@@ -1,0 +1,208 @@
+# .:.
+# i3 config
+
+## Variables
+
+### Mod key
+set $mod Mod4
+
+### Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+### Outputs
+set $main "eDP1"
+set $left "DP1"
+set $right "HDMI2"
+
+## System keybindings
+
+### Floating modifier
+floating_modifier $mod
+
+### Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+### Move window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+### Kill window
+bindsym $mod+q kill
+
+### Orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+### Modes
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+w sticky toggle
+
+### Switch workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+### Move focused
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+### Move between outputs
+bindsym $mod+KP_Right move workspace to output $right
+bindsym $mod+KP_Left move workspace to output $left
+
+### Additional navigation
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+### Resize mode
+mode "resize" {
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+## Look and Feel
+
+### System font
+font xft:FiraCode-Light 9
+
+### Assign monitors
+workspace $ws1 output $main $left
+workspace $ws2 output $main $left
+workspace $ws3 output $main $left
+workspace $ws4 output $main $left
+workspace $ws5 output $main $left
+workspace $ws6 output $main $right
+workspace $ws7 output $main $right
+workspace $ws8 output $main $right
+workspace $ws9 output $main $right
+workspace $ws10 output $main $right
+
+### Back and forth
+workspace_auto_back_and_forth yes
+
+### Window colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #647a82 #285577 #ffffff #ffffff   #647a82
+client.focused_inactive #ffffff #5f676a #ffffff #ffffff   #000000
+client.unfocused        #000000 #222222 #ffffff #ffffff   #000000
+client.urgent           #647a82 #900000 #ffffff #ffffff   #000000
+client.placeholder      #000000 #0c0c0c #ffffff #ffffff   #000000
+
+### Gaps
+gaps inner 15
+smart_gaps yes
+
+### Borders
+for_window [class="^.*"] border pixel 2
+smart_borders yes
+
+## Program-specific settings
+
+### Floating Windows
+for_window [title="win0"] floating enable
+for_window [title=".*Emulator.*"] floating enable
+
+### Assign windows
+assign [class="code"] $ws3
+assign [class="jetbrains-idea"] $ws3
+assign [class="jetbrains-studio"] $ws3
+assign [class="jetbrains-clion"] $ws3
+assign [class="TeXstudio"] $ws3
+assign [class="jetbrains-rubymine"] $ws3
+assign [class="jetbrains-webstorm"] $ws3
+assign [class="firefox"] $ws6
+assign [class="Thunderbird"] $ws7
+assign [class="Slack"] $ws8
+assign [class="discord"] $ws8
+assign [class="Element"] $ws9
+assign [title=".*Emulator.*"] $ws4
+for_window [class="Spotify"] move to workspace $ws10
+
+## Custom keybindings
+
+### Control
+bindsym $mod+Ctrl+h exec systemctl hibernate
+bindsym $mod+Ctrl+s exec systemctl poweroff
+bindsym $mod+Ctrl+r exec systemctl reboot
+bindsym $mod+Ctrl+e exec i3-msg exit
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+### Backlight
+bindsym XF86MonBrightnessUp exec lux -a 75
+bindsym XF86MonBrightnessDown exec lux -s 75
+
+### Audio
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioMicMute exec amixer set Capture toggle
+
+### Programs
+bindsym $mod+l exec /home/seims/.config/seims/scripts/lock.sh
+bindsym $mod+m exec /home/seims/.config/seims/scripts/screens.sh
+bindsym $mod+Return exec alacritty
+bindsym $mod+d exec rofi -show run
+bindsym $mod+n exec dunstctl set-paused toggle
+bindsym $mod+s exec sessions
+bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
+bindsym Print exec flameshot gui
+
+### Spotify
+bindsym $mod+Ctrl+Left exec spotifycli --prev
+bindsym $mod+Ctrl+Right exec spotifycli --next
+bindsym $mod+Ctrl+Down exec spotifycli --playpause
+
+### Preparations
+exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+exec autorandr --change
+exec /home/seims/.config/seims/scripts/polybar.sh
+exec_always zsh .fehbg
+exec picom -b
+exec redshift
+exec nm-applet
+exec gnome-keyring-daemon --start --components=secrets
+
+### Autostart
+exec firefox
+exec thunderbird
+exec slack
+exec element-desktop
+exec spotify

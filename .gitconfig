@@ -1,0 +1,20 @@
+# .:.
+# gitconfig
+
+[user]
+  email = simon.kaleschke@inaudito.de
+  name = Simon Kaleschke
+[alias]
+  co = checkout
+  br = branch
+  cm = commit
+  st = status
+  pl = pull
+  ps = push
+  lg = log
+  df = diff
+  dfc = diff --cached
+[color]
+  ui = true
+[pull]
+  rebase = false
