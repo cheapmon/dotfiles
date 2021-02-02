@@ -571,34 +571,3 @@ format = <label>
 exec = python /home/seims/.config/seims/scripts/spotify.py -f '{artist}: {song}' -t 25
 ;format-underline = #1db954
 
-[module/github]
-type = internal/github
-
-; Accessing an access token stored in file
-token = ${file:/home/seims/.config/polybar/github}
-
-; Accessing an access token stored in an environment variable
-;token = ${env:GITHUB_ACCESS_TOKEN}
-
-; Whether empty notifications should be displayed or not
-empty-notifications = false
-
-; Number of seconds in between requests
-interval = 10
-
-; Available tags:
-;   <label> (default)
-format = <label>
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-
-; Available tokens:
-;   %notifications% (default)
-; Default: Notifications: %notifications%
-label = %notifications%
-
-[module/gmail]
-type = custom/script
-exec = ~/.config/polybar/gmail/launch.py
-tail = true
-click-left = xdg-open https://mail.google.com
