@@ -1,3 +1,3 @@
 configuration {
-	theme: "/usr/share/rofi/themes/solarized.rasi";
+	theme: "/home/seims/.config/rofi/nord.rasi";
 }
