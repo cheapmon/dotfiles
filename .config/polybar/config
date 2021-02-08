@@ -34,7 +34,7 @@ secondary = #e60053
 alert = #000000
 
 [bar/main]
-monitor = ${env:MONITOR:eDP1}
+monitor = ${env:MONITOR:eDP}
 width = 100%
 height = 28
 ;offset-x = 12%
@@ -66,7 +66,7 @@ font-4 = DejaVu Sans:pixelsize=9
 
 modules-left = i3
 modules-center = xwindow spotify
-modules-right = pulseaudio backlight-acpi filesystem memory cpu wlan battery temperature date
+modules-right = pulseaudio backlight filesystem memory cpu wlan battery temperature date
 
 tray-position = right
 tray-padding = 2
@@ -88,7 +88,7 @@ cursor-click = pointer
 ;cursor-scroll = ns-resize
 
 [bar/left]
-monitor = ${env:MONITOR:DP1}
+monitor = ${env:MONITOR:HDMI-A-0}
 ;monitor = ${env:MONITOR:HDMI2}
 width = 100%
 height = 24
@@ -121,7 +121,7 @@ font-4 = DejaVu Sans:pixelsize=8
 
 modules-left = i3
 modules-center = xwindow spotify
-modules-right = pulseaudio backlight-acpi filesystem memory cpu wlan battery temperature date
+modules-right = pulseaudio backlight filesystem memory cpu wlan battery temperature date
 
 tray-position = right
 tray-padding = 2
@@ -144,7 +144,7 @@ cursor-click = pointer
 
 [bar/right]
 ;monitor = ${env:MONITOR:DP1}
-monitor = ${env:MONITOR:HDMI2}
+monitor = ${env:MONITOR:DisplayPort-2}
 width = 100%
 height = 24
 ;offset-x = 12%
@@ -307,28 +307,15 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; Separator in between workspaces
 ; label-separator = |
 
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label =  %percentage%%
-
+[module/backlight]
+type = internal/backlight
+card = amdgpu_bl0
+enable-scroll = true
+format =  <label> <bar>
 bar-width = 10
 bar-indicator = |
-;bar-indicator-foreground = #fff
-bar-indicator-font = 2
 bar-fill = ─
-bar-fill-font = 2
-;bar-fill-foreground = #9f78e1
-bar-fill-foreground = #002b36
 bar-empty = ─
-bar-empty-font = 2
-;bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
@@ -348,7 +335,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -420,13 +407,13 @@ bar-volume-width = 10
 ;bar-volume-foreground-4 = #55aa55
 ;bar-volume-foreground-5 = #f5a70a
 ;bar-volume-foreground-6 = #ff5555
-bar-volume-foreground-0 = #002b36
-bar-volume-foreground-1 = #002b36
-bar-volume-foreground-2 = #002b36
-bar-volume-foreground-3 = #002b36
-bar-volume-foreground-4 = #002b36
-bar-volume-foreground-5 = #002b36
-bar-volume-foreground-6 = #002b36
+;bar-volume-foreground-0 = #002b36
+;bar-volume-foreground-1 = #002b36
+;bar-volume-foreground-2 = #002b36
+;bar-volume-foreground-3 = #002b36
+;bar-volume-foreground-4 = #002b36
+;bar-volume-foreground-5 = #002b36
+;bar-volume-foreground-6 = #002b36
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
