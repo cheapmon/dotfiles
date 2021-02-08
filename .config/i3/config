@@ -19,9 +19,9 @@ set $ws9 "9"
 set $ws10 "10"
 
 ### Outputs
-set $main "eDP1"
-set $left "DP1"
-set $right "HDMI2"
+set $main "eDP"
+set $left "HDMI-A-0"
+set $right "DisplayPort-2"
 
 ## System keybindings
 
@@ -165,8 +165,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 ### Backlight
-bindsym XF86MonBrightnessUp exec lux -a 75
-bindsym XF86MonBrightnessDown exec lux -s 75
+bindsym XF86MonBrightnessUp exec lux -a 5%
+bindsym XF86MonBrightnessDown exec lux -s 5%
 
 ### Audio
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
@@ -182,6 +182,7 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+n exec dunstctl set-paused toggle
 bindsym $mod+s exec sessions
 bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
+bindsym $mod+z exec rofi-pass --root /home/seims/git/passwords
 bindsym Print exec flameshot gui
 
 ### Spotify
@@ -190,8 +191,8 @@ bindsym $mod+Ctrl+Right exec spotifycli --next
 bindsym $mod+Ctrl+Down exec spotifycli --playpause
 
 ### Preparations
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
+exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
 exec autorandr --change
 exec /home/seims/.config/seims/scripts/polybar.sh
 exec_always zsh .fehbg
