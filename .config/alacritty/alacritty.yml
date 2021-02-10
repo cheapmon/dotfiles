@@ -1,6 +1,8 @@
 # .:.
 # Alacritty config
 
+env:
+  WINIT_X11_SCALE_FACTOR: "1.0"
 window:
   decorations: none
   gtk_theme_variant: None
