@@ -20,7 +20,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Environment
 export EDITOR=nvim
-export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia
+export FORCE_INIT=yes
 
 # Aliases
 alias g="git"
@@ -32,3 +33,5 @@ alias dc="docker-compose"
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
 export GLOBALIAS_FILTER_VALUES=(dt)
 
+# Completion
+source <($HOME/git/architecture/bin/ia completion)
