@@ -28,4 +28,7 @@ name = 'colorscheme'
 name = 'lsp'
 
 [[layers]]
+name = 'lang#typescript'
+
+[[layers]]
 name = 'lang#vue'
