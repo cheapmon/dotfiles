@@ -4,6 +4,7 @@
 [user]
   email = simon.kaleschke@inaudito.de
   name = Simon Kaleschke
+  signingkey = A9E66BBF378A8A26
 [alias]
   co = checkout
   br = branch
@@ -19,4 +20,6 @@
 [pull]
   rebase = false
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[commit]
+  gpgsign = true
