@@ -193,7 +193,7 @@ bindsym $mod+Ctrl+Down exec spotifycli --playpause
 ### Preparations
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
-exec autorandr --change
+exec autorandr dual
 exec /home/seims/.config/seims/scripts/polybar.sh
 exec_always zsh .fehbg
 exec picom -b
