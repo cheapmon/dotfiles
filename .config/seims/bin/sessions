@@ -8,7 +8,9 @@ def select_session(sessions:)
   session_names = sessions.keys.join("\n")
   session_name = %x(echo -e "#{session_names}" | rofi -dmenu -i -p session).strip
 
-  exec "alacritty -e sessions #{session_name}"
+  unless session_name.empty?
+    exec "alacritty -e sessions #{session_name}"
+  end
 end
 
 def has_session(session_name:)

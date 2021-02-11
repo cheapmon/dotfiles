@@ -176,7 +176,7 @@ bindsym XF86AudioMicMute exec amixer set Capture toggle
 
 ### Programs
 bindsym $mod+l exec /home/seims/.config/seims/scripts/lock.sh
-bindsym $mod+m exec /home/seims/.config/seims/scripts/screens.sh
+bindsym $mod+m exec screens
 bindsym $mod+Return exec alacritty
 bindsym $mod+d exec rofi -show run
 bindsym $mod+n exec dunstctl set-paused toggle

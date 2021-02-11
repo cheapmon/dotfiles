@@ -1,0 +1,13 @@
+#!/usr/bin/ruby
+
+# .:.
+# Change screen configuration
+begin
+  config = %x(autorandr | cut -d'\(' -f1 | rofi -dmenu -i -p config)
+  unless config.empty?
+    system "autorandr #{config}"
+    system "sh $HOME/.fehbg"
+    system "sh $HOME/.config/seims/scripts/polybar.sh"
+    puts "Screen configuration changed to $config"
+  end
+end
