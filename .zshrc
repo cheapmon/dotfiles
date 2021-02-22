@@ -36,3 +36,5 @@ export GLOBALIAS_FILTER_VALUES=(dt)
 # Completion
 source <($HOME/git/architecture/bin/ia completion)
 source <(kubectl completion zsh)
+source <(minikube completion zsh)
+source <(helm completion zsh)
