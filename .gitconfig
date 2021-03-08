@@ -12,6 +12,7 @@
   st = status
   pl = pull
   ps = push
+  pu = !git push -u $(git remote) $(git branch --show-current)
   lg = log
   df = diff
   dfc = diff --cached
