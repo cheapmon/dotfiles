@@ -31,7 +31,7 @@ alias dc="docker-compose"
 
 # Dotfiles
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
-export GLOBALIAS_FILTER_VALUES=(dt)
+export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff)
 
 # Completion
 source <($HOME/git/architecture/bin/ia completion)
