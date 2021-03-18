@@ -22,6 +22,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia
 export FORCE_INIT=yes
+export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
 
 # Aliases
 alias g="git"
