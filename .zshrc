@@ -39,3 +39,5 @@ source <($HOME/git/architecture/bin/ia completion)
 source <(kubectl completion zsh)
 source <(minikube completion zsh)
 source <(helm completion zsh)
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
