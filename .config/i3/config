@@ -200,6 +200,7 @@ exec picom -b
 exec redshift
 exec nm-applet
 exec gnome-keyring-daemon --start --components=secrets
+exec unclutter
 
 ### Autostart
 exec firefox
