@@ -26,3 +26,6 @@ name = 'colorscheme'
 
 [[layers]]
 name = 'lang#vue'
+
+[[layers]]
+name = 'fzf'
