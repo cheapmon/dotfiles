@@ -146,7 +146,7 @@ assign [class="jetbrains-clion"] $ws3
 assign [class="TeXstudio"] $ws3
 assign [class="jetbrains-rubymine"] $ws3
 assign [class="jetbrains-webstorm"] $ws3
-assign [class="firefox"] $ws6
+assign [class="firefoxdeveloperedition"] $ws6
 assign [class="Thunderbird"] $ws7
 assign [class="Slack"] $ws8
 assign [class="discord"] $ws8
@@ -203,7 +203,7 @@ exec gnome-keyring-daemon --start --components=secrets
 exec unclutter
 
 ### Autostart
-exec firefox
+exec firefox-developer-edition
 exec thunderbird
 exec slack
 exec element-desktop
