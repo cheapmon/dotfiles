@@ -7,6 +7,7 @@
   signingkey = A9E66BBF378A8A26
 [alias]
   co = checkout
+  cf = !git checkout `git branch | fzf`
   br = branch
   cm = commit
   st = status
