@@ -27,6 +27,7 @@ export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
 # Aliases
 alias g="git"
 alias p="paru"
+alias k="kubectl"
 alias ls="exa"
 alias dc="docker-compose"
 
@@ -41,3 +42,12 @@ source <(minikube completion zsh)
 source <(helm completion zsh)
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+# kubectl
+kc() {
+  gopass show inaudito/infrastructure/kubernetes/staging/kubeconfig > /dev/shm/kubeconfig-staging
+  gopass show inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
+  export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production
+}
+alias kx="kubectx"
+alias kn="kubens"
