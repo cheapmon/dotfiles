@@ -51,3 +51,6 @@ kc() {
 }
 alias kx="kubectx"
 alias kn="kubens"
+
+# Starship prompt
+eval "$(starship init zsh)"
