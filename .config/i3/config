@@ -184,6 +184,16 @@ bindsym $mod+s exec sessions
 bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
 bindsym $mod+z exec rofi-pass --root /home/seims/git/passwords
 bindsym Print exec flameshot gui
+bindsym $mod+Ctrl+1 exec alacritty
+bindsym $mod+Ctrl+2 exec alacritty
+bindsym $mod+Ctrl+3 exec code
+bindsym $mod+Ctrl+4 exec chromium
+bindsym $mod+Ctrl+5 exec pavucontrol
+bindsym $mod+Ctrl+6 exec firefox-developer-edition
+bindsym $mod+Ctrl+7 exec thunderbird
+bindsym $mod+Ctrl+8 exec slack
+bindsym $mod+Ctrl+9 exec element-desktop
+bindsym $mod+Ctrl+10 exec spotify
 
 ### Spotify
 bindsym $mod+Ctrl+Left exec spotifycli --prev
