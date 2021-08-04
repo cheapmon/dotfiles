@@ -2,13 +2,14 @@
 # gitconfig
 
 [user]
-  email = simon.kaleschke@inaudito.de
+  email = simon.kaleschke.leipzig@gmail.com
   name = Simon Kaleschke
-  signingkey = A9E66BBF378A8A26
 [alias]
   co = checkout
   cf = !git checkout `git branch | fzf`
+  cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf`
   br = branch
+  bd = !git branch -D `git branch | fzf`
   cm = commit
   st = status
   pl = pull
@@ -23,5 +24,3 @@
   rebase = false
 [init]
   defaultBranch = main
-[commit]
-  gpgsign = true
