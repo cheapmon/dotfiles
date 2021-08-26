@@ -33,7 +33,7 @@ alias dc="docker-compose"
 
 # Dotfiles
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
-export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff)
+export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia history)
 
 # Completion
 source <($HOME/git/architecture/bin/ia completion)
@@ -49,8 +49,14 @@ kc() {
   gopass show inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
   export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production
 }
+kd() {
+  export KUBECONFIG=
+}
 alias kx="kubectx"
 alias kn="kubens"
 
 # Starship prompt
 eval "$(starship init zsh)"
+
+# Remove folder
+rm -rf $HOME/Downloads
