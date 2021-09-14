@@ -11,4 +11,7 @@ polybar main &
 polybar left &
 polybar right &
 
+# Repair background
+zsh ~/.fehbg
+
 echo "Bars launched..."
