@@ -5,6 +5,7 @@
   email = simon.kaleschke.leipzig@gmail.com
   name = Simon Kaleschke
 [alias]
+  ap = add --patch
   co = checkout
   cf = !git checkout `git branch | fzf`
   cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf`
@@ -18,6 +19,8 @@
   lg = log
   df = diff
   dfc = diff --cached
+  rb = rebase
+  rbc = rebase --continue
 [color]
   ui = true
 [pull]
