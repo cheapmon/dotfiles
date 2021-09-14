@@ -31,6 +31,21 @@ alias k="kubectl"
 alias ls="exa"
 alias dc="docker-compose"
 
+# Project aliases
+alias configurator="$HOME/git/architecture/apps/configurator"
+alias core="$HOME/git/architecture/apps/core"
+alias dumper="$HOME/git/architecture/apps/dumper"
+alias infrastructure="$HOME/git/architecture/apps/infrastructure"
+alias jobmixer="$HOME/git/architecture/apps/jobmixer"
+alias jobmixer-legacy="$HOME/git/architecture/apps/jobmixer-legacy"
+alias jobwindow="$HOME/git/architecture/apps/jobwindow"
+alias keywords="$HOME/git/architecture/apps/keywords"
+alias notes="$HOME/git/architecture/apps/notes"
+alias odoo="$HOME/git/architecture/apps/odoo"
+alias odoo-ee="$HOME/git/architecture/apps/odoo-ee"
+alias schnellestelle2017="$HOME/git/architecture/apps/schnellestelle2017"
+alias whitelabel="$HOME/git/architecture/apps/whitelabel"
+
 # Dotfiles
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
 export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia history)
