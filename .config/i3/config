@@ -199,6 +199,7 @@ bindsym $mod+Ctrl+10 exec spotify
 bindsym $mod+Ctrl+Left exec spotifycli --prev
 bindsym $mod+Ctrl+Right exec spotifycli --next
 bindsym $mod+Ctrl+Down exec spotifycli --playpause
+bindsym XF86AudioPlay exec spotifycli --playpause
 
 ### Preparations
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
