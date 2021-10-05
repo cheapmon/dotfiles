@@ -165,8 +165,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 ### Backlight
-bindsym XF86MonBrightnessUp exec lux -a 5%
-bindsym XF86MonBrightnessDown exec lux -s 5%
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 ### Audio
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
