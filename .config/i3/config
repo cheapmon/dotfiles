@@ -196,6 +196,11 @@ bindsym $mod+Ctrl+8 exec slack
 bindsym $mod+Ctrl+9 exec element-desktop
 bindsym $mod+Ctrl+10 exec spotify
 
+### The Key
+bindsym XF86Tools exec /home/seims/.config/seims/scripts/stackoverflow.sh
+bindsym XF86Launch5 exec core-panic
+bindsym XF86Launch6 exec alacritty
+
 ### Spotify
 bindsym $mod+Ctrl+Left exec spotifycli --prev
 bindsym $mod+Ctrl+Right exec spotifycli --next
