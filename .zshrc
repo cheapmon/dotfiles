@@ -20,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Environment
 export EDITOR=nvim
-export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia
+export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia:$HOME/.cargo/bin
 export FORCE_INIT=yes
 export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
 
