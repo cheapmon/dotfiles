@@ -199,7 +199,7 @@ bindsym $mod+Ctrl+10 exec spotify
 ### The Key
 bindsym XF86Tools exec /home/seims/.config/seims/scripts/stackoverflow.sh
 bindsym XF86Launch5 exec core-panic
-bindsym XF86Launch6 exec alacritty
+bindsym XF86Launch6 exec polybar-msg cmd toggle
 
 ### Spotify
 bindsym $mod+Ctrl+Left exec spotifycli --prev

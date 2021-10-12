@@ -42,6 +42,7 @@ height = 28
 radius = 0.0
 fixed-center = false
 ;bottom = true
+enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -97,6 +98,7 @@ height = 24
 radius = 0.0
 fixed-center = false
 ;bottom = true
+enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -152,6 +154,7 @@ height = 24
 radius = 0.0
 fixed-center = false
 ;bottom = true
+enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
