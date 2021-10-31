@@ -7,9 +7,10 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
-polybar main &
-polybar left &
-polybar right &
+cd $HOME/.config/polybar
+polybar -c config.ini main &
+polybar -c config.ini left &
+polybar -c config.ini right &
 
 # Repair background
 zsh ~/.fehbg
