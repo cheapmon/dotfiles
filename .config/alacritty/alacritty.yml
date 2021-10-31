@@ -8,35 +8,36 @@ window:
   gtk_theme_variant: None
 font:
   normal:
-    family: JetBrains Mono
+    family: JetBrains Mono Nerd Font
   size: 9
+# Colors (Material Theme)
 colors:
-   # Default colors
-   primary:
-     background: '#2E3440'
-     foreground: '#D8DEE9'
+  # Default colors
+  primary:
+    background: '0x1e282d'
+    foreground: '0xc4c7d1'
 
-   # Normal colors
-   normal:
-     black:   '#3B4252'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#88C0D0'
-     white:   '#E5E9F0'
+  # Normal colors
+  normal:
+    black:   '0x666666'
+    red:     '0xeb606b'
+    green:   '0xc3e88d'
+    yellow:  '0xf7eb95'
+    blue:    '0x80cbc4'
+    magenta: '0xff2f90'
+    cyan:    '0xaeddff'
+    white:   '0xffffff'
 
-   # Bright colors
-   bright:
-     black:   '#4C566A'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#8FBCBB'
-     white:   '#ECEFF4'
+  # Bright colors
+  bright:
+    black:   '0xff262b'
+    red:     '0xeb606b'
+    green:   '0xc3e88d'
+    yellow:  '0xf7eb95'
+    blue:    '0x7dc6bf'
+    magenta: '0x6c71c4'
+    cyan:    '0x35434d'
+    white:   '0xffffff'
 background_opacity: 0.8
 cursor:
   style: Underline
@@ -47,3 +48,5 @@ cursor:
 key_bindings:
   - { key: V,        mods: Control|Shift,           action: Paste            }
   - { key: C,        mods: Control|Shift,           action: Copy             }
+scrolling:
+  history: 100000
