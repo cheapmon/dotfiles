@@ -186,6 +186,7 @@ bindsym $mod+s exec sessions
 bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
 bindsym $mod+z exec rofi-pass --root /home/seims/git/passwords
 bindsym Print exec flameshot gui
+bindsym Insert exec CM_LAUNCHER=rofi clipmenu
 bindsym $mod+Ctrl+1 exec alacritty
 bindsym $mod+Ctrl+2 exec alacritty
 bindsym $mod+Ctrl+3 exec code
@@ -220,6 +221,7 @@ exec redshift
 exec nm-applet
 exec gnome-keyring-daemon --start --components=secrets
 exec unclutter
+exec clipmenud
 
 ### Autostart
 exec firefox-developer-edition
