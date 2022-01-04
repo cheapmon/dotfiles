@@ -96,10 +96,16 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Layouts
+bindsym $mod+comma layout stacking
+bindsym $mod+period layout tabbed
+bindsym $mod+slash layout toggle split
+
 ## Look and Feel
 
 ### System font
-font xft:FiraCode-Light 9
+font pango:JetBrains Mono 9
+title_align center
 
 ### Assign monitors
 workspace $ws1 output $main $left
@@ -118,7 +124,7 @@ workspace_auto_back_and_forth yes
 
 ### Window colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #647a82 #285577 #ffffff #ffffff   #647a82
+client.focused          #ffffff #000000 #ffffff #ffffff   #647a82
 client.focused_inactive #ffffff #5f676a #ffffff #ffffff   #000000
 client.unfocused        #000000 #222222 #ffffff #ffffff   #000000
 client.urgent           #647a82 #900000 #ffffff #ffffff   #000000
@@ -216,7 +222,7 @@ exec autorandr work
 exec /home/seims/.config/seims/scripts/polybar.sh
 exec_always zsh .fehbg
 exec_always --no-startup-id i3-auto-layout
-exec picom --experimental-backends -b
+exec picom -b
 exec redshift
 exec nm-applet
 exec gnome-keyring-daemon --start --components=secrets
