@@ -230,6 +230,7 @@ exec_always --no-startup-id i3-auto-layout
 exec picom -b
 exec redshift
 exec nm-applet
+exec blueman-applet
 exec gnome-keyring-daemon --start --components=secrets
 exec unclutter
 exec clipmenud
