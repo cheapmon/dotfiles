@@ -6,6 +6,7 @@ env:
 window:
   decorations: none
   gtk_theme_variant: None
+  opacity: 0.8
 font:
   normal:
     family: JetBrains Mono Nerd Font
@@ -38,7 +39,6 @@ colors:
     magenta: '0x6c71c4'
     cyan:    '0x35434d'
     white:   '0xffffff'
-background_opacity: 0.8
 cursor:
   style: Underline
   url:
