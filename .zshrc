@@ -14,6 +14,7 @@ plugins=(
   docker-compose
   thefuck
   vi-mode
+  fzf
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -23,31 +24,21 @@ export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia:$HOME/.cargo/bin:$HOME/.local/share/gem/ruby/3.0.0/bin
 export FORCE_INIT=yes
 export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
+export COMPOSE_HTTP_TIMEOUT=86400
 
 # Aliases
 alias g="git"
 alias p="paru"
 alias k="kubectl"
 alias ls="exa"
-alias dc="docker compose"
+alias dc="docker-compose"
 
 # Project aliases
-alias architecture="$HOME/git/architecture"
-alias configurator="$HOME/git/architecture/apps/configurator"
-alias cli="$HOME/git/architecture/apps/cli"
-alias core="$HOME/git/architecture/apps/core"
-alias dumper="$HOME/git/architecture/apps/dumper"
-alias infrastructure="$HOME/git/architecture/apps/infrastructure"
-alias jobcrawler="$HOME/git/architecture/apps/jobcrawler"
-alias jobmixer="$HOME/git/architecture/apps/jobmixer"
-alias jobmixer-legacy="$HOME/git/architecture/apps/jobmixer-legacy"
-alias jobwindow="$HOME/git/architecture/apps/jobwindow"
-alias keywords="$HOME/git/architecture/apps/keywords"
-alias notes="$HOME/git/architecture/apps/notes"
-alias odoo="$HOME/git/architecture/apps/odoo"
-alias odoo-ee="$HOME/git/architecture/apps/odoo-ee"
-alias schnellestelle2017="$HOME/git/architecture/apps/schnellestelle2017"
-alias whitelabel="$HOME/git/architecture/apps/whitelabel"
+source <(ls -d $HOME/git/architecture/apps/* | cut -d/ -f7 | xargs -I% echo "alias %=\"$HOME/git/architecture/apps/%\"")
+prj() {
+  app=$(ls -d $HOME/git/architecture/apps/* | cut -d/ -f7 | fzf)
+  cd $HOME/git/architecture/apps/$app
+}
 
 # Dotfiles
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
