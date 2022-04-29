@@ -80,6 +80,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+KP_Right move workspace to output $right
 bindsym $mod+KP_Left move workspace to output $left
 
+### Scratchpad
+bindsym $mod+Prior move scratchpad
+bindsym $mod+Next scratchpad show
+
 ### Additional navigation
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
@@ -192,6 +196,7 @@ bindsym $mod+s exec sessions
 bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
 bindsym $mod+z exec rofi-pass --root /home/seims/git/passwords
 bindsym Print exec flameshot gui
+bindsym $mod+Home exec flameshot gui
 bindsym Insert exec CM_LAUNCHER=rofi clipmenu
 bindsym $mod+Ctrl+1 exec alacritty
 bindsym $mod+Ctrl+2 exec alacritty
