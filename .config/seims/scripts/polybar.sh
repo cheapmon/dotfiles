@@ -8,9 +8,15 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
 cd $HOME/.config/polybar
-polybar -c config.ini main &
-polybar -c config.ini left &
-polybar -c config.ini right &
+if [ -n "$MONITOR" ]; then
+  polybar -c config.ini main &
+fi
+if [ -n "$MONITOR_LEFT" ]; then
+  polybar -c config.ini left &
+fi
+if [ -n "$MONITOR_RIGHT" ]; then
+  polybar -c config.ini right &
+fi
 
 # Repair background
 zsh ~/.fehbg
