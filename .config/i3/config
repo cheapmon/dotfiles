@@ -19,9 +19,9 @@ set $ws9 "9"
 set $ws10 "10"
 
 ### Outputs
-set $main "eDP"
-set $left "HDMI-A-0"
-set $right "DisplayPort-2"
+set_from_resource $main i3wm.monitor ""
+set_from_resource $left i3wm.monitor_left ""
+set_from_resource $right i3wm.monitor_right ""
 
 ## System keybindings
 

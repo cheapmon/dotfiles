@@ -7,3 +7,8 @@ export MONITOR_LEFT=HDMI-A-0
 export MONITOR_RIGHT=DisplayPort-2
 
 export NETWORK_INTERFACE=enp2s0f0
+
+# Make variables available to i3
+echo "*monitor: $MONITOR
+*monitor_left: $MONITOR_LEFT
+*monitor_right: $MONITOR_RIGHT" > $HOME/.Xresources
