@@ -192,7 +192,6 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+d exec rofi -show run
 bindsym $mod+i exec rofi -show window
 bindsym $mod+n exec dunstctl set-paused toggle
-bindsym $mod+s exec sessions
 bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
 bindsym $mod+z exec rofi-pass --root /home/seims/git/passwords
 bindsym Print exec flameshot gui
