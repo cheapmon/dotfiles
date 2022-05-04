@@ -56,13 +56,15 @@ complete -o nospace -C /usr/bin/terraform terraform
 kc() {
   gopass show inaudito/infrastructure/kubernetes/staging/kubeconfig > /dev/shm/kubeconfig-staging
   gopass show inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
-  export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production
+  gopass show inaudito/infrastructure/kubernetes/hetzner/kubeconfig > /dev/shm/kubeconfig-hetzner
+  export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production:/dev/shm/kubeconfig-hetzner
 }
 kd() {
   export KUBECONFIG=
 }
 alias kx="kubectx"
 alias kn="kubens"
+alias k9="k9s --readonly"
 
 # Starship prompt
 eval "$(starship init zsh)"
