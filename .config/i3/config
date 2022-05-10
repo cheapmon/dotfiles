@@ -220,6 +220,7 @@ bindsym $mod+Ctrl+Down exec spotifycli --playpause
 bindsym XF86AudioPlay exec spotifycli --playpause
 
 ### Preparations
+exec /home/seims/.config/seims/scripts/dotfiles.sh
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
 exec /home/seims/.config/seims/scripts/polybar.sh
