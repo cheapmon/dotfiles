@@ -39,10 +39,11 @@ prj() {
   app=$(ls -d $HOME/git/architecture/apps/* | cut -d/ -f7 | fzf)
   cd $HOME/git/architecture/apps/$app
 }
+alias iacli="$HOME/git/architecture/apps/cli/cli"
 
 # Dotfiles
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
-export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia history)
+export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia iacli history)
 
 # Completion
 source <($HOME/git/architecture/bin/ia completion)
