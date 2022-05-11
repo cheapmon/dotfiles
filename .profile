@@ -10,6 +10,7 @@ case $MACHINE_ID in
     export MONITOR=eDP
     export MONITOR_LEFT=HDMI-A-0
     export MONITOR_RIGHT=DisplayPort-2
+    export AUTORANDR_PROFILE=work
 
     export NETWORK_INTERFACE=enp2s0f0
     ;;
@@ -17,6 +18,7 @@ case $MACHINE_ID in
     export MONITOR=
     export MONITOR_LEFT=DP-0
     export MONITOR_RIGHT=HDMI-0
+    export AUTORANDR_PROFILE=home
 
     export NETWORK_INTERFACE=enp34s0
     ;;
@@ -26,3 +28,6 @@ esac
 echo "*monitor: $MONITOR
 *monitor_left: $MONITOR_LEFT
 *monitor_right: $MONITOR_RIGHT" > $HOME/.Xresources
+
+# Adjust monitors
+autorandr $AUTORANDR_PROFILE
