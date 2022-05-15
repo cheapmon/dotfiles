@@ -16,3 +16,9 @@ case $? in
 esac
 
 dunstify -a $APP_NAME -u $URGENCY $MESSAGE
+
+for FILE in $(fd -tf . $HOME/.dots | awk "{ gsub(\"$HOME/.dots\", \"\"); print }"); do
+  ORIGIN="$HOME/.dots$FILE"
+  echo "cp $ORIGIN $FILE"
+  cp $ORIGIN $FILE
+done
