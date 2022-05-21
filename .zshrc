@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Environment
 export EDITOR=nvim
-export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia:$HOME/.cargo/bin:$HOME/.local/share/gem/ruby/3.0.0/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/git/architecture/bin/ia:$HOME/.local/share/gem/ruby/3.0.0/bin
 export FORCE_INIT=yes
 export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
 export COMPOSE_HTTP_TIMEOUT=86400
