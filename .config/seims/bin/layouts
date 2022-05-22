@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+LAYOUTS = %w[
+  vstack
+  hstack
+  spiral
+  3columns
+  2columns
+  companion
+  autosplit
+  tabbed
+  splitv
+  splith
+  stacking
+].freeze
+
+layouts = LAYOUTS.join("\n")
+layout = `echo \"#{layouts}\" | rofi -dmenu -i -p layout`
+exec "i3l #{layout}"

@@ -188,6 +188,7 @@ bindsym XF86AudioMicMute exec amixer set Capture toggle
 ### Programs
 bindsym $mod+l exec /home/seims/.config/seims/scripts/lock.sh
 bindsym $mod+m exec screens
+bindsym $mod+Shift+l exec layouts
 bindsym $mod+Return exec alacritty
 bindsym $mod+d exec rofi -show run
 bindsym $mod+i exec rofi -show window
@@ -221,6 +222,7 @@ bindsym XF86AudioPlay exec spotifycli --playpause
 
 ### Preparations
 exec /home/seims/.config/seims/scripts/dotfiles.sh
+exec_always i3-layouts
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
 exec /home/seims/.config/seims/scripts/polybar.sh
