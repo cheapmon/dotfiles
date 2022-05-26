@@ -19,18 +19,12 @@ myClickJustFocuses  = False
 myBorderWidth       = 2
 myModMask           = mod4Mask
 
-myWorkspaces nScreens = withScreens nScreens (map show [1..5])
+myWorkspaces = map show [1..10]
 
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#ffffff"
 
-myKeys conf@(XConfig {XMonad.modMask = modm}) = fromList $
-  -- switch screen / move window to screen
-  [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-    | (key, sc) <- zip [xK_m, xK_comma, xK_period] [0..]
-    , (f, m) <- [(view, 0), (shift, shiftMask)]]
-
-myAdditionalKeys =
+myAdditionalKeys nScreens =
   [
     ("M-<Return>", spawn myTerminal),
     ("M-d",        spawn "rofi -show run"),
@@ -52,32 +46,36 @@ myAdditionalKeys =
     ("M-u",        sendMessage (IncMasterN 1)),
     ("M-i",        sendMessage (IncMasterN (-1))),
 
+    -- Monitors
+    ("M-m",        openScreen 0),
+    ("M-,",        openScreen 1),
+
     -- Move to workspace
-    ("M-1",        switchTo 0 "1"),
-    ("M-2",        switchTo 0 "2"),
-    ("M-3",        switchTo 0 "3"),
-    ("M-4",        switchTo 0 "4"),
-    ("M-5",        switchTo 0 "5"),
-    ("M-6",        switchTo 1 "1"),
-    ("M-7",        switchTo 1 "2"),
-    ("M-8",        switchTo 1 "3"),
-    ("M-9",        switchTo 1 "4"),
-    ("M-0",        switchTo 1 "5"),
+    ("M-1",        switchTo "1" nScreens),
+    ("M-2",        switchTo "2" nScreens),
+    ("M-3",        switchTo "3" nScreens),
+    ("M-4",        switchTo "4" nScreens),
+    ("M-5",        switchTo "5" nScreens),
+    ("M-6",        switchTo "6" nScreens),
+    ("M-7",        switchTo "7" nScreens),
+    ("M-8",        switchTo "8" nScreens),
+    ("M-9",        switchTo "9" nScreens),
+    ("M-0",        switchTo "10" nScreens),
 
     -- Move window to workspace
-    ("M-S-1",      shiftTo 0 "1"),
-    ("M-S-2",      shiftTo 0 "2"),
-    ("M-S-3",      shiftTo 0 "3"),
-    ("M-S-4",      shiftTo 0 "4"),
-    ("M-S-5",      shiftTo 0 "5"),
-    ("M-S-6",      shiftTo 1 "1"),
-    ("M-S-7",      shiftTo 1 "2"),
-    ("M-S-8",      shiftTo 1 "3"),
-    ("M-S-9",      shiftTo 1 "4"),
-    ("M-S-0",      shiftTo 1 "5")
+    ("M-S-1",      shiftTo "1" nScreens),
+    ("M-S-2",      shiftTo "2" nScreens),
+    ("M-S-3",      shiftTo "3" nScreens),
+    ("M-S-4",      shiftTo "4" nScreens),
+    ("M-S-5",      shiftTo "5" nScreens),
+    ("M-S-6",      shiftTo "6" nScreens),
+    ("M-S-7",      shiftTo "7" nScreens),
+    ("M-S-8",      shiftTo "8" nScreens),
+    ("M-S-9",      shiftTo "9" nScreens),
+    ("M-S-0",      shiftTo "10" nScreens)
   ]
 
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| tabs
+myLayout = avoidStruts $ tiled ||| Mirror tiled ||| tabs ||| Full
   where
     tiled = Tall 1 (3 / 100) (1 / 2)
     tabs  = tabbedBottom shrinkText myTabConf
@@ -111,30 +109,40 @@ main = do
     clickJustFocuses   = myClickJustFocuses,
     borderWidth        = myBorderWidth,
     modMask            = myModMask,
-    workspaces         = myWorkspaces nScreens,
+    workspaces         = myWorkspaces,
     normalBorderColor  = myNormalBorderColor,
     focusedBorderColor = myFocusedBorderColor,
-    keys = myKeys,
+    keys               = const empty,
     -- hooks, layouts
     layoutHook         = myLayout,
     manageHook         = myManageHook,
     handleEventHook    = myEventHook,
     logHook            = myLogHook,
     startupHook        = myStartupHook
-  } `additionalKeysP` myAdditionalKeys
+  } `additionalKeysP` myAdditionalKeys nScreens
 
--- Helper functions
+-- Custom X actions
 openScreen :: ScreenId -> X ()
 openScreen s = withScreen s view
 
-switchTo :: ScreenId -> WorkspaceId -> X ()
-switchTo s w = sequence_ [openScreen s, windows $ onCurrentScreen view w, warpToWindow 0.5 0.5]
+switchTo :: WorkspaceId -> ScreenId -> X ()
+switchTo w nScreens = sequence_ [openScreen s, windows $ greedyView w, warpToWindow 0.5 0.5]
+  where s = screenFor w nScreens
 
-shiftTo :: ScreenId -> WorkspaceId -> X ()
-shiftTo s w = sequence_ [windows $ shift (marshall s w), switchTo s w]
+shiftTo :: WorkspaceId -> ScreenId -> X ()
+shiftTo w nScreens = sequence_ [windows $ shift w, switchTo w nScreens]
+  where s = screenFor w nScreens
 
 withScreen :: ScreenId -> (WorkspaceId -> WindowSet -> WindowSet) -> X ()
 withScreen s f = screenWorkspace s >>= flip whenJust (windows . f)
+
+-- Helper functions
+screenFor :: WorkspaceId -> ScreenId -> ScreenId
+screenFor workspace nScreens = fromInteger s
+  where w = read workspace - 1
+        n = toInteger nScreens
+        m = toInteger (length myWorkspaces)
+        s = w `div` (m `div` n)
 
 toggleFloat :: Window -> X ()
 toggleFloat w = windows (\s -> if member w (floating s)
