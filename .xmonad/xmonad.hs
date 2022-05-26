@@ -7,6 +7,7 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.IndependentScreens
+import XMonad.Layout.Tabbed
 import XMonad.StackSet hiding (workspaces)
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -76,39 +77,50 @@ myAdditionalKeys =
     ("M-S-0",      shiftTo 1 "5")
   ]
 
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts $ tiled ||| Mirror tiled ||| tabs
   where
-    tiled = Tall nmaster delta ratio
-    nmaster = 1
-    ratio = 1 / 2
-    delta = 3 / 100
+    tiled = Tall 1 (3 / 100) (1 / 2)
+    tabs  = tabbedBottom shrinkText myTabConf
 
-myManageHook = composeAll []
-myEventHook = mempty
-myLogHook = ewmhDesktopsLogHook
+myTabConf = def {
+  fontName            = "xft:JetBrains Mono:size=9",
+  activeColor         = "#000000",
+  inactiveColor       = "#000000",
+  urgentColor         = "#000000",
+  activeBorderColor   = "#FFFFFF",
+  inactiveBorderColor = "#000000",
+  urgentBorderColor   = "#000000",
+  activeTextColor     = "#FFFFFF",
+  inactiveTextColor   = "#FFFFFF",
+  urgentTextColor     = "#FFFFFF"
+}
+
+myManageHook  = composeAll []
+myEventHook   = mempty
+myLogHook     = ewmhDesktopsLogHook
 myStartupHook = do
-  spawn "$HOME/.config/seims/scripts/polybar.sh"
+  spawn     "$HOME/.config/seims/scripts/polybar.sh"
   spawnOnce "picom -b"
 
 main = do
   nScreens <- countScreens
   xmonad $ docks . ewmh $ desktopConfig {
     -- simple stuff
-    terminal = myTerminal,
-    focusFollowsMouse = myFocusFollowsMouse,
-    clickJustFocuses = myClickJustFocuses,
-    borderWidth = myBorderWidth,
-    modMask = myModMask,
-    workspaces = myWorkspaces nScreens,
-    normalBorderColor = myNormalBorderColor,
+    terminal           = myTerminal,
+    focusFollowsMouse  = myFocusFollowsMouse,
+    clickJustFocuses   = myClickJustFocuses,
+    borderWidth        = myBorderWidth,
+    modMask            = myModMask,
+    workspaces         = myWorkspaces nScreens,
+    normalBorderColor  = myNormalBorderColor,
     focusedBorderColor = myFocusedBorderColor,
     keys = myKeys,
     -- hooks, layouts
-    layoutHook = myLayout,
-    manageHook = myManageHook,
-    handleEventHook = myEventHook,
-    logHook = myLogHook,
-    startupHook = myStartupHook
+    layoutHook         = myLayout,
+    manageHook         = myManageHook,
+    handleEventHook    = myEventHook,
+    logHook            = myLogHook,
+    startupHook        = myStartupHook
   } `additionalKeysP` myAdditionalKeys
 
 -- Helper functions
