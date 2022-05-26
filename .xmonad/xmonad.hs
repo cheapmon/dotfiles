@@ -1,14 +1,14 @@
 import Data.Map hiding (map, keys)
 import Data.Monoid
 import System.Exit
-import XMonad
+import XMonad hiding (float)
 import XMonad.Actions.Warp
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.Tabbed
-import XMonad.StackSet hiding (workspaces)
+import XMonad.StackSet hiding (workspaces, member)
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -48,7 +48,7 @@ myAdditionalKeys =
     ("M-<U>",      windows swapMaster),
     ("M-j",        sendMessage Expand),
     ("M-k",        sendMessage Shrink),
-    ("M-t",        withFocused $ windows . sink),
+    ("M-t",        withFocused toggleFloat),
     ("M-u",        sendMessage (IncMasterN 1)),
     ("M-i",        sendMessage (IncMasterN (-1))),
 
@@ -135,3 +135,11 @@ shiftTo s w = sequence_ [windows $ shift (marshall s w), switchTo s w]
 
 withScreen :: ScreenId -> (WorkspaceId -> WindowSet -> WindowSet) -> X ()
 withScreen s f = screenWorkspace s >>= flip whenJust (windows . f)
+
+toggleFloat :: Window -> X ()
+toggleFloat w = windows (\s -> if member w (floating s)
+  then sink w s
+  else float w floatingRect s)
+
+floatingRect :: RationalRect
+floatingRect = RationalRect (1/10) (1/10) (8/10) (8/10)
