@@ -128,6 +128,7 @@ myManageHook  = composeAll
     title =? "win0"                        --> doCenterFloat,
     title =? ".*Emulator.*"                --> doCenterFloat,
     title =? ".screen share.*"             --> doCenterFloat,
+    title =? "Picture-in-Picture"          --> doCenterFloat,
 
     -- Assign to workspace
     className =? "code-oss"                --> doShift "3",
