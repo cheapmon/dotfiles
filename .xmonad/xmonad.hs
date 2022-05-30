@@ -139,8 +139,25 @@ myManageHook  = composeAll
 myEventHook   = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> doShift "10")
 myLogHook     = ewmhDesktopsLogHook
 myStartupHook = do
-  spawn     "$HOME/.config/seims/scripts/polybar.sh"
-  spawnOnce "picom -b"
+  -- Background
+  spawn "$HOME/seims/.config/scripts/dotfiles.sh"
+  spawn "$HOME/.config/seims/scripts/polybar.sh"
+  spawn "picom -b"
+  spawn "redshift"
+  spawn "nm-applet"
+  spawn "blueman-applet"
+  spawn "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Tapping Enabled\" 1"
+  spawn "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Natural Scrolling Enabled\" 1"
+  spawn "gnome-keyring-daemon --start --components=secrets"
+  spawn "unclutter"
+  spawn "clipmenud"
+
+  -- Autostart
+  spawnOnce "firefox-developer-edition"
+  spawnOnce "thunderbird"
+  spawnOnce "slack"
+  spawnOnce "element-desktop"
+  spawnOnce "spotify"
 
 main = do
   nScreens <- countScreens
