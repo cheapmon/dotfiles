@@ -140,17 +140,17 @@ myEventHook   = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> doShift 
 myLogHook     = ewmhDesktopsLogHook
 myStartupHook = do
   -- Background
-  spawn "$HOME/seims/.config/scripts/dotfiles.sh"
-  spawn "$HOME/.config/seims/scripts/polybar.sh"
-  spawn "picom -b"
-  spawn "redshift"
-  spawn "nm-applet"
-  spawn "blueman-applet"
-  spawn "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Tapping Enabled\" 1"
-  spawn "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Natural Scrolling Enabled\" 1"
-  spawn "gnome-keyring-daemon --start --components=secrets"
-  spawn "unclutter"
-  spawn "clipmenud"
+  spawnOnce "$HOME/seims/.config/scripts/dotfiles.sh"
+  spawn     "$HOME/.config/seims/scripts/polybar.sh"
+  spawnOnce "picom -b"
+  spawnOnce "redshift"
+  spawnOnce "nm-applet"
+  spawnOnce "blueman-applet"
+  spawnOnce "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Tapping Enabled\" 1"
+  spawnOnce "xinput set-prop \"ETPS/2 Elantech Touchpad\" \"libinput Natural Scrolling Enabled\" 1"
+  spawnOnce "gnome-keyring-daemon --start --components=secrets"
+  spawnOnce "unclutter"
+  spawnOnce "clipmenud"
 
   -- Autostart
   spawnOnce "firefox-developer-edition"
