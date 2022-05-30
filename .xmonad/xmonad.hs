@@ -182,6 +182,11 @@ main = do
   } `additionalKeysP` myAdditionalKeys nScreens
 
 -- Custom X actions
+toggleFloat :: Window -> X ()
+toggleFloat w = windows (\s -> if member w (floating s)
+  then sink w s
+  else float w floatingRect s)
+
 openScreen :: ScreenId -> X ()
 openScreen s = withScreen s view
 
@@ -203,11 +208,6 @@ screenFor workspace nScreens = fromInteger s
         n = toInteger nScreens
         m = toInteger (length myWorkspaces)
         s = w `div` (m `div` n)
-
-toggleFloat :: Window -> X ()
-toggleFloat w = windows (\s -> if member w (floating s)
-  then sink w s
-  else float w floatingRect s)
 
 floatingRect :: RationalRect
 floatingRect = RationalRect (1/10) (1/10) (8/10) (8/10)
