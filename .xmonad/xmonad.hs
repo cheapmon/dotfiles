@@ -132,7 +132,7 @@ myManageHook  = composeAll
     -- Assign to workspace
     className =? "code-oss"                --> doShift "3",
     className =? "firefoxdeveloperedition" --> doShift "6",
-    className =? "Thunderbrid"             --> doShift "7",
+    className =? "Thunderbird"             --> doShift "7",
     className =? "Slack"                   --> doShift "8",
     className =? "Element"                 --> doShift "9"
   ]
