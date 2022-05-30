@@ -4,8 +4,10 @@ import System.Exit
 import XMonad hiding (float)
 import XMonad.Actions.Warp
 import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicProperty
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.Tabbed
 import XMonad.StackSet hiding (workspaces, member)
@@ -33,6 +35,8 @@ myAdditionalKeys nScreens =
     ("M-q",        kill),
     ("M-r",        spawn "xmonad --recompile; xmonad --restart"),
     ("M-e",        io exitSuccess),
+    ("M-s",        spawn "systemctl poweroff"),
+    ("M-a",        spawn "systemctl reboot"),
 
     -- Layouts
     ("M-<Space>",  sendMessage NextLayout),
@@ -40,11 +44,11 @@ myAdditionalKeys nScreens =
     ("M-<L>",      windows focusUp),
     ("M-<D>",      windows focusMaster),
     ("M-<U>",      windows swapMaster),
-    ("M-j",        sendMessage Expand),
-    ("M-k",        sendMessage Shrink),
+    ("M-h",        sendMessage Shrink),
+    ("M-l",        sendMessage Expand),
+    ("M-j",        sendMessage (IncMasterN (-1))),
+    ("M-k",        sendMessage (IncMasterN 1)),
     ("M-t",        withFocused toggleFloat),
-    ("M-u",        sendMessage (IncMasterN 1)),
-    ("M-i",        sendMessage (IncMasterN (-1))),
 
     -- Monitors
     ("M-m",        openScreen 0),
@@ -72,7 +76,31 @@ myAdditionalKeys nScreens =
     ("M-S-7",      shiftTo "7" nScreens),
     ("M-S-8",      shiftTo "8" nScreens),
     ("M-S-9",      shiftTo "9" nScreens),
-    ("M-S-0",      shiftTo "10" nScreens)
+    ("M-S-0",      shiftTo "10" nScreens),
+
+    -- Backlight
+    ("<XF86MonBrightnessUp>",   spawn "xbacklight -inc 5"),
+    ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5"),
+
+    -- Audio
+    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+"),
+    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-"),
+    ("<XF86AudioMute>",        spawn "amixer set Master toggle"),
+    ("<XF86AudioMicMute>",     spawn "amixer set Capture toggle"),
+
+    -- The Key
+    ("<XF86Tools>",   spawn "$HOME/.config/seims/scripts/stackoverflow.sh"),
+    ("<XF86Launch5>", spawn "core-panic"),
+    ("<XF86Launch6>", spawn "polybar-msg cmd toggle"),
+
+    -- Programs
+    ("M-C-l",      spawn "$HOME/.config/seims/scripts/lock.sh"),
+    ("M-C-s",      spawn "screens"),
+    ("M-C-i",      spawn "rofi -show window"),
+    ("M-C-n",      spawn "dunstctl set-paused toggle"),
+    ("M-C-z",      spawn "rofi-pass --root $HOME/git/passwords"),
+    ("M-C-<Home>", spawn "flameshot gui"),
+    ("M-C-c",      spawn "CM_LAUNCHER=rofi clipmenu")
   ]
 
 myLayout = avoidStruts $ tiled ||| Mirror tiled ||| tabs ||| Full
@@ -93,8 +121,22 @@ myTabConf = def {
   urgentTextColor     = "#FFFFFF"
 }
 
-myManageHook  = composeAll []
-myEventHook   = mempty
+myManageHook  = composeAll
+  [
+    -- Floating windows
+    isDialog                               --> doCenterFloat,
+    title =? "win0"                        --> doCenterFloat,
+    title =? ".*Emulator.*"                --> doCenterFloat,
+    title =? ".screen share.*"             --> doCenterFloat,
+
+    -- Assign to workspace
+    className =? "code-oss"                --> doShift "3",
+    className =? "firefoxdeveloperedition" --> doShift "6",
+    className =? "Thunderbrid"             --> doShift "7",
+    className =? "Slack"                   --> doShift "8",
+    className =? "Element"                 --> doShift "9"
+  ]
+myEventHook   = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> doShift "10")
 myLogHook     = ewmhDesktopsLogHook
 myStartupHook = do
   spawn     "$HOME/.config/seims/scripts/polybar.sh"
