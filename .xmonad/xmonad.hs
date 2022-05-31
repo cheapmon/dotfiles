@@ -1,4 +1,4 @@
-import Data.Map hiding (map, keys)
+import qualified Data.Map as M
 import Data.Monoid
 import System.Exit
 import XMonad hiding (float)
@@ -10,6 +10,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Spacing
 import XMonad.StackSet hiding (workspaces, member)
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -103,10 +104,12 @@ myAdditionalKeys nScreens =
     ("M-C-c",      spawn "CM_LAUNCHER=rofi clipmenu")
   ]
 
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| tabs ||| Full
+myLayout = avoidStruts . spacing $ tiled ||| Mirror tiled ||| tabs ||| Full
   where
-    tiled = Tall 1 (3 / 100) (1 / 2)
-    tabs  = tabbedBottom shrinkText myTabConf
+    tiled   = Tall 1 (3 / 100) (1 / 2)
+    tabs    = tabbedBottom shrinkText myTabConf
+    spacing = spacingRaw True (Border gap gap gap gap) True (Border gap gap gap gap) True
+    gap     = 10
 
 myTabConf = def {
   fontName            = "xft:JetBrains Mono:size=9",
@@ -172,7 +175,7 @@ main = do
     workspaces         = myWorkspaces,
     normalBorderColor  = myNormalBorderColor,
     focusedBorderColor = myFocusedBorderColor,
-    keys               = const empty,
+    keys               = const M.empty,
     -- hooks, layouts
     layoutHook         = myLayout,
     manageHook         = myManageHook,
@@ -183,7 +186,7 @@ main = do
 
 -- Custom X actions
 toggleFloat :: Window -> X ()
-toggleFloat w = windows (\s -> if member w (floating s)
+toggleFloat w = windows (\s -> if M.member w (floating s)
   then sink w s
   else float w floatingRect s)
 
