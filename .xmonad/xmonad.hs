@@ -9,9 +9,10 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.IndependentScreens
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Spacing
-import XMonad.StackSet hiding (workspaces, member)
+import XMonad.StackSet hiding (workspaces, member, Screen)
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -107,12 +108,13 @@ myAdditionalKeys nScreens =
     ("M-C-c",      spawn "CM_LAUNCHER=rofi clipmenu")
   ]
 
-myLayout = avoidStruts . spacing $ tiled ||| Mirror tiled ||| tabs ||| Full
+myLayout = avoidStruts . spacing . borders $ tiled ||| Mirror tiled ||| tabs ||| Full
   where
     tiled   = Tall 1 (3 / 100) (1 / 2)
     tabs    = tabbedBottom shrinkText myTabConf
     spacing = spacingRaw True (Border gap gap gap gap) True (Border gap gap gap gap) True
     gap     = 10
+    borders = lessBorders Screen
 
 myTabConf = def {
   fontName            = "xft:JetBrains Mono:size=9",
