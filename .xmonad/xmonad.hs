@@ -88,6 +88,9 @@ myAdditionalKeys nScreens =
     ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%-"),
     ("<XF86AudioMute>",        spawn "amixer set Master toggle"),
     ("<XF86AudioMicMute>",     spawn "amixer set Capture toggle"),
+    ("<XF86AudioPlay>",        spawn "spotifycli --playpause"),
+    ("<XF86AudioPrev>",        spawn "spotifycli --prev"),
+    ("<XF86AudioNext>",        spawn "spotifycli --next"),
 
     -- The Key
     ("<XF86Tools>",   spawn "$HOME/.config/seims/scripts/stackoverflow.sh"),
