@@ -6,6 +6,15 @@ export COMPOSE_HTTP_TIMEOUT=86400
 export MACHINE_ID=$(cat /etc/machine-id)
 
 case $MACHINE_ID in
+  ce13d501581c4f40aee92c0c68147344) # t480s
+    export MONITOR=eDP-1
+    export MONITOR_LEFT=
+    export MONITOR_RIGHT=
+    export AUTORANDR_PROFILE=t480s
+
+    export NETWORK_INTERFAC=wlp61s0
+    export BACKLIGHT_CARD=intel_backlight
+    ;;
   4ab0815ef27f484ebae33a3f0f9b7a56) # t14s
     export MONITOR=eDP
     export MONITOR_LEFT=HDMI-A-0
@@ -13,6 +22,7 @@ case $MACHINE_ID in
     export AUTORANDR_PROFILE=work
 
     export NETWORK_INTERFACE=enp2s0f0
+    export BACKLIGHT_CARD=amdgpu_bl0
     ;;
   22569a7abbb04344bf9f8b443d404cc4) # omen
     export MONITOR=
@@ -21,6 +31,7 @@ case $MACHINE_ID in
     export AUTORANDR_PROFILE=home
 
     export NETWORK_INTERFACE=enp34s0
+    export BACKLIGHT_CARD=amdgpu_bl0
     ;;
 esac
 
