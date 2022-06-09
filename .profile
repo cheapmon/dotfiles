@@ -12,6 +12,8 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=
     export AUTORANDR_PROFILE=t480s
 
+    export TOUCHPAD="Elan Touchpad"
+
     export NETWORK_INTERFAC=wlp61s0
     export BACKLIGHT_CARD=intel_backlight
     ;;
@@ -20,6 +22,8 @@ case $MACHINE_ID in
     export MONITOR_LEFT=HDMI-A-0
     export MONITOR_RIGHT=DisplayPort-2
     export AUTORANDR_PROFILE=work
+
+    export TOUCHPAD="ETPS/2 Elantech Touchpad"
 
     export NETWORK_INTERFACE=enp2s0f0
     export BACKLIGHT_CARD=amdgpu_bl0
@@ -30,6 +34,8 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=HDMI-0
     export AUTORANDR_PROFILE=home
 
+    export TOUCHPAD=
+
     export NETWORK_INTERFACE=enp34s0
     export BACKLIGHT_CARD=amdgpu_bl0
     ;;
@@ -38,7 +44,8 @@ esac
 # Make variables available to i3
 echo "*monitor: $MONITOR
 *monitor_left: $MONITOR_LEFT
-*monitor_right: $MONITOR_RIGHT" > $HOME/.Xresources
+*monitor_right: $MONITOR_RIGHT
+*touchpad: $TOUCHPAD" > $HOME/.Xresources
 
 # Adjust monitors
 autorandr $AUTORANDR_PROFILE
