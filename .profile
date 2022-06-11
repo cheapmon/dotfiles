@@ -39,6 +39,16 @@ case $MACHINE_ID in
     export NETWORK_INTERFACE=enp34s0
     export BACKLIGHT_CARD=amdgpu_bl0
     ;;
+  *)
+    export MONITOR=$(xrandr | grep -w connected | head -n1 | cut -d' ' -f1)
+    export MONITOR_LEFT=
+    export MONITOR_RIGHT=
+    export AUTORANDR_PROFILE=
+
+    export TOUCHPAD=
+
+    export NETWORK_INTERFACE=$(nmcli | grep -w connected | cut -d' ' -f1 | sed 's/://')
+    export BACKLIGHT_CARD=
 esac
 
 # Make variables available to i3
