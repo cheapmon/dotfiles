@@ -1,8 +1,12 @@
 #!/usr/bin/env zsh
 if [[ $1 == "-g" ]]; then
   FILES=$(fd -tf . $HOME/.dots | awk "{ gsub(\"$HOME/.dots\", \"\"); print }" | xargs)
-  echo "sudo groupadd dots"
+  echo "sudo groupadd -f dots"
   echo "sudo usermod -aG dots $USER"
+  for FILE in $(echo "$FILES" | xargs); do
+    echo "sudo mkdir -p $(dirname $FILE)"
+  done
+  echo "sudo touch $FILES"
   echo "sudo chgrp dots $FILES"
   echo "sudo chmod g+rw $FILES"
   exit
