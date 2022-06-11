@@ -12,6 +12,7 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=
     export AUTORANDR_PROFILE=t480s
 
+    export WORK=
     export TOUCHPAD="Elan Touchpad"
 
     export NETWORK_INTERFAC=wlp61s0
@@ -23,6 +24,7 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=DisplayPort-2
     export AUTORANDR_PROFILE=work
 
+    export WORK=true
     export TOUCHPAD="ETPS/2 Elantech Touchpad"
 
     export NETWORK_INTERFACE=enp2s0f0
@@ -34,6 +36,7 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=HDMI-0
     export AUTORANDR_PROFILE=home
 
+    export WORK=true
     export TOUCHPAD=
 
     export NETWORK_INTERFACE=enp34s0
@@ -45,6 +48,7 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=
     export AUTORANDR_PROFILE=
 
+    export WORK=
     export TOUCHPAD=
 
     export NETWORK_INTERFACE=$(nmcli | grep -w connected | cut -d' ' -f1 | sed 's/://')
