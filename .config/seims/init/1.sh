@@ -91,6 +91,13 @@ echo "> Fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 echo
 
+# Prepare 2.sh
+echo "> Preparing 2.sh"
+pacman -Sy wget
+wget https://raw.githubusercontent.com/cheapmon/dotfiles/main/.config/seims/init/2.sh
+mv 2.sh /mnt/root/.bashrc
+echo
+
 # Done
 echo "    arch-chroot /mnt"
 echo

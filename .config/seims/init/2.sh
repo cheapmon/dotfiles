@@ -188,6 +188,14 @@ usermod -aG dots seims
 passwd seims
 echo
 
+# Prepare 3.sh
+echo "> Preparing 3.sh"
+rm /root/.bashrc
+wget https://raw.githubusercontent.com/cheapmon/dotfiles/main/.config/seims/init/3.sh
+chown seims:seims 3.sh
+mv 3.sh /home/seims/.zshrc
+echo
+
 # Done
 echo "    reboot"
 echo
