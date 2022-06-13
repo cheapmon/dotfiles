@@ -237,8 +237,4 @@ exec unclutter
 exec clipmenud
 
 ### Autostart
-exec firefox-developer-edition
-exec thunderbird
-exec slack
-exec element-desktop
-exec spotify
+exec /home/seims/.config/seims/scripts/autostart.sh

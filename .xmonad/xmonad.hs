@@ -162,11 +162,7 @@ myStartupHook = do
   spawnOnce "clipmenud"
 
   -- Autostart
-  spawnOnce "firefox-developer-edition"
-  spawnOnce "thunderbird"
-  spawnOnce "slack"
-  spawnOnce "element-desktop"
-  spawnOnce "spotify"
+  spawnOnce "$HOME/.config/seims/scripts/autostart.sh"
 
 main = do
   nScreens <- countScreens
