@@ -41,7 +41,7 @@ eval "$(starship init zsh)"
 rm -rf $HOME/Downloads
 
 # Work
-if [ -z "${WORK+x}" ]; then
+if [ "$WORK" = "yes" ]; then
   # Environment
   export PATH=$PATH:$HOME/git/architecture/bin/ia
   export FORCE_INIT=yes

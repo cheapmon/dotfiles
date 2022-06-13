@@ -24,7 +24,7 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=DisplayPort-2
     export AUTORANDR_PROFILE=work
 
-    export WORK=true
+    export WORK=yes
     export TOUCHPAD="ETPS/2 Elantech Touchpad"
 
     export NETWORK_INTERFACE=enp2s0f0
@@ -36,7 +36,7 @@ case $MACHINE_ID in
     export MONITOR_RIGHT=HDMI-0
     export AUTORANDR_PROFILE=home
 
-    export WORK=true
+    export WORK=yes
     export TOUCHPAD=
 
     export NETWORK_INTERFACE=enp34s0
