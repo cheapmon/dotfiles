@@ -6,7 +6,7 @@ export COMPOSE_HTTP_TIMEOUT=86400
 export MACHINE_ID=$(cat /etc/machine-id)
 
 case $MACHINE_ID in
-  ce13d501581c4f40aee92c0c68147344) # t480s
+  5938cd00e7304a739aaae2286797acb6) # t480s
     export MONITOR=eDP-1
     export MONITOR_LEFT=
     export MONITOR_RIGHT=
