@@ -68,9 +68,9 @@ if [ "$WORK" = "yes" ]; then
 
   # kubectl
   kc() {
-    gopass show inaudito/infrastructure/kubernetes/staging/kubeconfig > /dev/shm/kubeconfig-staging
-    gopass show inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
-    gopass show inaudito/infrastructure/kubernetes/hetzner/kubeconfig > /dev/shm/kubeconfig-hetzner
+    gopass show -n inaudito/infrastructure/kubernetes/staging/kubeconfig > /dev/shm/kubeconfig-staging
+    gopass show -n inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
+    gopass show -n inaudito/infrastructure/kubernetes/hetzner/kubeconfig > /dev/shm/kubeconfig-hetzner
     export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production:/dev/shm/kubeconfig-hetzner
   }
   kd() {
