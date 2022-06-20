@@ -56,7 +56,7 @@ if [ "$WORK" = "yes" ]; then
     app=$(ls -d $HOME/git/architecture/apps/* | cut -d/ -f7 | fzf)
     cd $HOME/git/architecture/apps/$app
   }
-  alias iacli="$HOME/git/architecture/apps/cli/cli"
+  alias iacli="$HOME/git/architecture/apps/cli/iacli"
 
   # Completion
   source <($HOME/git/architecture/bin/ia completion)
