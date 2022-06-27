@@ -50,7 +50,7 @@ bindsym $mod+v split v
 
 ### Modes
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+t floating toggle
 bindsym $mod+w sticky toggle
 
 ### Switch workspace
@@ -88,18 +88,6 @@ bindsym $mod+Next scratchpad show
 ### Additional navigation
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-
-### Resize mode
-mode "resize" {
-  bindsym Left resize shrink width 10 px or 10 ppt
-  bindsym Down resize grow height 10 px or 10 ppt
-  bindsym Up resize shrink height 10 px or 10 ppt
-  bindsym Right resize grow width 10 px or 10 ppt
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-  bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
 
 # Layouts
 bindsym $mod+comma layout stacking
@@ -168,13 +156,15 @@ for_window [class="Spotify"] move to workspace $ws10
 
 ## Custom keybindings
 
+### Baseline
+bindsym $mod+Return exec alacritty
+bindsym $mod+d exec rofi -show run
+
 ### Control
-bindsym $mod+Ctrl+h exec systemctl hibernate
-bindsym $mod+Ctrl+s exec systemctl poweroff
-bindsym $mod+Ctrl+r exec systemctl reboot
-bindsym $mod+Ctrl+e exec i3-msg exit
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
+bindsym $mod+s exec systemctl poweroff
+bindsym $mod+a exec systemctl reboot
+bindsym $mod+e exec i3-msg exit
+bindsym $mod+r restart
 
 ### Backlight
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
@@ -185,41 +175,25 @@ bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioMute exec amixer set Master toggle
 bindsym XF86AudioMicMute exec amixer set Capture toggle
+bindsym XF86AudioPlay exec spotifycli --playpause
+bindsym XF86AudioPrev exec spotifycli --prev
+bindsym XF86AudioNext exec spotifycli --next
 
 ### Programs
-bindsym $mod+l exec /home/seims/.config/seims/scripts/lock.sh
-bindsym $mod+m exec screens
-bindsym $mod+Shift+l exec layouts
-bindsym $mod+Return exec alacritty
-bindsym $mod+d exec rofi -show run
-bindsym $mod+i exec rofi -show window
-bindsym $mod+n exec dunstctl set-paused toggle
-bindsym $mod+p exec /home/seims/.config/seims/scripts/polybar.sh
-bindsym $mod+z exec rofi-pass --root /home/seims/git/passwords
-bindsym Print exec flameshot gui
-bindsym $mod+Home exec flameshot gui
-bindsym Insert exec CM_LAUNCHER=rofi clipmenu
-bindsym $mod+Ctrl+1 exec alacritty
-bindsym $mod+Ctrl+2 exec alacritty
-bindsym $mod+Ctrl+3 exec code
-bindsym $mod+Ctrl+4 exec chromium
-bindsym $mod+Ctrl+5 exec pavucontrol
-bindsym $mod+Ctrl+6 exec firefox-developer-edition
-bindsym $mod+Ctrl+7 exec thunderbird
-bindsym $mod+Ctrl+8 exec slack
-bindsym $mod+Ctrl+9 exec element-desktop
-bindsym $mod+Ctrl+10 exec spotify
+bindsym $mod+Ctrl+l exec /home/seims/.config/seims/scripts/lock.sh
+bindsym $mod+Ctrl+s exec screens
+bindsym $mod+Ctrl+k exec layouts
+bindsym $mod+Ctrl+w exec rofi -show window
+bindsym $mod+Ctrl+n exec dunstctl set-paused toggle
+bindsym $mod+Ctrl+p exec /home/seims/.config/seims/scripts/polybar.sh
+bindsym $mod+Ctrl+z exec rofi-pass --root /home/seims/git/passwords
+bindsym $mod+Ctrl+Home exec flameshot gui
+bindsym $mod+Ctrl+Insert exec CM_LAUNCHER=rofi clipmenu
 
 ### The Key
 bindsym XF86Tools exec /home/seims/.config/seims/scripts/stackoverflow.sh
 bindsym XF86Launch5 exec core-panic
 bindsym XF86Launch6 exec polybar-msg cmd toggle
-
-### Spotify
-bindsym $mod+Ctrl+Left exec spotifycli --prev
-bindsym $mod+Ctrl+Right exec spotifycli --next
-bindsym $mod+Ctrl+Down exec spotifycli --playpause
-bindsym XF86AudioPlay exec spotifycli --playpause
 
 ### Preparations
 exec /home/seims/.config/seims/scripts/dotfiles.sh
