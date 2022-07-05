@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
-gopass show inaudito/infrastructure/kubernetes/staging/kubeconfig > /dev/shm/kubeconfig-staging
-gopass show inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
-export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production
+#!/usr/bin/env zsh
+source $HOME/.zshrc
 
+kc
 kubectx digitalocean-production
 kubens core-production
 kubectl get pods
