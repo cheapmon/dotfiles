@@ -10,7 +10,7 @@ window:
 font:
   normal:
     family: JetBrains Mono Nerd Font
-  size: 9
+  size: 11
 # Colors (Dracula)
 colors:
   # Default colors
