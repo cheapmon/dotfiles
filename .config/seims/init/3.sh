@@ -21,6 +21,11 @@ echo "> oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 echo
 
+# SpaceVim
+echo "> SpaceVim"
+curl -sLf https://spacevim.org/install.sh | bash
+echo
+
 # Dotfiles
 echo "> Dotfiles"
 mkdir $HOME/git
