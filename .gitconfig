@@ -8,6 +8,7 @@
   ap = add --patch
   co = checkout
   cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf`
+  cl = clean -fd
   cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf`
   br = branch
   bd = !git branch -D `git branch | fzf -m`
