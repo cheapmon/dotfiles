@@ -25,7 +25,7 @@ esac
 # Dependencies
 pacman -S --noconfirm \
   networkmanager grub efibootmgr lvm2 $CPU-ucode xorg $GPU_DEPS sudo neovim \
-  i3-gaps xmonad xmonad-contrib lightdm pulseaudio pulseaudio-alsa \
+  i3-gaps lightdm pulseaudio pulseaudio-alsa \
   pavucontrol zsh code firefox-developer-edition element-desktop ruby git \
   alacritty rofi dunst polybar flameshot clipmenu thunderbird feh picom \
   redshift network-manager-applet blueman gnome-keyring unclutter ripgrep fd \
