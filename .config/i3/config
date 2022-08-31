@@ -81,6 +81,16 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+KP_Right move workspace to output $right
 bindsym $mod+KP_Left move workspace to output $left
 
+### Resize
+bindsym $mod+space mode "resize"
+mode "resize" {
+  bindsym $mod+Left resize shrink width 1px or 1ppt
+  bindsym $mod+Right resize grow width 1px or 1ppt
+  bindsym $mod+Up resize grow height 1px or 1ppt
+  bindsym $mod+Down resize shrink height 1px or 1ppt
+  bindsym Escape mode "default"
+}
+
 ### Scratchpad
 bindsym $mod+Prior move scratchpad
 bindsym $mod+Next scratchpad show
