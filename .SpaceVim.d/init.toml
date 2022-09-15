@@ -1,13 +1,13 @@
 [options]
-    colorscheme = "hybrid"
-    colorscheme_bg = "dark"
-    enable_guicolors = true
-    statusline_separator = "arrow"
-    statusline_iseparator = "arrow"
-    buffer_index_type = 4
-    enable_tabline_filetype_icon = true
-    enable_statusline_mode = false
-    project_rooter_outermost = false
+colorscheme = "hybrid"
+colorscheme_bg = "dark"
+enable_guicolors = true
+statusline_separator = "arrow"
+statusline_iseparator = "arrow"
+buffer_index_type = 4
+enable_tabline_filetype_icon = true
+enable_statusline_mode = false
+project_rooter_outermost = false
 
 [[layers]]
 name = 'colorscheme'
@@ -24,3 +24,7 @@ auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
 name = 'fzf'
+
+[[layers]]
+name = 'lang#ruby'
+enabled_linters = []
