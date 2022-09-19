@@ -13,7 +13,7 @@ echo
 # AUR packages
 echo "> AUR packages"
 paru -S --noconfirm paper-icon-theme i3lock-color i3lock-fancy-rapid-git \
-  lightdm-slick-greeter mdr nerd-fonts-jetbrains-mono spotify
+  lightdm-slick-greeter mdr nerd-fonts-jetbrains-mono spotify ttf-scientifica
 echo
 
 # oh-my-zsh

@@ -9,8 +9,8 @@ window:
   opacity: 0.8
 font:
   normal:
-    family: JetBrains Mono Nerd Font
-  size: 11
+    family: Scientifica
+  size: 17
 # Colors (Dracula)
 colors:
   # Default colors
