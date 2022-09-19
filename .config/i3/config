@@ -192,6 +192,7 @@ bindsym XF86AudioNext exec spotifycli --next
 
 ### Programs
 bindsym $mod+Ctrl+l exec /home/seims/.config/seims/scripts/lock.sh
+bindsym $mod+Ctrl+b exec /home/seims/.config/seims/scripts/battery.sh
 bindsym $mod+Ctrl+s exec screens
 bindsym $mod+Ctrl+k exec layouts
 bindsym $mod+Ctrl+w exec rofi -show window
