@@ -7,5 +7,7 @@ if [ "$WORK" == "yes" -a $HOUR -ge 8 -a $HOUR -lt 18 ]; then
   thunderbird &
   slack &
   element-desktop &
+  telegram-desktop &
+  signal-desktop &
   spotify &
 fi

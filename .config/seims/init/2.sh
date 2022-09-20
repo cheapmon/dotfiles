@@ -34,7 +34,7 @@ pacman -S --noconfirm \
   gnome-themes-extra gopass gource htop neofetch pamixer sl simple-scan \
   python-pip rsync rustup simple-scan solaar thefuck tmux tokei vlc wget \
   words youtube-dl jq yq ttf-font-awesome ttf-jetbrains-mono acpi rofi-pass \
-  starship magic-wormhole upower
+  starship magic-wormhole upower telegram-desktop signal-desktop
 
 # Time zone
 echo "> Time zone"

@@ -150,18 +150,12 @@ for_window [title=".*screen share.*"] floating enable
 for_window [title="alacritty"] floating enable
 
 ### Assign windows
-assign [class="code"] $ws3
-assign [class="jetbrains-idea"] $ws3
-assign [class="jetbrains-studio"] $ws3
-assign [class="jetbrains-clion"] $ws3
-assign [class="TeXstudio"] $ws3
-assign [class="jetbrains-rubymine"] $ws3
-assign [class="jetbrains-webstorm"] $ws3
 assign [class="firefoxdeveloperedition"] $ws6
 assign [class="thunderbird"] $ws7
 assign [class="Slack"] $ws8
-assign [class="discord"] $ws8
 assign [class="Element"] $ws9
+assign [class="TelegramDesktop"] $ws9
+assign [class="Signal"] $ws9
 assign [title=".*Emulator.*"] $ws4
 for_window [class="Spotify"] move to workspace $ws10
 
