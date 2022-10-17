@@ -17,7 +17,6 @@
   pl = pull
   pra = pull --rebase --autostash
   ps = push
-  pu = !git push -u $(git remote) $(git branch --show-current)
   lg = log
   df = diff
   dfc = diff --cached
@@ -25,6 +24,8 @@
   rbc = rebase --continue
 [color]
   ui = true
+[push]
+  autoSetupRemote = true
 [pull]
   rebase = false
 [init]
