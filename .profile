@@ -15,7 +15,7 @@ case $MACHINE_ID in
     export WORK=
     export TOUCHPAD="Elan Touchpad"
 
-    export NETWORK_INTERFAC=wlp61s0
+    export NETWORK_INTERFACE=wlp61s0
     export BACKLIGHT_CARD=intel_backlight
     ;;
   4ab0815ef27f484ebae33a3f0f9b7a56) # t14s
