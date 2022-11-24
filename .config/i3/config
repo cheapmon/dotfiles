@@ -196,7 +196,8 @@ bindsym $mod+Ctrl+z exec rofi-pass --root /home/seims/git/passwords
 bindsym $mod+Ctrl+Return exec alacritty --title alacritty
 bindsym $mod+Ctrl+Home exec flameshot gui
 bindsym $mod+Ctrl+Insert exec CM_LAUNCHER=rofi clipmenu
-bindsym $mod+Ctrl+1 exec /home/seims/.config/seims/scripts/layout.sh
+bindsym $mod+Ctrl+1 exec /home/seims/.config/seims/scripts/layout.sh 1 tiles core
+bindsym $mod+Ctrl+2 exec /home/seims/.config/seims/scripts/layout.sh 2 tiles configurator
 
 ### The Key
 bindsym XF86Tools exec /home/seims/.config/seims/scripts/stackoverflow.sh
