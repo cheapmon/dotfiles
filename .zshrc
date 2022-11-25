@@ -30,6 +30,11 @@ alias p="paru"
 alias ls="exa"
 alias dc="docker-compose"
 
+# Functions
+rgl() {
+  rg -p $@ | less
+}
+
 # Dotfiles
 alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
 export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia iacli history)
