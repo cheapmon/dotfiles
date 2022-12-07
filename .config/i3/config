@@ -82,7 +82,7 @@ bindsym $mod+KP_Right move workspace to output $right
 bindsym $mod+KP_Left move workspace to output $left
 
 ### Resize
-bindsym $mod+space mode "resize"
+bindsym $mod+d mode "resize"
 mode "resize" {
   bindsym $mod+Left resize shrink width 1px or 1ppt
   bindsym $mod+Right resize grow width 1px or 1ppt
@@ -163,7 +163,7 @@ for_window [class="Spotify"] move to workspace $ws10
 
 ### Baseline
 bindsym $mod+Return exec alacritty
-bindsym $mod+d exec rofi -show run
+bindsym $mod+space exec rofi -show run
 
 ### Control
 bindsym $mod+s exec systemctl poweroff
