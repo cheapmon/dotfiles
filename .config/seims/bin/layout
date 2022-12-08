@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'active_support/all'
+require 'optparse'
+require 'json'
+
+options = { variant: :tiles }
+parser = OptionParser.new do |opts|
+  opts.on('-w WORKSPACE', '--workspace=WORKSPACE')
+  opts.on('-v VARIANT', '--variant=VARIANT')
+  opts.on('-a APP', '--app=APP')
+end
+parser.parse!(into: options)
+
+if options[:workspace].present?
+  `i3-msg "workspace --no-auto-back-and-forth #{options[:workspace]}"`
+end
+
+`i3-msg append_layout $HOME/.i3/workspace-#{options[:variant]}.json`
+
+working_directory = if options[:app].present?
+  "$HOME/git/architecture/apps/#{options[:app]}"
+else
+  "$HOME"
+end
+
+def count_nodes(node)
+  node["nodes"]&.map { |n| count_nodes(n) }&.sum || 1
+end
+
+n_nodes = File.read("#{Dir.home}/.i3/workspace-#{options[:variant]}.json")
+  .split("\n\n")
+  .map { |str| JSON.parse(str) }
+  .map { |node| count_nodes(node) }
+  .sum
+
+n_nodes.times do
+  `i3-msg exec "alacritty --working-directory=#{working_directory}"`
+end
