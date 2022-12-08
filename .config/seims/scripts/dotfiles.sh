@@ -28,6 +28,7 @@ case $? in
     ;;
 esac
 
+i3-msg restart
 dunstify -a $APP_NAME -u $URGENCY $MESSAGE
 
 for FILE in $(fd -tf . $HOME/.dots | awk "{ gsub(\"$HOME/.dots\", \"\"); print }"); do
