@@ -194,7 +194,7 @@ bindsym $mod+Ctrl+n exec dunstctl set-paused toggle
 bindsym $mod+Ctrl+p exec /home/seims/.config/seims/scripts/polybar.sh
 bindsym $mod+Ctrl+z exec rofi-pass --root /home/seims/git/passwords
 bindsym $mod+Ctrl+Return exec alacritty --title alacritty
-bindsym $mod+Ctrl+Home exec flameshot gui
+bindsym $mod+Ctrl+f exec flameshot gui
 bindsym $mod+Ctrl+Insert exec CM_LAUNCHER=rofi clipmenu
 
 # Layouts
