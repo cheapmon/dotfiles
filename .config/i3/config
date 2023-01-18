@@ -202,11 +202,6 @@ bindsym $mod+Ctrl+space exec layout
 bindsym $mod+Ctrl+1 exec layout -w 1 -a core
 bindsym $mod+Ctrl+2 exec layout -w 2 -a configurator
 
-### The Key
-bindsym XF86Tools exec /home/seims/.config/seims/scripts/stackoverflow.sh
-bindsym XF86Launch5 exec core-panic
-bindsym XF86Launch6 exec polybar-msg cmd toggle
-
 ### Preparations
 exec /home/seims/.config/seims/scripts/dotfiles.sh
 exec_always i3-layouts
