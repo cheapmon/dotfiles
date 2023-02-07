@@ -4,7 +4,7 @@ output DP-1
 off
 output DP-0
 crtc 0
-gamma 0.625:0.588:0.526
+gamma 0.5:0.455:0.385
 mode 2560x1440
 pos 0x0
 primary
@@ -12,8 +12,8 @@ rate 164.96
 x-prop-non_desktop 0
 output HDMI-0
 crtc 1
-gamma 0.625:0.588:0.526
+gamma 0.5:0.455:0.385
 mode 1920x1080
-pos 2560x279
+pos 2560x270
 rate 60.00
 x-prop-non_desktop 0
