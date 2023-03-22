@@ -29,6 +29,8 @@ alias g="git"
 alias p="paru"
 alias ls="exa"
 alias dc="docker-compose"
+alias n="nvim"
+alias vim="nvim"
 
 # Functions
 rgl() {
