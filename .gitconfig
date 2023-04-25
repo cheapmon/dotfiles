@@ -17,11 +17,12 @@
   pl = pull
   pra = pull --rebase --autostash
   ps = push
-  lg = log
+  lg = log -p
   df = diff
   dfc = diff --cached
   rb = rebase
   rbc = rebase --continue
+  rba = rebase --abort
   rl = reset --soft HEAD~1
   rs = restore --staged
 [color]
