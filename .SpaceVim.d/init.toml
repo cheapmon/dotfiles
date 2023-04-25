@@ -1,5 +1,5 @@
 [options]
-colorscheme = "dracula"
+colorscheme = "catppuccin"
 colorscheme_bg = "dark"
 enable_guicolors = true
 statusline_separator = "arrow"
@@ -28,3 +28,10 @@ name = 'fzf'
 [[layers]]
 name = 'lang#ruby'
 enabled_linters = []
+
+[[layers]]
+name = "tmux"
+
+[[custom_plugins]]
+repo = 'catppuccin/nvim'
+merged = false
