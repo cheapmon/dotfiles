@@ -23,6 +23,10 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/.local/share/gem/ruby/3.0.0/bin
 export COMPOSE_HTTP_TIMEOUT=86400
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # Aliases
 alias g="git"
