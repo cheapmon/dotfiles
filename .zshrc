@@ -35,6 +35,8 @@ alias ls="exa"
 alias dc="docker-compose"
 alias n="nvim"
 alias vim="nvim"
+alias t="tmux"
+alias ts="tmux new-session -t $(basename $(pwd))"
 
 # Functions
 rgl() {
