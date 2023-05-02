@@ -43,7 +43,7 @@ rgl() {
 }
 
 ts() {
-  tmux new-session -t $(basename $(pwd))
+  tmux new -As $(basename $(pwd))
 }
 
 # Dotfiles
