@@ -35,15 +35,10 @@ alias ls="exa"
 alias dc="docker-compose"
 alias n="nvim"
 alias vim="nvim"
-alias t="tmux"
 
 # Functions
 rgl() {
   rg -p $@ | less
-}
-
-ts() {
-  tmux new -As $(basename $(pwd))
 }
 
 # Dotfiles
