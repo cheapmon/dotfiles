@@ -25,6 +25,7 @@
   rba = rebase --abort
   rl = reset --soft HEAD~1
   rs = restore --staged
+  main = checkout main
 [color]
   ui = true
 [push]
