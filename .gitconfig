@@ -28,6 +28,8 @@
   main = checkout main
 [color]
   ui = true
+[commit]
+  verbose = true
 [push]
   autoSetupRemote = true
 [pull]
