@@ -15,7 +15,6 @@
   cm = commit
   st = status
   pl = pull
-  pra = pull --rebase --autostash
   ps = push
   lg = log -p
   df = diff
@@ -33,6 +32,8 @@
 [push]
   autoSetupRemote = true
 [pull]
-  rebase = false
+  rebase = true
 [init]
   defaultBranch = main
+[rebase]
+  autoStash = true
