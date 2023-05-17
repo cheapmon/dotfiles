@@ -3,7 +3,7 @@
 # .:.
 # Change screen configuration
 begin
-  config = %x(autorandr | grep detected | cut -d'\(' -f1 | rofi -dmenu -i -p config)
+  config = %x(autorandr | cut -d'\(' -f1 | rofi -dmenu -i -p config)
   unless config.empty?
     system "autorandr #{config}"
     system "xmonad --restart"
