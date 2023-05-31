@@ -18,7 +18,12 @@ case $MACHINE_ID in
     export NETWORK_INTERFACE=wlp61s0
     export BACKLIGHT_CARD=intel_backlight
 
-    export VIM_COLORSCHEME=catppuccin
+    export VIM_COLORSCHEME=catppuccin-mocha
+    export TMUX_COLORSCHEME=mocha
+    export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
     ;;
   4ab0815ef27f484ebae33a3f0f9b7a56) # t14s
     export MONITOR=eDP
@@ -32,7 +37,12 @@ case $MACHINE_ID in
     export NETWORK_INTERFACE=enp2s0f0
     export BACKLIGHT_CARD=amdgpu_bl0
 
-    export VIM_COLORSCHEME=catppuccin
+    export VIM_COLORSCHEME=catppuccin-mocha
+    export TMUX_COLORSCHEME=mocha
+    export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
     ;;
   22569a7abbb04344bf9f8b443d404cc4) # omen
     export MONITOR=
@@ -47,6 +57,11 @@ case $MACHINE_ID in
     export BACKLIGHT_CARD=amdgpu_bl0
 
     export VIM_COLORSCHEME=catppuccin-latte
+    export TMUX_COLORSCHEME=latte
+    export FZF_DEFAULT_OPTS=" \
+--color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
+--color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+--color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
     ;;
   *)
     export MONITOR=$(xrandr | grep -w connected | head -n1 | cut -d' ' -f1)
@@ -60,7 +75,12 @@ case $MACHINE_ID in
     export NETWORK_INTERFACE=$(nmcli | grep -w connected | cut -d' ' -f1 | sed 's/://')
     export BACKLIGHT_CARD=
 
-    export VIM_COLORSCHEME=catppuccin
+    export VIM_COLORSCHEME=catppuccin-mocha
+    export TMUX_COLORSCHEME=mocha
+    export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 esac
 
 # Make variables available to i3
