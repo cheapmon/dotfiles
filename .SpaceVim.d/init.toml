@@ -26,6 +26,10 @@ auto_completion_tab_key_behavior = "smart"
 name = 'fzf'
 
 [[layers]]
+name = 'git'
+git_plugin = 'fugitive'
+
+[[layers]]
 name = 'lang#ruby'
 enabled_linters = []
 
