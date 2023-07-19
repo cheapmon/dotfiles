@@ -168,7 +168,7 @@ bindsym $mod+space exec rofi -show run
 ### Control
 bindsym $mod+s exec systemctl poweroff
 bindsym $mod+a exec systemctl reboot
-bindsym $mod+e exec i3-msg exit
+bindsym $mod+e exit
 bindsym $mod+r restart
 
 ### Backlight
