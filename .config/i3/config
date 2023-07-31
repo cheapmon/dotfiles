@@ -30,23 +30,23 @@ set_from_resource $touchpad i3wm.touchpad ""
 floating_modifier $mod
 
 ### Change focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 ### Move window
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 ### Kill window
 bindsym $mod+q kill
 
 ### Orientation
-bindsym $mod+h split h
-bindsym $mod+v split v
+bindsym $mod+Mod1+h split h
+bindsym $mod+Mod1+v split v
 
 ### Modes
 bindsym $mod+f fullscreen toggle
