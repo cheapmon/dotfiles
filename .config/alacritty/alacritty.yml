@@ -11,7 +11,7 @@ window:
 font:
   normal:
     family: IosevkaTerm Nerd Font
-  size: 15
+  size: 17
 colors:
     primary:
         background: "#1E1E2E" # base
