@@ -10,33 +10,33 @@ enable_statusline_mode = false
 project_rooter_outermost = false
 
 [[layers]]
-name = 'colorscheme'
+name = "colorscheme"
 
 [[layers]]
-name = 'shell'
-default_position = 'bottom'
+name = "shell"
+default_position = "bottom"
 default_height = 30
 
 [[layers]]
-name = 'autocomplete'
+name = "autocomplete"
 auto_completion_return_key_behavior = "complete"
 auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
-name = 'fzf'
+name = "fzf"
 
 [[layers]]
-name = 'git'
-git_plugin = 'fugitive'
+name = "git"
+git_plugin = "fugitive"
 
 [[layers]]
-name = 'lang#ruby'
-enabled_linters = []
+name = "lang#ruby"
+enabled_linters = ["rubocop"]
 format_on_save = true
 
 [[layers]]
 name = "tmux"
 
 [[custom_plugins]]
-repo = 'catppuccin/nvim'
+repo = "catppuccin/nvim"
 merged = false
