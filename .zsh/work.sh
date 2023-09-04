@@ -43,4 +43,10 @@ if [ "$WORK" = "yes" ]; then
   alias kx="kubectx"
   alias kn="kubens"
   alias k9="k9s --readonly"
+
+  # rbenv
+  if [ -d "$HOME/.rbenv" ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+  fi
 fi
