@@ -162,7 +162,8 @@ for_window [class="Spotify"] move to workspace $ws10
 ## Custom keybindings
 
 ### Baseline
-bindsym $mod+Return exec alacritty -e tmux -- new -As main
+#bindsym $mod+Return exec alacritty -e tmux -- new -As main
+bindsym $mod+Return exec wezterm start -- tmux -- new -As main
 bindsym $mod+space exec rofi -show run
 
 ### Control
@@ -192,7 +193,6 @@ bindsym $mod+Ctrl+w exec rofi -show window
 bindsym $mod+Ctrl+n exec dunstctl set-paused toggle
 bindsym $mod+Ctrl+p exec /home/seims/.config/seims/scripts/polybar.sh
 bindsym $mod+Ctrl+z exec rofi-pass --root /home/seims/git/passwords
-bindsym $mod+Ctrl+Return exec alacritty --title alacritty-floating -e tmux -- new -As main
 bindsym $mod+Ctrl+f exec flameshot gui
 bindsym $mod+Ctrl+Insert exec CM_LAUNCHER=rofi clipmenu
 
