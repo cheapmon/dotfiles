@@ -116,6 +116,7 @@ local harpoon_ui = require("harpoon.ui")
 vim.keymap.set("n", "<C-a>", harpoon_mark.toggle_file)
 vim.keymap.set("n", "<M-h>", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<M-l>", harpoon_ui.nav_next)
+vim.keymap.set("n", "<C-i>", harpoon_ui.toggle_quick_menu)
 vim.keymap.set("n", "<C-m>", function() vim.cmd("Telescope harpoon marks") end)
 
 -- Undotree
