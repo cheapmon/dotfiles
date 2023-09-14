@@ -17,6 +17,8 @@ case $MACHINE_ID in
 
     export NETWORK_INTERFACE=wlp61s0
     export BACKLIGHT_CARD=intel_backlight
+
+    export VIM_COLORSCHEME=catppuccin
     ;;
   4ab0815ef27f484ebae33a3f0f9b7a56) # t14s
     export MONITOR=eDP
@@ -29,6 +31,8 @@ case $MACHINE_ID in
 
     export NETWORK_INTERFACE=enp2s0f0
     export BACKLIGHT_CARD=amdgpu_bl0
+
+    export VIM_COLORSCHEME=catppuccin
     ;;
   22569a7abbb04344bf9f8b443d404cc4) # omen
     export MONITOR=
@@ -41,6 +45,8 @@ case $MACHINE_ID in
 
     export NETWORK_INTERFACE=enp34s0
     export BACKLIGHT_CARD=amdgpu_bl0
+
+    export VIM_COLORSCHEME=catppuccin-latte
     ;;
   *)
     export MONITOR=$(xrandr | grep -w connected | head -n1 | cut -d' ' -f1)
@@ -53,6 +59,8 @@ case $MACHINE_ID in
 
     export NETWORK_INTERFACE=$(nmcli | grep -w connected | cut -d' ' -f1 | sed 's/://')
     export BACKLIGHT_CARD=
+
+    export VIM_COLORSCHEME=catppuccin
 esac
 
 # Make variables available to i3
