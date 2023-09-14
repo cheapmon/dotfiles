@@ -5,7 +5,7 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.window_background_opacity = 1
+config.window_background_opacity = 0.8
 config.color_scheme = os.getenv("VIM_COLORSCHEME")
 config.enable_tab_bar = false
 config.font = wezterm.font 'IosevkaTerm Nerd Font'
