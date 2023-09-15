@@ -131,9 +131,10 @@ vim.keymap.set("n", "<C-m>", function() vim.cmd("Telescope harpoon marks") end)
 vim.keymap.set("n", "<C-u>", vim.cmd.UndotreeToggle)
 
 -- Bufdelete
-vim.api.nvim_create_user_command("BufDeleteEx", function()
-  if vim.fn.len(vim.fn.filter(vim.fn.range(1, vim.fn.bufnr('$')), '! empty(bufname(v:val)) && buflisted(v:val)')) == 1 then
-    vim.cmd.Ex()
+vim.api.nvim_create_autocmd("BufDelete", {
+  callback = function()
+    if vim.fn.len(vim.fn.filter(vim.fn.range(1, vim.fn.bufnr('$')), '! empty(bufname(v:val)) && buflisted(v:val)')) == 1 then
+      vim.cmd.Ex()
+    end
   end
-end, {})
-vim.cmd("autocmd BufDelete * :BufDeleteEx")
+})
