@@ -44,7 +44,7 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<C-n>", vim.cmd.Ex)
 vim.keymap.set("n", "<leader><Tab>", function() vim.cmd("b#") end)
-vim.keymap.set("n", "<C-x>", function()
+vim.keymap.set("n", "<C-w>", function()
   if vim.api.nvim_buf_get_option(0, "filetype") == "netrw" then
     return
   end
