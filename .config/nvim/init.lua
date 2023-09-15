@@ -44,7 +44,13 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<C-n>", vim.cmd.Ex)
 vim.keymap.set("n", "<leader><Tab>", function() vim.cmd("b#") end)
-vim.keymap.set("n", "<C-x>", function() vim.cmd("bd!") end)
+vim.keymap.set("n", "<C-x>", function()
+  if vim.api.nvim_buf_get_option(0, "filetype") == "netrw" then
+    return
+  end
+
+  vim.cmd("Bdelete")
+end)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -73,7 +79,7 @@ if not vim.loop.fs_stat(lazypath) then
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
-    lazypath,
+    lazypath
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -86,6 +92,7 @@ require("lazy").setup({
   "mbbill/undotree",
   "christoomey/vim-tmux-navigator",
   "tpope/vim-fugitive",
+  "famiu/bufdelete.nvim"
 })
 
 -- Catppuccin
@@ -122,3 +129,11 @@ vim.keymap.set("n", "<C-m>", function() vim.cmd("Telescope harpoon marks") end)
 
 -- Undotree
 vim.keymap.set("n", "<C-u>", vim.cmd.UndotreeToggle)
+
+-- Bufdelete
+vim.api.nvim_create_user_command("BufDeleteEx", function()
+  if vim.fn.len(vim.fn.filter(vim.fn.range(1, vim.fn.bufnr('$')), '! empty(bufname(v:val)) && buflisted(v:val)')) == 1 then
+    vim.cmd.Ex()
+  end
+end, {})
+vim.cmd("autocmd BufDelete * :BufDeleteEx")
