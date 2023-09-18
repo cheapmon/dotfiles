@@ -12,8 +12,16 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.smarttab = true
+vim.opt.autoindent = true
+vim.opt.copyindent = true
+vim.opt.smartindent = true
 
 vim.opt.smartindent = true
+vim.opt.backspace = "indent,eol,start"
+
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
 
 vim.opt.wrap = false
 vim.opt.swapfile = false
@@ -23,6 +31,7 @@ vim.opt.undofile = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.opt.ignorecase = true
 
 vim.opt.termguicolors = true
 
@@ -32,7 +41,9 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+vim.opt.cursorline = true
 vim.opt.colorcolumn = "100"
+vim.opt.list = true
 
 vim.opt.showmode = false
 vim.opt.ruler = false
@@ -97,7 +108,9 @@ require("lazy").setup({
   "mbbill/undotree",
   "christoomey/vim-tmux-navigator",
   "tpope/vim-fugitive",
+  "tpope/vim-commentary",
   "famiu/bufdelete.nvim",
+  "m4xshen/autoclose.nvim",
   "ruby-formatter/rufo-vim"
 })
 
@@ -144,6 +157,11 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
   end
 })
+
+-- Autoclose
+local autoclose = require("autoclose")
+
+autoclose.setup()
 
 -- Ruby
 vim.api.nvim_create_autocmd("FileType", {
