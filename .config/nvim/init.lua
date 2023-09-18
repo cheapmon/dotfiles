@@ -39,6 +39,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
+vim.opt.hidden = true
 vim.opt.updatetime = 50
 
 vim.opt.cursorline = true
