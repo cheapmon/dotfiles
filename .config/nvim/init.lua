@@ -51,6 +51,12 @@ vim.opt.ruler = false
 vim.opt.laststatus = 0
 vim.opt.showcmd = false
 
+vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {
+  callback = function()
+    vim.opt.hidden = true
+  end
+})
+
 -- Keymap
 vim.g.mapleader = " "
 
