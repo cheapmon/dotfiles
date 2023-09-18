@@ -92,7 +92,8 @@ require("lazy").setup({
   "mbbill/undotree",
   "christoomey/vim-tmux-navigator",
   "tpope/vim-fugitive",
-  "famiu/bufdelete.nvim"
+  "famiu/bufdelete.nvim",
+  "ruby-formatter/rufo-vim"
 })
 
 -- Catppuccin
@@ -138,3 +139,16 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
   end
 })
+
+-- Ruby
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ruby",
+  callback = function()
+    vim.lsp.start({
+      name = "rubocop",
+      cmd = { "rubocop", "--lsp" }
+    })
+  end
+})
+
+vim.g.rufo_auto_formatting = 1

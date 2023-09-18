@@ -5,6 +5,7 @@
   "nvim": { "branch": "main", "commit": "85e93601e0f0b48aa2c6bbfae4d0e9d7a1898280" },
   "nvim-treesitter": { "branch": "master", "commit": "5ec42175676bc4e6248b8ca9603acbc86497c68e" },
   "plenary.nvim": { "branch": "master", "commit": "9ce85b0f7dcfe5358c0be937ad23e456907d410b" },
+  "rufo-vim": { "branch": "master", "commit": "ba7d1dd3c062a91c67717101fbda8e3564b0d013" },
   "telescope.nvim": { "branch": "master", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" },
   "undotree": { "branch": "master", "commit": "0e11ba7325efbbb3f3bebe06213afa3e7ec75131" },
   "vim-fugitive": { "branch": "master", "commit": "6fcb0ad03982de646e3fecb6915e585651b9a9fb" },
