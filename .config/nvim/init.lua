@@ -32,6 +32,8 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
+vim.opt.grepprg="rg --vimgrep --no-heading --smart-case"
+vim.opt.grepformat="%f:%l:%c:%m"
 
 vim.opt.termguicolors = true
 
@@ -61,6 +63,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   { underline = false }
 )
+
+-- Custom functions
+function search_and_replace(from, to)
+  vim.cmd("grep " .. from)
+  vim.cmd("cfdo %s/" .. from .. "/" .. to .. "/ge | update")
+end
 
 -- Keymap
 vim.g.mapleader = " "
