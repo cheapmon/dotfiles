@@ -73,9 +73,9 @@ end
 -- Keymap
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<C-n>", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>n", vim.cmd.Ex)
 vim.keymap.set("n", "<leader><Tab>", function() vim.cmd("b#") end)
-vim.keymap.set("n", "<C-w>", function()
+vim.keymap.set("n", "<leader>w", function()
   if vim.api.nvim_buf_get_option(0, "filetype") == "netrw" then
     return
   end
@@ -171,11 +171,11 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 
-vim.keymap.set("n", "<C-p>", telescope_builtin.git_files)
-vim.keymap.set("n", "<C-o>", telescope_builtin.find_files)
-vim.keymap.set("n", "<C-f>", telescope_builtin.live_grep)
-vim.keymap.set("n", "<C-b>", telescope_builtin.buffers)
-vim.keymap.set("n", "<C-h>", telescope_builtin.help_tags)
+vim.keymap.set("n", "<leader>p", telescope_builtin.git_files)
+vim.keymap.set("n", "<leader>o", telescope_builtin.find_files)
+vim.keymap.set("n", "<leader>f", telescope_builtin.live_grep)
+vim.keymap.set("n", "<leader>b", telescope_builtin.buffers)
+vim.keymap.set("n", "<leader>h", telescope_builtin.help_tags)
 
 -- Treesitter
 local treesitter = require("nvim-treesitter.configs")
@@ -192,14 +192,14 @@ local harpoon_ui = require("harpoon.ui")
 
 telescope.load_extension("harpoon")
 
-vim.keymap.set("n", "<C-a>", harpoon_mark.toggle_file)
+vim.keymap.set("n", "<leader>a", harpoon_mark.toggle_file)
 vim.keymap.set("n", "<M-h>", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<M-l>", harpoon_ui.nav_next)
-vim.keymap.set("n", "<C-i>", harpoon_ui.toggle_quick_menu)
-vim.keymap.set("n", "<C-m>", function() vim.cmd("Telescope harpoon marks") end)
+vim.keymap.set("n", "<leader>i", harpoon_ui.toggle_quick_menu)
+vim.keymap.set("n", "<leader>m", function() vim.cmd("Telescope harpoon marks") end)
 
 -- Undotree
-vim.keymap.set("n", "<C-u>", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Bufdelete
 vim.api.nvim_create_autocmd("BufDelete", {
