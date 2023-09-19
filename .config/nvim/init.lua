@@ -106,12 +106,12 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<leader>dh', vim.diagnostic.hide)
-vim.keymap.set('n', '<leader>ds', vim.diagnostic.show)
-vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist)
+vim.keymap.set("n", "<leader>dh", vim.diagnostic.hide)
+vim.keymap.set("n", "<leader>ds", vim.diagnostic.show)
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
 
 -- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -130,6 +130,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "catppuccin/nvim",
   { "nvim-telescope/telescope.nvim", tag = "0.1.3", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" } },
   "mbbill/undotree",
@@ -147,12 +148,34 @@ vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- Telescope
-local telescope = require("telescope.builtin")
+local telescope = require("telescope")
+local telescope_builtin = require("telescope.builtin")
 
-vim.keymap.set("n", "<C-p>", telescope.git_files)
-vim.keymap.set("n", "<C-o>", telescope.find_files)
-vim.keymap.set("n", "<C-f>", telescope.live_grep)
-vim.keymap.set("n", "<C-b>", telescope.buffers)
+telescope.setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-r>"] = "to_fuzzy_refine",
+      }
+    },
+    extensions = {
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case"
+      }
+    }
+  }
+})
+
+telescope.load_extension("fzf")
+
+vim.keymap.set("n", "<C-p>", telescope_builtin.git_files)
+vim.keymap.set("n", "<C-o>", telescope_builtin.find_files)
+vim.keymap.set("n", "<C-f>", telescope_builtin.live_grep)
+vim.keymap.set("n", "<C-b>", telescope_builtin.buffers)
+vim.keymap.set("n", "<C-h>", telescope_builtin.help_tags)
 
 -- Treesitter
 local treesitter = require("nvim-treesitter.configs")
@@ -167,6 +190,8 @@ treesitter.setup({
 local harpoon_mark = require("harpoon.mark")
 local harpoon_ui = require("harpoon.ui")
 
+telescope.load_extension("harpoon")
+
 vim.keymap.set("n", "<C-a>", harpoon_mark.toggle_file)
 vim.keymap.set("n", "<M-h>", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<M-l>", harpoon_ui.nav_next)
@@ -179,7 +204,7 @@ vim.keymap.set("n", "<C-u>", vim.cmd.UndotreeToggle)
 -- Bufdelete
 vim.api.nvim_create_autocmd("BufDelete", {
   callback = function()
-    if vim.fn.len(vim.fn.filter(vim.fn.range(1, vim.fn.bufnr('$')), '! empty(bufname(v:val)) && buflisted(v:val)')) == 1 then
+    if vim.fn.len(vim.fn.filter(vim.fn.range(1, vim.fn.bufnr("$")), "! empty(bufname(v:val)) && buflisted(v:val)")) == 1 then
       vim.cmd.Ex()
     end
   end
