@@ -57,6 +57,11 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "FileReadPre" }, {
   end
 })
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  { underline = false }
+)
+
 -- Keymap
 vim.g.mapleader = " "
 
@@ -92,6 +97,13 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 vim.keymap.set("n", "Q", "<nop>")
+
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>dh', vim.diagnostic.hide)
+vim.keymap.set('n', '<leader>ds', vim.diagnostic.show)
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next)
 
 -- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
