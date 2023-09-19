@@ -23,6 +23,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/.local/share/gem/ruby/3.0.0/bin
 export COMPOSE_HTTP_TIMEOUT=86400
+export LESS="--mouse -R"
 
 # Aliases
 alias g="git"
