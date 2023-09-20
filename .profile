@@ -44,6 +44,25 @@ case $MACHINE_ID in
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
     ;;
+  32a2e774d50449fb9f9b936bba932d09) # t14s
+    export MONITOR=eDP
+    export MONITOR_LEFT=HDMI-A-0
+    export MONITOR_RIGHT=DisplayPort-2
+    export AUTORANDR_PROFILE=work
+
+    export WORK=yes
+    export TOUCHPAD="ETPS/2 Elantech Touchpad"
+
+    export NETWORK_INTERFACE=enp2s0f0
+    export BACKLIGHT_CARD=amdgpu_bl0
+
+    export VIM_COLORSCHEME=catppuccin-mocha
+    export TMUX_COLORSCHEME=mocha
+    export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+    ;;
   22569a7abbb04344bf9f8b443d404cc4) # omen
     export MONITOR=
     export MONITOR_LEFT=DP-0
