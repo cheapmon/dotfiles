@@ -28,7 +28,7 @@ case $MACHINE_ID in
   4ab0815ef27f484ebae33a3f0f9b7a56) # t14s
     export MONITOR=eDP
     export MONITOR_LEFT=HDMI-A-0
-    export MONITOR_RIGHT=DisplayPort-2
+    export MONITOR_RIGHT=DisplayPort-6
     export AUTORANDR_PROFILE=work
 
     export WORK=yes
