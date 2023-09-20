@@ -28,7 +28,7 @@ case $MACHINE_ID in
   4ab0815ef27f484ebae33a3f0f9b7a56) # t14s
     export MONITOR=eDP
     export MONITOR_LEFT=HDMI-A-0
-    export MONITOR_RIGHT=DisplayPort-6
+    export MONITOR_RIGHT=DisplayPort-2
     export AUTORANDR_PROFILE=work
 
     export WORK=yes
@@ -47,13 +47,13 @@ case $MACHINE_ID in
   32a2e774d50449fb9f9b936bba932d09) # t14s
     export MONITOR=eDP
     export MONITOR_LEFT=HDMI-A-0
-    export MONITOR_RIGHT=DisplayPort-2
+    export MONITOR_RIGHT=DisplayPort-6
     export AUTORANDR_PROFILE=work
 
     export WORK=yes
-    export TOUCHPAD="ETPS/2 Elantech Touchpad"
+    export TOUCHPAD="ELAN0676:00 04F3:3195 Touchpad"
 
-    export NETWORK_INTERFACE=enp2s0f0
+    export NETWORK_INTERFACE=enp197s0f4u1u1
     export BACKLIGHT_CARD=amdgpu_bl0
 
     export VIM_COLORSCHEME=catppuccin-mocha
