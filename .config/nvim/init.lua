@@ -197,6 +197,10 @@ vim.keymap.set("n", "<M-h>", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<M-l>", harpoon_ui.nav_next)
 vim.keymap.set("n", "<leader>i", harpoon_ui.toggle_quick_menu)
 vim.keymap.set("n", "<leader>m", function() vim.cmd("Telescope harpoon marks") end)
+vim.keymap.set("n", "<leader>c", function()
+  vim.cmd("bufdo Bdelete")
+  harpoon_mark.clear_all()
+end)
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
