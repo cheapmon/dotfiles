@@ -179,6 +179,7 @@ vim.keymap.set("n", "<leader>o", telescope_builtin.find_files)
 vim.keymap.set("n", "<leader>f", telescope_builtin.live_grep)
 vim.keymap.set("n", "<leader>b", telescope_builtin.buffers)
 vim.keymap.set("n", "<leader>h", telescope_builtin.help_tags)
+vim.keymap.set("n", "<leader>s", telescope_builtin.lsp_dynamic_workspace_symbols)
 
 -- Harpoon
 local harpoon_mark = require("harpoon.mark")
