@@ -106,7 +106,7 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist)
 vim.keymap.set("n", "<leader>dh", vim.diagnostic.hide)
 vim.keymap.set("n", "<leader>ds", vim.diagnostic.show)
@@ -179,7 +179,8 @@ vim.keymap.set("n", "<leader>o", telescope_builtin.find_files)
 vim.keymap.set("n", "<leader>f", telescope_builtin.live_grep)
 vim.keymap.set("n", "<leader>b", telescope_builtin.buffers)
 vim.keymap.set("n", "<leader>h", telescope_builtin.help_tags)
-vim.keymap.set("n", "<leader>s", telescope_builtin.lsp_dynamic_workspace_symbols)
+vim.keymap.set("n", "<leader>ss", telescope_builtin.lsp_dynamic_workspace_symbols)
+vim.keymap.set("n", "<leader>sd", telescope_builtin.lsp_document_symbols)
 
 -- Harpoon
 local harpoon_mark = require("harpoon.mark")
@@ -210,7 +211,7 @@ treesitter.setup({
 local lsp_zero = require("lsp-zero")
 local cmp = require('cmp')
 
-lsp_zero.setup_servers({ "solargraph", "rubocop", "lua_ls" })
+lsp_zero.setup_servers({ "solargraph", "rubocop", "lua_ls", "rust_analyzer" })
 lsp_zero.on_attach(function(_, bufnr)
   lsp_zero.default_keymaps({ buffer = bufnr })
 end)
