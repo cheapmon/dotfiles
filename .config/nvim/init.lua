@@ -131,8 +131,11 @@ require("lazy").setup({
   "catppuccin/nvim",
   { "nvim-telescope/telescope.nvim", tag = "0.1.3", dependencies = { "nvim-lua/plenary.nvim" } },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+  { "neovim/nvim-lspconfig", dependencies = { "hrsh7th/cmp-nvim-lsp" } },
+  { "hrsh7th/nvim-cmp", dependencies = { "hrsh7th/cmp-buffer" } },
   "mbbill/undotree",
   "christoomey/vim-tmux-navigator",
   "tpope/vim-fugitive",
@@ -177,15 +180,6 @@ vim.keymap.set("n", "<leader>f", telescope_builtin.live_grep)
 vim.keymap.set("n", "<leader>b", telescope_builtin.buffers)
 vim.keymap.set("n", "<leader>h", telescope_builtin.help_tags)
 
--- Treesitter
-local treesitter = require("nvim-treesitter.configs")
-
-treesitter.setup({
-  ensure_installed = "all",
-  auto_install = true,
-  highlight = { enable = true }
-})
-
 -- Harpoon
 local harpoon_mark = require("harpoon.mark")
 local harpoon_ui = require("harpoon.ui")
@@ -201,6 +195,31 @@ vim.keymap.set("n", "<leader>c", function()
   vim.cmd("bufdo Bdelete")
   harpoon_mark.clear_all()
 end)
+
+-- Treesitter
+local treesitter = require("nvim-treesitter.configs")
+
+treesitter.setup({
+  ensure_installed = "all",
+  auto_install = true,
+  highlight = { enable = true }
+})
+
+-- LSP
+local lsp_zero = require("lsp-zero")
+local cmp = require('cmp')
+
+lsp_zero.setup_servers({ "solargraph", "rubocop", "lua_ls" })
+lsp_zero.on_attach(function(_, bufnr)
+  lsp_zero.default_keymaps({ buffer = bufnr })
+end)
+
+cmp.setup({
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "buffer" }
+  }
+})
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -220,14 +239,4 @@ local autoclose = require("autoclose")
 autoclose.setup()
 
 -- Ruby
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "ruby",
-  callback = function()
-    vim.lsp.start({
-      name = "rubocop",
-      cmd = { "rubocop", "--lsp" }
-    })
-  end
-})
-
 vim.g.rufo_auto_formatting = 1
