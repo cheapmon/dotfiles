@@ -1,0 +1,7 @@
+require("seims.provider")
+require("seims.opt")
+require("seims.diagnostics")
+require("seims.remap")
+require("seims.lazy")
+require("seims.colorscheme")
+require("seims.function")
