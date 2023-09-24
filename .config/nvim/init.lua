@@ -75,13 +75,6 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>n", vim.cmd.Ex)
 vim.keymap.set("n", "<leader><Tab>", function() vim.cmd("b#") end)
-vim.keymap.set("n", "<leader>w", function()
-  if vim.api.nvim_buf_get_option(0, "filetype") == "netrw" then
-    return
-  end
-
-  vim.cmd("Bdelete")
-end)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -140,7 +133,6 @@ require("lazy").setup({
   "christoomey/vim-tmux-navigator",
   "tpope/vim-fugitive",
   "tpope/vim-commentary",
-  "famiu/bufdelete.nvim",
   "m4xshen/autoclose.nvim",
   "ruby-formatter/rufo-vim"
 })
@@ -193,10 +185,6 @@ vim.keymap.set("n", "<M-h>", harpoon_ui.nav_prev)
 vim.keymap.set("n", "<M-l>", harpoon_ui.nav_next)
 vim.keymap.set("n", "<leader>i", harpoon_ui.toggle_quick_menu)
 vim.keymap.set("n", "<leader>m", function() vim.cmd("Telescope harpoon marks") end)
-vim.keymap.set("n", "<leader>c", function()
-  vim.cmd("bufdo Bdelete")
-  harpoon_mark.clear_all()
-end)
 
 -- Treesitter
 local treesitter = require("nvim-treesitter.configs")
@@ -230,15 +218,6 @@ cmp.setup({
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-
--- Bufdelete
-vim.api.nvim_create_autocmd("BufDelete", {
-  callback = function()
-    if vim.fn.len(vim.fn.filter(vim.fn.range(1, vim.fn.bufnr("$")), "! empty(bufname(v:val)) && buflisted(v:val)")) == 1 then
-      vim.cmd.Ex()
-    end
-  end
-})
 
 -- Autoclose
 local autoclose = require("autoclose")
