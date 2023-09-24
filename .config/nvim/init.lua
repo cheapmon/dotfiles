@@ -180,11 +180,11 @@ local harpoon_ui = require("harpoon.ui")
 
 telescope.load_extension("harpoon")
 
-vim.keymap.set("n", "<leader>a", harpoon_mark.toggle_file)
-vim.keymap.set("n", "<M-h>", harpoon_ui.nav_prev)
-vim.keymap.set("n", "<M-l>", harpoon_ui.nav_next)
-vim.keymap.set("n", "<leader>i", harpoon_ui.toggle_quick_menu)
-vim.keymap.set("n", "<leader>m", function() vim.cmd("Telescope harpoon marks") end)
+vim.keymap.set("n", "<leader>ht", harpoon_mark.toggle_file)
+vim.keymap.set("n", "<leader>hp", harpoon_ui.nav_prev)
+vim.keymap.set("n", "<leader>hn", harpoon_ui.nav_next)
+vim.keymap.set("n", "<leader>hq", harpoon_ui.toggle_quick_menu)
+vim.keymap.set("n", "<leader>hm", function() vim.cmd("Telescope harpoon marks") end)
 
 -- Treesitter
 local treesitter = require("nvim-treesitter.configs")
