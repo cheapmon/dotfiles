@@ -166,13 +166,13 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 
-vim.keymap.set("n", "<leader>p", telescope_builtin.git_files)
-vim.keymap.set("n", "<leader>o", telescope_builtin.find_files)
-vim.keymap.set("n", "<leader>f", telescope_builtin.live_grep)
-vim.keymap.set("n", "<leader>b", telescope_builtin.buffers)
-vim.keymap.set("n", "<leader>h", telescope_builtin.help_tags)
-vim.keymap.set("n", "<leader>ss", telescope_builtin.lsp_dynamic_workspace_symbols)
-vim.keymap.set("n", "<leader>sd", telescope_builtin.lsp_document_symbols)
+vim.keymap.set("n", "<leader>tg", telescope_builtin.git_files)
+vim.keymap.set("n", "<leader>tf", telescope_builtin.find_files)
+vim.keymap.set("n", "<leader>tl", telescope_builtin.live_grep)
+vim.keymap.set("n", "<leader>tb", telescope_builtin.buffers)
+vim.keymap.set("n", "<leader>th", telescope_builtin.help_tags)
+vim.keymap.set("n", "<leader>ts", telescope_builtin.lsp_dynamic_workspace_symbols)
+vim.keymap.set("n", "<leader>td", telescope_builtin.lsp_document_symbols)
 
 -- Harpoon
 local harpoon_mark = require("harpoon.mark")
