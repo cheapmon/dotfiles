@@ -22,6 +22,18 @@ require("lazy").setup({
   { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
   { "neovim/nvim-lspconfig", dependencies = { "hrsh7th/cmp-nvim-lsp" } },
   { "hrsh7th/nvim-cmp", dependencies = { "hrsh7th/cmp-buffer" } },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  },
   { "mbbill/undotree" },
   { "christoomey/vim-tmux-navigator" },
   { "tpope/vim-fugitive" },
