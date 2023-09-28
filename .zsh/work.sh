@@ -12,9 +12,9 @@ if [ "$WORK" = "yes" ]; then
   alias k="kubectl"
 
   # Project aliases
-  source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"$HOME/git/architecture/apps/%\"")
+  source <(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"$HOME/git/architecture/apps/%\"")
   prj() {
-    app="$(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf)"
+    app="$(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf)"
     dir="$HOME/git/architecture/apps/$app"
 
     if tmuxifier list-sessions | rg -q $app; then
