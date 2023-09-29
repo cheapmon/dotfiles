@@ -22,6 +22,7 @@ source $ZSH/oh-my-zsh.sh
 # Environment
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.local/bin:$HOME/.config/seims/bin:$HOME/.local/share/gem/ruby/3.0.0/bin
+export PATH=$PATH:$HOME/.tmuxifier/bin
 export COMPOSE_HTTP_TIMEOUT=86400
 export LESS="--mouse -R"
 
@@ -44,6 +45,9 @@ export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia iacli history)
 
 # Starship prompt
 eval "$(starship init zsh)"
+
+# Tmuxifier
+eval "$(tmuxifier init -)"
 
 # Remove folder
 rm -rf $HOME/Downloads
