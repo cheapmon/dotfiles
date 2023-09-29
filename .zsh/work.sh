@@ -16,8 +16,13 @@ if [ "$WORK" = "yes" ]; then
   prj() {
     app="$(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf)"
     dir="$HOME/git/architecture/apps/$app"
-    tmux new -Ads "$app" -c "$dir"
-    tmux switch -t "$app"
+
+    if tmuxifier list-sessions | rg -q $app; then
+      tmuxifier load-session $app
+    else
+      tmux new -Ads "$app" -c "$dir"
+      tmux switch -t "$app"
+    fi
   }
   alias iacli="$HOME/git/architecture/apps/cli/iacli"
 
