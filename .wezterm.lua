@@ -20,5 +20,6 @@ config.window_padding = {
 }
 config.scrollback_lines = 100000
 config.cursor_blink_rate = 0
+config.warn_about_missing_glyphs = false
 
 return config
