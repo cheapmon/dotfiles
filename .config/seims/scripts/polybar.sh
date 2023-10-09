@@ -25,4 +25,8 @@ fi
 # Repair background
 zsh ~/.fehbg
 
+# xinput
+xinput set-prop "$TOUCHPAD" "libinput Tapping Enabled" 1
+xinput set-prop "$TOUCHPAD" "libinput Natural Scrolling Enabled" 1
+
 echo "Bars launched..."
