@@ -5,6 +5,9 @@ vim.keymap.set("n", "<leader>n", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>x", vim.cmd.bd)
 vim.keymap.set("n", "<leader><Tab>", function() vim.cmd("b#") end)
 
+vim.keymap.set("n", "<M-.>", vim.cmd.bn)
+vim.keymap.set("n", "<M-,>", vim.cmd.bp)
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
