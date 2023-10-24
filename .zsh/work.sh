@@ -36,11 +36,10 @@ if [ "$WORK" = "yes" ]; then
 
   # kubectl
   kc() {
-    gopass show -n inaudito/infrastructure/kubernetes/staging/kubeconfig > /dev/shm/kubeconfig-staging
-    gopass show -n inaudito/infrastructure/kubernetes/production/kubeconfig > /dev/shm/kubeconfig-production
-    gopass show -n inaudito/infrastructure/kubernetes/hetzner/kubeconfig > /dev/shm/kubeconfig-hetzner
-    chmod 0600 /dev/shm/kubeconfig-staging /dev/shm/kubeconfig-production /dev/shm/kubeconfig-hetzner
-    export KUBECONFIG=/dev/shm/kubeconfig-staging:/dev/shm/kubeconfig-production:/dev/shm/kubeconfig-hetzner
+    ctx=$(echo "staging\nproduction\nhetzner" | fzf)
+    gopass show -n inaudito/infrastructure/kubernetes/$ctx/kubeconfig > /dev/shm/kubeconfig
+    chmod 0600 /dev/shm/kubeconfig
+    export KUBECONFIG=/dev/shm/kubeconfig
   }
   kd() {
     export KUBECONFIG=
