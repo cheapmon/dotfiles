@@ -4,6 +4,7 @@ if [ "$WORK" = "yes" ]; then
   export PATH=$PATH:$HOME/git/architecture/bin/ia
   export FORCE_INIT=yes
   export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
+  export DIGITALOCEAN_TOKEN=$(cat $HOME/.vault/digitalocean_token)
   export RAILS_MASTER_KEY=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.rails.master_key'`
   export XING_CONSUMER_KEY=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.xing.consumer_key'`
   export XING_CONSUMER_SECRET=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.xing.consumer_secret'`
