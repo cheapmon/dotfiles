@@ -8,8 +8,8 @@ end
 config.window_background_opacity = 0.8
 config.color_scheme = os.getenv("VIM_COLORSCHEME")
 config.enable_tab_bar = false
-config.font = wezterm.font 'IosevkaTerm Nerd Font'
-config.font_size = 17.0
+config.font = wezterm.font 'Monaspace Krypton'
+config.font_size = 14.0
 config.window_decorations = "TITLE"
 config.enable_scroll_bar = false
 config.window_padding = {
