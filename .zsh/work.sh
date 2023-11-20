@@ -37,7 +37,7 @@ if [ "$WORK" = "yes" ]; then
 
   # kubectl
   kc() {
-    ctx=$(echo "staging\nproduction\nhetzner" | fzf)
+    ctx=$(echo "staging\nproduction" | fzf)
     gopass show -n inaudito/infrastructure/kubernetes/$ctx/kubeconfig > /dev/shm/kubeconfig
     chmod 0600 /dev/shm/kubeconfig
     export KUBECONFIG=/dev/shm/kubeconfig
