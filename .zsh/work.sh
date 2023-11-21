@@ -49,6 +49,15 @@ if [ "$WORK" = "yes" ]; then
   alias kn="kubens"
   alias k9="k9s --readonly"
 
+  # Ansible
+  ab() {
+    export ANSIBLE_FORCE_COLOR="True"
+    export ANSIBLE_NOCOWS=1
+    export ANSIBLE_INVENTORY="inventory.ini"
+    export ANSIBLE_VAULT_PASSWORD_FILE=/dev/shm/ansible-vault-password.txt
+    gopass show -n inaudito/infrastructure/ansible-vault-password > $ANSIBLE_VAULT_PASSWORD_FILE
+  }
+
   # rbenv
   if [ -d "$HOME/.rbenv" ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
