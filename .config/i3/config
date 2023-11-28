@@ -107,7 +107,7 @@ bindsym $mod+slash layout toggle split
 ## Look and Feel
 
 ### System font
-font pango:Monaspace Krypton 9
+font pango:IosevkaTerm Nerd Font 9
 title_align center
 
 ### Assign monitors
