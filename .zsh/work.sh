@@ -15,7 +15,7 @@ if [ "$WORK" = "yes" ]; then
   # Project aliases
   source <(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"$HOME/git/architecture/apps/%\"")
   prj() {
-    app="$(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf)"
+    app="$(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf-tmux)"
     dir="$HOME/git/architecture/apps/$app"
 
     if tmuxifier list-sessions | rg -q $app; then
@@ -37,7 +37,7 @@ if [ "$WORK" = "yes" ]; then
 
   # kubectl
   kc() {
-    ctx=$(echo "staging\nproduction" | fzf)
+    ctx=$(echo "staging\nproduction" | fzf-tmux)
     gopass show -n inaudito/infrastructure/kubernetes/$ctx/kubeconfig > /dev/shm/kubeconfig
     chmod 0600 /dev/shm/kubeconfig
     export KUBECONFIG=/dev/shm/kubeconfig

@@ -7,11 +7,11 @@
 [alias]
   ap = add --patch
   co = checkout
-  cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf`
+  cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
   cl = clean -fd
-  cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf`
+  cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
   br = branch
-  bd = !git branch -D `git branch | fzf -m`
+  bd = !git branch -D `git branch | fzf-tmux -m`
   cm = commit
   st = status
   pl = pull
