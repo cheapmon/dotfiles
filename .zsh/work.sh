@@ -8,6 +8,7 @@ if [ "$WORK" = "yes" ]; then
   export RAILS_MASTER_KEY=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.rails.master_key'`
   export XING_CONSUMER_KEY=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.xing.consumer_key'`
   export XING_CONSUMER_SECRET=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.xing.consumer_secret'`
+  export IA_PASSWORDSTORE_MOUNT="inaudito"
 
   # Aliases
   alias k="kubectl"

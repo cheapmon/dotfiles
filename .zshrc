@@ -49,6 +49,9 @@ eval "$(starship init zsh)"
 # Tmuxifier
 eval "$(tmuxifier init -)"
 
+# Direnv
+eval "$(direnv hook zsh)"
+
 # Remove folder
 rm -rf $HOME/Downloads
 
