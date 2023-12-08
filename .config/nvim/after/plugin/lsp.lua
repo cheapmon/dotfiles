@@ -7,9 +7,12 @@ lsp_zero.setup_servers({
   "rust_analyzer",
   "vuels",
   "bashls",
-  "tsserver"
+  "tsserver",
+  "jsonls"
 })
 
 lsp_zero.on_attach(function(_, bufnr)
   lsp_zero.default_keymaps({ buffer = bufnr })
 end)
+
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
