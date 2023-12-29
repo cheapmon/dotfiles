@@ -21,7 +21,7 @@ require("lazy").setup({
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
   { "neovim/nvim-lspconfig", dependencies = { "hrsh7th/cmp-nvim-lsp" } },
-  { "hrsh7th/nvim-cmp", dependencies = { "hrsh7th/cmp-buffer" } },
+  { "hrsh7th/nvim-cmp", dependencies = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-vsnip", "hrsh7th/vim-vsnip" } },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
