@@ -51,13 +51,19 @@ if [ "$WORK" = "yes" ]; then
   alias k9="k9s --readonly"
 
   # Ansible
-  ab() {
+  setup_ansible() {
     export ANSIBLE_FORCE_COLOR="True"
     export ANSIBLE_NOCOWS=1
     export ANSIBLE_INVENTORY="inventory.ini"
-    export ANSIBLE_VAULT_PASSWORD_FILE=/dev/shm/ansible-vault-password.txt
+    export ANSIBLE_VAULT_PASSWORD_FILE="/dev/shm/ansible-vault-password.txt"
+    export ANSIBLE_PRIVATE_KEY_FILE="/dev/shm/ansible-private-key-file.txt"
+    export ANSIBLE_REMOTE_USER="root"
+
     gopass show -n inaudito/infrastructure/ansible-vault-password > $ANSIBLE_VAULT_PASSWORD_FILE
+    gopass show -n inaudito/infrastructure/office-ci-runner/ssh-key | base64 -di - | tr -d '\r' > $ANSIBLE_PRIVATE_KEY_FILE
+    chmod 600 $ANSIBLE_PRIVATE_KEY_FILE
   }
+  alias ab="setup_ansible"
 
   # rbenv
   if [ -d "$HOME/.rbenv" ]; then
