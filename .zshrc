@@ -52,6 +52,9 @@ eval "$(tmuxifier init -)"
 # Direnv
 eval "$(direnv hook zsh)"
 
+# Just
+source <(just --completions bash)
+
 # Remove folder
 rm -rf $HOME/Downloads
 
