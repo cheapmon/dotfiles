@@ -45,3 +45,5 @@
   cmd = difft "$LOCAL" "$REMOTE"
 [pager]
   difftool = true
+[core]
+  excludesfile = ~/.gitexclude
