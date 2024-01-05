@@ -1,0 +1,19 @@
+set shell := ["zsh", "-c"]
+
+_default:
+  just --list
+
+plan:
+  terraform -chdir={{justfile_directory()}}/terraform plan
+
+validate:
+  terraform -chdir={{justfile_directory()}}/terraform validate
+
+format:
+  terraform -chdir={{justfile_directory()}}/terraform fmt -recursive
+
+diff:
+  source $HOME/.zshrc && setup_ansible && ansible-playbook --check --diff -i {{justfile_directory()}}/ansible/inventory.ini {{justfile_directory()}}/ansible/playbook.yml
+
+rollout:
+  source $HOME/.zshrc && setup_ansible && ansible-playbook -i {{justfile_directory()}}/ansible/inventory.ini {{justfile_directory()}}/ansible/playbook.yml

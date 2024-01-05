@@ -1,0 +1,10 @@
+_default:
+  just --list
+
+console:
+  docker-compose run --rm core rails c
+
+test:
+  docker-compose run -e RAILS_ENV=test --rm core rspec-all
+  docker-compose run -e RAILS_ENV=test --rm core rails zeitwerk:check
+  docker run -v "$(pwd)":/code presidentbeef/brakeman:v6.0.1 --color --skip-files=engines/admin/app/controllers/admin/application_controller.rb
