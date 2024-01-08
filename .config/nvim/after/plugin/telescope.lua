@@ -22,6 +22,7 @@ telescope.setup({
 telescope.load_extension("fzf")
 
 vim.keymap.set("n", "<C-p>", telescope_builtin.find_files)
+vim.keymap.set('n', '<leader>tf', function() telescope_builtin.find_files({ cwd = vim.fn.expand('%:p:h') }) end)
 vim.keymap.set("n", "<leader>tl", telescope_builtin.live_grep)
 vim.keymap.set("n", "<leader>tb", telescope_builtin.buffers)
 vim.keymap.set("n", "<leader>th", telescope_builtin.help_tags)
