@@ -8,7 +8,8 @@ lsp_zero.setup_servers({
   "vuels",
   "bashls",
   "tsserver",
-  "jsonls"
+  "jsonls",
+  "eslint",
 })
 
 lsp_zero.on_attach(function(_, bufnr)
