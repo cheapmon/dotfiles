@@ -16,3 +16,6 @@ dump:
   docker-compose up -d core-db
   iacli "core:load_dump[production,development]"
   docker-compose up -d
+
+replicate:
+  docker-compose run --rm core rails odoo:replication
