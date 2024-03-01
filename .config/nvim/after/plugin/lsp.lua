@@ -10,6 +10,7 @@ lsp_zero.setup_servers({
   "tsserver",
   "jsonls",
   "eslint",
+  "texlab",
 })
 
 lsp_zero.on_attach(function(_, bufnr)
