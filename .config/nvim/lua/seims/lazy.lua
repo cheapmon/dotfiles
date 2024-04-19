@@ -38,6 +38,5 @@ require("lazy").setup({
   { "christoomey/vim-tmux-navigator" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-commentary" },
-  { "m4xshen/autoclose.nvim" },
   { "ruby-formatter/rufo-vim" }
 })
