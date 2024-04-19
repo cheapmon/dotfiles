@@ -17,7 +17,7 @@ require("lazy").setup({
   { "catppuccin/nvim" },
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  { "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
   { "neovim/nvim-lspconfig", dependencies = { "hrsh7th/cmp-nvim-lsp" } },
