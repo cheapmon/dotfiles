@@ -1,9 +1,6 @@
 # .:.
 # zsh config
 
-# Oh my Zsh
-export ZSH=$HOME/.oh-my-zsh
-
 ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 
@@ -17,7 +14,7 @@ plugins=(
   fzf
 )
 
-source $ZSH/oh-my-zsh.sh
+source $OH_MY_ZSH/oh-my-zsh.sh
 
 # Environment
 export EDITOR=nvim
@@ -41,7 +38,7 @@ rgl() {
 }
 
 # Dotfiles
-alias dt='/usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
+alias dt='git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
 export GLOBALIAS_FILTER_VALUES=(dt grep egrep diff ia iacli history)
 
 # Starship prompt

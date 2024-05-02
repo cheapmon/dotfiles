@@ -93,11 +93,20 @@
     tmux
     nh
     git
+    oh-my-zsh
+    just
+    starship
+    direnv
+    fzf
+    gcc
+    thefuck
+    eza
   ];
 
   environment.sessionVariables = rec {
     EDITOR = "nvim";
     FLAKE = "/home/seims/.config/nixos";
+    OH_MY_ZSH = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
   };
 
   programs.zsh.enable = true;
