@@ -58,12 +58,11 @@
       defaultSession = "none+i3";
     };
 
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        wezterm
-      ];
-    };
+    windowManager.i3.enable = true;
+  };
+
+  services.picom = {
+    enable = true;
   };
 
   console = {

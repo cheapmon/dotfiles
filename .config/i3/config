@@ -201,7 +201,7 @@ exec /home/seims/.config/seims/scripts/dotfiles.sh
 exec_always i3-layouts
 exec /home/seims/.config/seims/scripts/polybar.sh
 exec_always zsh .fehbg
-exec picom -b
+#exec picom -b
 exec redshift
 exec nm-applet
 exec blueman-applet
