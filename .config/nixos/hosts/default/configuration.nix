@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -131,6 +132,23 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      seims = {
+        home.stateVersion = "23.11";
+
+        home.username = "seims";
+        home.homeDirectory = "/home/seims";
+
+        home.file.".tmux/plugins/tpm" = {
+          source = (fetchGit { url = "https://github.com/tmux-plugins/tpm.git"; }).outPath;
+          recursive = true;
+        };
+      };
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -157,5 +175,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
