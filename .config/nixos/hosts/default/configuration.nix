@@ -74,6 +74,7 @@
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "IosevkaTerm" ]; })
+    material-icons
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -109,12 +110,16 @@
     magic-wormhole
     fastfetch
 
+    feh
     wezterm
     rofi
     gnome.nautilus
     polybar
     dunst
     killall
+    spotify-cli-linux
+    spotify
+    firefox-devedition
 
     # Neovim
     neovim
