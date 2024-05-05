@@ -107,6 +107,15 @@
     thefuck
     eza
     ripgrep
+    magic-wormhole
+    fastfetch
+
+    wezterm
+    rofi
+    gnome.nautilus
+    polybar
+    dunst
+    killall
 
     # Neovim
     neovim
