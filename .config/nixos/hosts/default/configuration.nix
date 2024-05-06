@@ -59,14 +59,21 @@
     displayManager = {
       lightdm = {
         enable = true;
-        background = "/usr/share/backgrounds/login.png";
+        background = "/etc/login.png";
 
         greeters.slick = {
           enable = true;
           theme.name = "Adwaita-dark";
+
           iconTheme.name = "Paper";
+          iconTheme.package = pkgs.paper-icon-theme;
+
+          cursorTheme.name = "Paper";
+          cursorTheme.package = pkgs.paper-gtk-theme;
+
           font.name = "IosevkaTerm Nerd Font";
           font.package = pkgs.nerdfonts.override { fonts = [ "IosevkaTerm" ]; };
+
           draw-user-backgrounds = true;
 
           extraConfig = ''
@@ -198,6 +205,14 @@
           recursive = true;
         };
       };
+    };
+  };
+
+  environment.etc = {
+    "login.png" = {
+      source = /home/seims/bg/login.png;
+      mode = "0664";
+      user = "lightdm";
     };
   };
 
