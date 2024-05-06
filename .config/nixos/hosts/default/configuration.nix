@@ -152,6 +152,9 @@
     spotify-cli-linux
     spotify
     firefox-devedition
+    htop
+    xorg.xkill
+    networkmanagerapplet
 
     # Neovim
     neovim
