@@ -141,7 +141,12 @@
     gnome.gnome-themes-extra
     paper-gtk-theme
     paper-icon-theme
-    polybar
+    (polybar.override {
+      i3Support = true;
+      alsaSupport = true;
+      iwSupport = true;
+      githubSupport = true;
+    })
     dunst
     killall
     spotify-cli-linux
