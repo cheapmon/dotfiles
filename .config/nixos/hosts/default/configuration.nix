@@ -182,7 +182,11 @@
         home.homeDirectory = "/home/seims";
 
         home.file.".tmux/plugins/tpm" = {
-          source = (fetchGit { url = "https://github.com/tmux-plugins/tpm.git"; }).outPath;
+          source = (fetchGit {
+            url = "https://github.com/tmux-plugins/tpm.git";
+            ref = "refs/heads/master";
+            rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+          }).outPath;
           recursive = true;
         };
       };
