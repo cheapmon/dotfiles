@@ -47,19 +47,43 @@
   services.xserver = {
     enable = true;
 
-    layout = "us";
-    xkbVariant = "altgr-intl";
+    xkb = {
+      layout = "us";
+      variant = "altgr-intl";
+    };
 
     desktopManager = {
       xterm.enable = false;
     };
 
     displayManager = {
-      defaultSession = "none+i3";
+      lightdm = {
+        enable = true;
+        background = "/usr/share/backgrounds/login.png";
+
+        greeters.slick = {
+          enable = true;
+          theme.name = "Adwaita-dark";
+          iconTheme.name = "Paper";
+          font.name = "IosevkaTerm Nerd Font";
+          font.package = pkgs.nerdfonts.override { fonts = [ "IosevkaTerm" ]; };
+          draw-user-backgrounds = true;
+
+          extraConfig = ''
+            draw-grid=true
+            show-hostname=true
+            show-keyboard=true
+            show-clock=true
+            show-quit=true
+          '';
+        };
+      };
     };
 
     windowManager.i3.enable = true;
   };
+
+  services.displayManager.defaultSession = "none+i3";
 
   services.picom = {
     enable = true;
@@ -114,6 +138,9 @@
     wezterm
     rofi
     gnome.nautilus
+    gnome.gnome-themes-extra
+    paper-gtk-theme
+    paper-icon-theme
     polybar
     dunst
     killall
