@@ -59,9 +59,8 @@
     displayManager = {
       lightdm = {
         enable = true;
-        background = "/etc/login.png";
 
-        greeters.slick = {
+        greeters.gtk = {
           enable = true;
           theme.name = "Adwaita-dark";
 
@@ -70,19 +69,6 @@
 
           cursorTheme.name = "Paper";
           cursorTheme.package = pkgs.paper-gtk-theme;
-
-          font.name = "IosevkaTerm Nerd Font";
-          font.package = pkgs.nerdfonts.override { fonts = [ "IosevkaTerm" ]; };
-
-          draw-user-backgrounds = true;
-
-          extraConfig = ''
-            draw-grid=true
-            show-hostname=true
-            show-keyboard=true
-            show-clock=true
-            show-quit=true
-          '';
         };
       };
     };
@@ -205,14 +191,6 @@
           recursive = true;
         };
       };
-    };
-  };
-
-  environment.etc = {
-    "login.png" = {
-      source = /home/seims/bg/login.png;
-      mode = "0664";
-      user = "lightdm";
     };
   };
 
