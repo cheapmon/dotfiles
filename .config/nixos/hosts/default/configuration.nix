@@ -239,6 +239,11 @@
     };
   };
 
+  environment.etc = {
+    "modprobe.d/hid_apple.conf".text = "options hid_apple fnmode=0";
+    "modprobe.d/no_beep.conf".text = "blacklist pcspkr";
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
