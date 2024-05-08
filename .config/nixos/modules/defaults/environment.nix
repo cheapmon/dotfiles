@@ -39,7 +39,6 @@
     htop
     xorg.xkill
     networkmanagerapplet
-    alsa-utils
     pavucontrol
     element-desktop
     flameshot

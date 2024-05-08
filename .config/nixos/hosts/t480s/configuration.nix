@@ -19,7 +19,7 @@
     MONITOR = "eDP-1";
     MONITOR_LEFT = "";
     MONITOR_RIGHT = "";
-    AUTORANDR_PROFILE= "t480s";
+    AUTORANDR_PROFILE = "t480s";
 
     WORK = "";
     TOUCHPAD = "Elan Touchpad";

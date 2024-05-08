@@ -9,6 +9,7 @@
     ./defaults/console.nix
     ./defaults/environment.nix
     ./defaults/fonts.nix
+    ./defaults/hardware.nix
     ./defaults/home-manager.nix
     ./defaults/i18n.nix
     ./defaults/networking.nix
