@@ -7,23 +7,6 @@ export MACHINE_ID=$(cat /etc/machine-id)
 
 case $MACHINE_ID in
   95f85cded1c546599c9cfa3af5515e4e) # t480s
-    export MONITOR=eDP-1
-    export MONITOR_LEFT=
-    export MONITOR_RIGHT=
-    export AUTORANDR_PROFILE=t480s
-
-    export WORK=
-    export TOUCHPAD="Elan Touchpad"
-
-    export NETWORK_INTERFACE=wlp61s0
-    export BACKLIGHT_CARD=intel_backlight
-
-    export VIM_COLORSCHEME=catppuccin-mocha
-    export TMUX_COLORSCHEME=mocha
-    export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
     ;;
   32a2e774d50449fb9f9b936bba932d09) # t14s
     export MONITOR=eDP
