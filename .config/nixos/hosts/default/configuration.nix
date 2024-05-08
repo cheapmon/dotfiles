@@ -135,12 +135,7 @@
     gnome.simple-scan
     paper-gtk-theme
     paper-icon-theme
-    (polybar.override {
-      i3Support = true;
-      alsaSupport = true;
-      iwSupport = true;
-      githubSupport = true;
-    })
+    polybarFull
     dunst
     killall
     spotify-cli-linux
