@@ -13,12 +13,21 @@
     nixpkgs,
     ...
   } @ inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        inputs.home-manager.nixosModules.default
-        ./hosts/default/configuration.nix
-      ];
+    nixosConfigurations = {
+      default = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          inputs.home-manager.nixosModules.default
+          ./hosts/default/configuration.nix
+        ];
+      };
+      t480s = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          inputs.home-manager.nixosModules.default
+          ./hosts/t480s/configuration.nix
+        ];
+      };
     };
   };
 }
