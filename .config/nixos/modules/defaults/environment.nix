@@ -1,6 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     nh
     git
@@ -70,7 +73,7 @@
     telegram-desktop
     signal-desktop
     (i3lock-fancy-rapid.overrideAttrs {
-      propagatedBuildInputs = [ i3lock-color ];
+      propagatedBuildInputs = [i3lock-color];
 
       postPatch = ''
         substituteInPlace i3lock-fancy-rapid.c \
@@ -80,6 +83,7 @@
     ruby
     upower
     glow
+    alejandra
 
     # Neovim
     neovim

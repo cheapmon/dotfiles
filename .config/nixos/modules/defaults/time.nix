@@ -1,5 +1,8 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   time.timeZone = "Europe/Berlin";
 }

@@ -1,11 +1,13 @@
-{ config, pkgs, inputs, ... }:
-
 {
-  imports =
-    [
-      /etc/nixos/hardware-configuration.nix
-      ../../modules/defaults.nix
-    ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    ../../modules/defaults.nix
+  ];
 
   system.stateVersion = "23.11";
 
