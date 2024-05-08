@@ -26,7 +26,7 @@
           iconTheme.package = pkgs.paper-icon-theme;
 
           cursorTheme.name = "Paper";
-          cursorTheme.package = pkgs.paper-gtk-theme;
+          cursorTheme.package = pkgs.paper-icon-theme;
         };
       };
     };

@@ -23,6 +23,11 @@
             .outPath;
           recursive = true;
         };
+
+        home.pointerCursor = {
+          package = pkgs.paper-icon-theme;
+          name = "Paper";
+        };
       };
     };
   };
