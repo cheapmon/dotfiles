@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 nix-shell -p "git" --command "git clone --bare https://github.com/cheapmon/dotfiles.git $HOME/git/dotfiles"
 nix-shell -p "git" --command "git --git-dir=$HOME/git/dotfiles --work-tree=$HOME checkout -f"
 sudo nix-shell -p "git" --command "nixos-rebuild switch --impure --flake .config/nixos#default"

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+AUTORANDR_PROFILE="$(autorandr | cut -d"(" -f1 | rofi -dmenu -i -p "Profile")"
+
+autorandr "$AUTORANDR_PROFILE"
+refresh-screen

@@ -2,8 +2,9 @@
 
 HOUR=$(($(date +%H)))
 
-if [ "$WORK" == "yes" -a $HOUR -ge 8 -a $HOUR -lt 18 ]; then
+if [ "$WORK" == "yes" ] && [ $HOUR -ge 8 ] && [ $HOUR -lt 18 ]; then
   firefox-developer-edition &
+  firefox-devedition &
   thunderbird &
   slack &
   element-desktop &

@@ -26,6 +26,7 @@ if [ "$WORK" = "yes" ]; then
       tmux switch -t "$app"
     fi
   }
+  alias ia="$HOME/git/architecture/bin/ia"
   alias iacli="$HOME/git/architecture/apps/cli/iacli"
 
   # Completion

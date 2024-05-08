@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull --all
+
+case $? in
+  0)
+    MESSAGE="$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" log -1 --pretty=%B)"
+    URGENCY="normal"
+    ;;
+  *)
+    MESSAGE="something went wrong"
+    URGENCY="critical"
+    ;;
+esac
+
+i3-msg restart
+dunstify -a dotfiles -u "$URGENCY" "$MESSAGE"

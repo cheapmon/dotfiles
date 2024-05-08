@@ -12,7 +12,7 @@ export MODULES_MAIN="round-left i3 round-right margin round-left xwindow round-r
 export MODULES_RIGHT="round-left i3 round-right margin round-left xwindow round-right"
 
 # Launch bars
-cd $HOME/.config/polybar
+cd "$HOME/.config/polybar" || return
 if [ -n "$MONITOR" ]; then
   polybar -c config.ini main &
 fi
@@ -29,5 +29,3 @@ zsh ~/.fehbg
 # xinput
 xinput set-prop "$TOUCHPAD" "libinput Tapping Enabled" 1
 xinput set-prop "$TOUCHPAD" "libinput Natural Scrolling Enabled" 1
-
-echo "Bars launched..."
