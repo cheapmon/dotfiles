@@ -85,6 +85,7 @@
     upower
     glow
     alejandra
+    brightnessctl
 
     # Neovim
     neovim
