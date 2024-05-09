@@ -1,0 +1,17 @@
+[mounts]
+	path = /home/seims/.local/share/gopass/stores/root
+[show]
+	safecontent = false
+[age]
+	usekeychain = false
+[core]
+	parsing = true
+	nopager = false
+	autoimport = true
+	notifications = true
+	exportkeys = true
+	cliptimeout = 45
+[generate]
+	autoclip = false
+[mounts "inaudito"]
+	path = /home/seims/git/passwords
