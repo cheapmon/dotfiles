@@ -6,25 +6,15 @@ killall -q .polybar-wrappe
 
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-
-# Setup modules based on WM
-export MODULES_MAIN="round-left i3 round-right margin round-left xwindow round-right margin round-left spotify round-right"
-export MODULES_RIGHT="round-left i3 round-right margin round-left xwindow round-right"
+while pgrep -u $UID -x .polybar-wrappe >/dev/null; do sleep 1; done
 
 # Launch bars
-cd "$HOME/.config/polybar" || return
-if [ -n "$MONITOR" ]; then
-  polybar -c config.ini main &
-fi
-if [ -n "$MONITOR_LEFT" ]; then
-  polybar -c config.ini left &
-fi
-if [ -n "$MONITOR_RIGHT" ]; then
-  polybar -c config.ini right &
-fi
+for m in $(polybar --list-monitors | cut -d":" -f1); do
+  MONITOR=$m polybar --reload main &
+done
 
 # Repair background
-zsh ~/.fehbg
+bash "$HOME/.fehbg"
 
 # xinput
 xinput set-prop "$TOUCHPAD" "libinput Tapping Enabled" 1
