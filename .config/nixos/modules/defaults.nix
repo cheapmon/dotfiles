@@ -19,5 +19,6 @@
     ./defaults/services.nix
     ./defaults/time.nix
     ./defaults/users.nix
+    ./defaults/virtualisation.nix
   ];
 }
