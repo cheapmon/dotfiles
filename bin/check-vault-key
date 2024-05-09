@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+RED="\033[0;31m"
+NC="\033[0m"
+
+if [ ! -f "$HOME/.vault/key.txt" ]; then
+  echo -e "${RED}Private key file not found!${NC}"
+  exit 1
+fi
