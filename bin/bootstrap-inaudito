@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+if [ ! -d "$HOME/git/passwords" ]; then
+  git clone git@gitlab.com:inaudito-ops/passwords.git "$HOME/git/passwords"
+  yes 0 | gopass init
+  gopass show inaudito/architecture-init-test
+fi
+
+if [ ! -d "$HOME/git/architecture" ]; then
+  git clone git@gitlab.com:inaudito/architecture.git "$HOME/git/architecture"
+fi
+
+APPS=(
+  ci
+  cli
+  configurator
+  core
+  dumper
+  dumpster
+  inaudito-website
+  infrastructure
+  jobads
+  jobcrawler
+  jobcrawler-browser
+  jobmixer-legacy
+  jobwindow
+  notes
+  odoo
+  odoo-ee
+  partner-docs
+  passwords
+  salesforce-archive
+  schnellestelle
+  schnellestelle2017
+  sites
+  util
+  whitelabel
+)
+
+for APP in "${APPS[@]}"; do
+  DIR="$HOME/git/architecture/apps/$APP"
+
+  if [ ! -d "$DIR" ]; then
+    git clone "git@gitlab.com:inaudito/${APP}.git" "$DIR"
+  fi
+done

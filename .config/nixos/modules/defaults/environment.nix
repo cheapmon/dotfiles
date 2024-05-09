@@ -85,6 +85,9 @@
     glow
     alejandra
     brightnessctl
+    age
+    gnupg
+    gopass
 
     # Neovim
     neovim
@@ -105,6 +108,7 @@
     EDITOR = "nvim";
     FLAKE = "/home/seims/.config/nixos";
     OH_MY_ZSH = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
+    GTK_THEME = "Adwaita-dark";
   };
 
   environment.etc = {
