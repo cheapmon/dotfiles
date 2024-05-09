@@ -15,4 +15,5 @@ nix-shell -p "git" --command "git clone --bare https://github.com/cheapmon/dotfi
 nix-shell -p "git" --command "git --git-dir=$HOME/git/dotfiles --work-tree=$HOME checkout -f"
 sudo nix-shell -p "git" --command "nixos-rebuild switch --impure --flake .config/nixos#default"
 
-"$HOME/bin/decrypt-secrets"
+export PATH="$PATH:$HOME/bin"
+decrypt-secrets
