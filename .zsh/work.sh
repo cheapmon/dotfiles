@@ -14,9 +14,9 @@ if [ "$WORK" = "yes" ]; then
   alias k="kubectl"
 
   # Project aliases
-  source <(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"$HOME/git/architecture/apps/%\"")
+  source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"$HOME/git/architecture/apps/%\"")
   prj() {
-    app="$(/usr/bin/ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf-tmux)"
+    app="$(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf-tmux)"
     dir="$HOME/git/architecture/apps/$app"
 
     if tmuxifier list-sessions | rg -q $app; then
@@ -35,7 +35,7 @@ if [ "$WORK" = "yes" ]; then
   source <(minikube completion zsh)
   source <(helm completion zsh)
   autoload -U +X bashcompinit && bashcompinit
-  complete -o nospace -C /usr/bin/terraform terraform
+  complete -o nospace -C terraform terraform
 
   # kubectl
   kc() {

@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+set -e
+set -o pipefail
+
+RED="\033[0;31m"
+NC="\033[0m"
+
+if [ ! -f "$HOME/.vault/key.txt" ]; then
+  echo -e "${RED}Private key file not found!${NC}"
+  exit 1
+fi
+
 nix-shell -p "git" --command "git clone --bare https://github.com/cheapmon/dotfiles.git $HOME/git/dotfiles"
 nix-shell -p "git" --command "git --git-dir=$HOME/git/dotfiles --work-tree=$HOME checkout -f"
 sudo nix-shell -p "git" --command "nixos-rebuild switch --impure --flake .config/nixos#default"
+
+"$HOME/bin/decrypt-secrets"
