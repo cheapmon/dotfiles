@@ -28,25 +28,7 @@ case $MACHINE_ID in
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
     export OH_MY_ZSH=$HOME/.oh-my-zsh
     ;;
-  22569a7abbb04344bf9f8b443d404cc4) # omen
-    export MONITOR=
-    export MONITOR_LEFT=DP-0
-    export MONITOR_RIGHT=HDMI-0
-    export AUTORANDR_PROFILE=home
-
-    export WORK=yes
-    export TOUCHPAD=
-
-    export NETWORK_INTERFACE=enp34s0
-    export BACKLIGHT_CARD=amdgpu_bl0
-
-    export VIM_COLORSCHEME=catppuccin-latte
-    export TMUX_COLORSCHEME=latte
-    export FZF_DEFAULT_OPTS=" \
---color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
---color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
---color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
-    export OH_MY_ZSH=$HOME/.oh-my-zsh
+  ed5223368b194065936f47c247623232) # omen
     ;;
   *)
     export MONITOR=$(xrandr | grep -w connected | head -n1 | cut -d' ' -f1)

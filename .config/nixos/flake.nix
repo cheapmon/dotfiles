@@ -28,6 +28,13 @@
           ./hosts/t480s/configuration.nix
         ];
       };
+      omen = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          inputs.home-manager.nixosModules.default
+          ./hosts/omen/configuration.nix
+        ];
+      };
     };
   };
 }
