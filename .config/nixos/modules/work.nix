@@ -15,6 +15,7 @@
     terraform
     ansible
     rbenv
+    rofi-pass
   ];
 
   environment.sessionVariables = rec {
