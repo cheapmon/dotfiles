@@ -57,6 +57,7 @@
     lolcat
     cups
     curlie
+    dig
     docker
     docker-compose
     evince
