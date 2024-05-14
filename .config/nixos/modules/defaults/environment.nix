@@ -110,6 +110,7 @@
     FLAKE = "/home/seims/.config/nixos";
     OH_MY_ZSH = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
     GTK_THEME = "Adwaita-dark";
+    COMPOSE_HTTP_TIMEOUT = 86400;
   };
 
   environment.etc = {

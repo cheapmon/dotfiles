@@ -35,6 +35,13 @@
           ./hosts/omen/configuration.nix
         ];
       };
+      t14s = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          inputs.home-manager.nixosModules.default
+          ./hosts/t14s/configuration.nix
+        ];
+      };
     };
   };
 }

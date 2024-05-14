@@ -1,54 +1,5 @@
 # .:.
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin
-export COMPOSE_HTTP_TIMEOUT=86400
-
-# Setup variables based on machine
-export MACHINE_ID=$(cat /etc/machine-id)
-
-case $MACHINE_ID in
-  95f85cded1c546599c9cfa3af5515e4e) # t480s
-    ;;
-  32a2e774d50449fb9f9b936bba932d09) # t14s
-    export MONITOR=eDP
-    export MONITOR_LEFT=HDMI-A-0
-    export MONITOR_RIGHT=DisplayPort-6
-    export AUTORANDR_PROFILE=work
-
-    export WORK=yes
-    export TOUCHPAD="ELAN0676:00 04F3:3195 Touchpad"
-
-    export NETWORK_INTERFACE=enp197s0f4u1u1
-    export BACKLIGHT_CARD=amdgpu_bl0
-
-    export VIM_COLORSCHEME=catppuccin-mocha
-    export TMUX_COLORSCHEME=mocha
-    export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-    export OH_MY_ZSH=$HOME/.oh-my-zsh
-    ;;
-  ed5223368b194065936f47c247623232) # omen
-    ;;
-  *)
-    export MONITOR=$(xrandr | grep -w connected | head -n1 | cut -d' ' -f1)
-    export MONITOR_LEFT=
-    export MONITOR_RIGHT=
-    export AUTORANDR_PROFILE=
-
-    export WORK=
-    export TOUCHPAD=
-
-    export NETWORK_INTERFACE=$(nmcli | grep -w connected | cut -d' ' -f1 | sed 's/://')
-    export BACKLIGHT_CARD=
-
-    export VIM_COLORSCHEME=catppuccin-mocha
-    export TMUX_COLORSCHEME=mocha
-    export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-esac
+export PATH=$PATH:$HOME/bin
 
 # Make variables available to i3
 echo "*monitor: $MONITOR

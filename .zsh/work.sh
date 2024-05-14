@@ -1,7 +1,6 @@
 # Work
 if [ "$WORK" = "yes" ]; then
   # Environment
-  export PATH=$PATH:$HOME/git/architecture/bin/ia
   export FORCE_INIT=yes
   export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
   export DIGITALOCEAN_TOKEN=$(cat $HOME/.vault/digitalocean_token)
