@@ -18,26 +18,16 @@ APPS=(
   cli
   configurator
   core
-  dumper
   dumpster
-  inaudito-website
   infrastructure
   jobads
   jobcrawler
   jobcrawler-browser
   jobmixer-legacy
-  jobwindow
   notes
   odoo
-  odoo-ee
   partner-docs
-  passwords
-  salesforce-archive
-  schnellestelle
-  schnellestelle2017
-  sites
   util
-  whitelabel
 )
 
 for APP in "${APPS[@]}"; do
