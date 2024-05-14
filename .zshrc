@@ -19,13 +19,11 @@ source $OH_MY_ZSH/oh-my-zsh.sh
 # Environment
 export EDITOR=nvim
 export PATH=$PATH:$HOME/.tmuxifier/bin
-export COMPOSE_HTTP_TIMEOUT=86400
 export LESS="-R"
 
 # Aliases
 alias g="git"
-alias p="paru"
-alias ls="exa"
+alias e="exa"
 alias dc="docker-compose"
 alias n="nvim"
 alias vim="nvim"
