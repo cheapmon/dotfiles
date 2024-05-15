@@ -38,6 +38,7 @@
     firefox-devedition
     htop
     xorg.xkill
+    xsel
     networkmanagerapplet
     pavucontrol
     element-desktop
@@ -71,6 +72,7 @@
     jq
     yq
     acpi
+    usbutils
     telegram-desktop
     signal-desktop
     (i3lock-fancy-rapid.overrideAttrs {
