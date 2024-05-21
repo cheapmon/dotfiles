@@ -16,6 +16,7 @@
     ansible
     rbenv
     rofi-pass
+    beekeeper-studio
   ];
 
   environment.sessionVariables = rec {
