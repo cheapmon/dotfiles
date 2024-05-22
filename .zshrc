@@ -53,6 +53,9 @@ zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*" menu no
 zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa $realpath'
 
+# Keybindings
+bindkey -e
+
 # Environment
 export PATH="$PATH:$HOME/.tmuxifier/bin"
 export LESS="-R"
