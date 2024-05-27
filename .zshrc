@@ -60,6 +60,7 @@ bindkey -e
 export PATH="$PATH:$HOME/.tmuxifier/bin"
 export LESS="-R"
 export GLOBALIAS_FILTER_VALUES=(d ls ia iacli)
+export DIRENV_LOG_FORMAT=
 
 # Aliases
 alias d='git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
