@@ -5,75 +5,87 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    nh
-    git
-    tmux
-    zsh
-    just
-    starship
-    direnv
-    fzf
-    gcc
-    gnumake
-    thefuck
-    eza
-    ripgrep
-    magic-wormhole
-    fastfetch
-    feh
-    wezterm
-    rofi
-    gnome.eog
-    gnome.nautilus
-    gnome.gnome-themes-extra
-    gnome.simple-scan
-    paper-gtk-theme
-    paper-icon-theme
-    polybarFull
-    dunst
-    killall
-    spotify-cli-linux
-    spotify
-    firefox-devedition
-    htop
-    xorg.xkill
-    xsel
-    networkmanagerapplet
-    pavucontrol
-    element-desktop
-    flameshot
-    clipmenu
-    thunderbird
-    redshift
-    unclutter
-    fd
+    acpi
+    age
+    alejandra
     arandr
     autorandr
-    xdotool
     baobab
     bat
+    brightnessctl
+    cargo
+    clipmenu
     cmatrix
     cowsay
-    lolcat
     cups
     curlie
     dig
+    direnv
     docker
     docker-compose
+    dunst
+    element-desktop
     evince
+    eza
+    fastfetch
+    fd
+    feh
+    firefox-devedition
+    flameshot
+    fzf
+    gcc
+    gimp
+    git
+    glow
+    gnome.eog
+    gnome.gnome-themes-extra
+    gnome.nautilus
+    gnome.simple-scan
+    gnumake
+    gnupg
+    gopass
     gource
-    sl
-    rsync
-    solaar
-    tokei
-    vlc
-    wget
+    htop
     jq
-    yq
-    acpi
-    usbutils
-    telegram-desktop
+    just
+    killall
+    lolcat
+    magic-wormhole
+    networkmanagerapplet
+    nh
+    paper-gtk-theme
+    paper-icon-theme
+    pavucontrol
+    polybarFull
+    redshift
+    ripgrep
+    rofi
+    rsync
+    ruby
     signal-desktop
+    sl
+    solaar
+    spotify
+    spotify-cli-linux
+    starship
+    telegram-desktop
+    thefuck
+    thunderbird
+    tmux
+    tokei
+    unclutter
+    upower
+    usbutils
+    vlc
+    wezterm
+    wget
+    xdotool
+    xorg.xkill
+    xsel
+    yq
+    zsh
+
+    # Overrides
     (i3lock-fancy-rapid.overrideAttrs {
       propagatedBuildInputs = [i3lock-color];
 
@@ -82,28 +94,20 @@
           --replace '"i3lock"' '"${i3lock-color}/bin/i3lock-color"'
       '';
     })
-    ruby
-    upower
-    glow
-    alejandra
-    brightnessctl
-    age
-    gnupg
-    gopass
 
     # Neovim
+    lua-language-server
     neovim
-    rubyPackages.solargraph
-    nodePackages.vls
     nodePackages.bash-language-server
     nodePackages.typescript-language-server
+    nodePackages.vls
     nodePackages.vscode-json-languageserver
-    vscode-langservers-extracted
     rubocop
+    rubyPackages.solargraph
     rufo
-    lua-language-server
     rust-analyzer
     texlab
+    vscode-langservers-extracted
   ];
 
   environment.sessionVariables = rec {
