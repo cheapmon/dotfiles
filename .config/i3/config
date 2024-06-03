@@ -163,7 +163,7 @@ for_window [class="Spotify"] move to workspace $ws10
 ## Custom keybindings
 
 ### Baseline
-bindsym $mod+Return exec wezterm start -- tmux -- new -As main
+bindsym $mod+Return exec alacritty -e tmux -- new -As main
 bindsym $mod+space exec rofi -show run
 
 ### Control

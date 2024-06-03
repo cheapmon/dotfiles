@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     acpi
     age
+    alacritty
     alejandra
     arandr
     autorandr
