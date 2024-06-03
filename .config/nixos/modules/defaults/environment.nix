@@ -105,6 +105,7 @@
     nodePackages.vscode-json-languageserver
     rubocop
     rubyPackages.solargraph
+    rubyPackages.rexml
     rufo
     rust-analyzer
     texlab
