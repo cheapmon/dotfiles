@@ -39,6 +39,7 @@
   services.openssh.enable = true;
   services.blueman.enable = true;
   services.printing.enable = true;
+  services.gvfs.enable = true;
 
   services.avahi = {
     enable = true;
