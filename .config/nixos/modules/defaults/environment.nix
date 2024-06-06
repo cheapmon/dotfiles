@@ -47,6 +47,7 @@
     gopass
     gource
     htop
+    inotify-tools
     jq
     just
     killall
@@ -70,6 +71,7 @@
     spotify-cli-linux
     starship
     telegram-desktop
+    texliveFull
     thefuck
     thunderbird
     tmux
@@ -99,6 +101,7 @@
     # Neovim
     lua-language-server
     neovim
+    nodejs
     nodePackages.bash-language-server
     nodePackages.typescript-language-server
     nodePackages.vls
@@ -109,6 +112,7 @@
     rufo
     rust-analyzer
     texlab
+    tree-sitter
     vscode-langservers-extracted
   ];
 
