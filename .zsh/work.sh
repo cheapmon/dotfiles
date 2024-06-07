@@ -14,17 +14,7 @@ if [ "$WORK" = "yes" ]; then
 
   # Project aliases
   source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"cd $HOME/git/architecture/apps/%\"")
-  prj() {
-    app="$(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | fzf-tmux)"
-    dir="$HOME/git/architecture/apps/$app"
-
-    if tmuxifier list-sessions | rg -q $app; then
-      tmuxifier load-session $app
-    else
-      tmux new -Ads "$app" -c "$dir"
-      tmux switch -t "$app"
-    fi
-  }
+  alias prj="open-project"
   alias ia="$HOME/git/architecture/bin/ia"
   alias iacli="$HOME/git/architecture/apps/cli/iacli"
 

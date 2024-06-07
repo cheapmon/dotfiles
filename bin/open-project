@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+app="$(find /home/seims/git/architecture/apps -maxdepth 1 -exec basename {} \; | tail -n +2 | fzf-tmux)"
+dir="$HOME/git/architecture/apps/$app"
+
+if tmuxifier list-sessions | rg -q "$app"; then
+  tmuxifier load-session "$app"
+else
+  tmux new -Ads "$app" -c "$dir"
+  tmux switch -t "$app"
+fi
