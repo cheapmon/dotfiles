@@ -15,6 +15,7 @@
     bat
     brightnessctl
     cargo
+    chromium
     clipmenu
     cmatrix
     cowsay
