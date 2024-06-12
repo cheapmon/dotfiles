@@ -1,0 +1,4 @@
+[Default Applications]
+x-scheme-handler/tg=org.telegram.desktop.desktop
+x-scheme-handler/https=firefox-devedition.desktop
+x-scheme-handler/http=firefox-devedition.desktop
