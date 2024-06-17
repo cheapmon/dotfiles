@@ -103,7 +103,7 @@
     lua-language-server
     neovim
     nodejs
-    nodePackages.bash-language-server
+    bash-language-server
     nodePackages.typescript-language-server
     nodePackages.vls
     nodePackages.vscode-json-languageserver
