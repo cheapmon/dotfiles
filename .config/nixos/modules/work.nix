@@ -7,11 +7,6 @@
 }: {
   environment.systemPackages = with pkgs; [
     slack
-    kubectl
-    minikube
-    kubernetes-helm
-    kubectx
-    k9s
     terraform
     ansible
     rbenv

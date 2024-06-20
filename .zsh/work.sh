@@ -4,13 +4,7 @@ if [ "$WORK" = "yes" ]; then
   export FORCE_INIT=yes
   export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
   export DIGITALOCEAN_TOKEN=$(cat $HOME/.vault/digitalocean_token)
-  export RAILS_MASTER_KEY=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.rails.master_key'`
-  export XING_CONSUMER_KEY=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.xing.consumer_key'`
-  export XING_CONSUMER_SECRET=`gopass show inaudito/kubernetes-apps/inaudito/core/values-core-production.yaml | yq -r '.xing.consumer_secret'`
   export IA_PASSWORDSTORE_MOUNT="inaudito"
-
-  # Aliases
-  alias k="kubectl"
 
   # Project aliases
   source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"cd $HOME/git/architecture/apps/%\"")
@@ -20,25 +14,8 @@ if [ "$WORK" = "yes" ]; then
 
   # Completion
   source <($HOME/git/architecture/bin/ia completion)
-  source <(kubectl completion zsh)
-  source <(minikube completion zsh)
-  source <(helm completion zsh)
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C terraform terraform
-
-  # kubectl
-  kc() {
-    ctx=$(echo "staging\nproduction" | fzf-tmux)
-    gopass show -n inaudito/infrastructure/kubernetes/$ctx/kubeconfig > /dev/shm/kubeconfig
-    chmod 0600 /dev/shm/kubeconfig
-    export KUBECONFIG=/dev/shm/kubeconfig
-  }
-  kd() {
-    export KUBECONFIG=
-  }
-  alias kx="kubectx"
-  alias kn="kubens"
-  alias k9="k9s --readonly"
 
   # Ansible
   setup_ansible() {
