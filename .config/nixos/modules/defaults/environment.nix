@@ -49,6 +49,7 @@
     gource
     htop
     inotify-tools
+    jetbrains.idea-community
     jq
     just
     killall
