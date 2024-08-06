@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+cd "$HOME/.config/nixos" || exit
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" checkout flake.lock
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull
+nix flake update
+nh os switch && nh clean all
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" add -f flake.lock
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" commit -m "[nix] Update system"
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" push
