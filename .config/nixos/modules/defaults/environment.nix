@@ -27,6 +27,7 @@
     docker-compose
     dunst
     element-desktop
+    eog
     evince
     eza
     fastfetch
@@ -39,10 +40,7 @@
     gimp
     git
     glow
-    gnome.eog
-    gnome.gnome-themes-extra
-    gnome.nautilus
-    gnome.simple-scan
+    gnome-themes-extra
     gnumake
     gnupg
     gopass
@@ -55,6 +53,7 @@
     killall
     lolcat
     magic-wormhole
+    nautilus
     networkmanagerapplet
     nh
     paper-gtk-theme
@@ -67,6 +66,7 @@
     rsync
     ruby
     signal-desktop
+    simple-scan
     sl
     solaar
     spotify
