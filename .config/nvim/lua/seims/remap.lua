@@ -17,6 +17,9 @@ vim.keymap.set("n", ">", ">>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+vim.keymap.set("n", "<M-h>", "5<C-w><")
+vim.keymap.set("n", "<M-l>", "5<C-w>>")
+
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
