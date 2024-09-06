@@ -34,6 +34,7 @@ require("lazy").setup({
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
+  { "nvim-pack/nvim-spectre" },
   { "mbbill/undotree" },
   { "christoomey/vim-tmux-navigator" },
   { "tpope/vim-fugitive" },
