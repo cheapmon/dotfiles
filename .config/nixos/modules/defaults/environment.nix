@@ -33,7 +33,7 @@
     fastfetch
     fd
     feh
-    firefox-devedition
+    firefox-devedition-bin
     flameshot
     fzf
     gcc

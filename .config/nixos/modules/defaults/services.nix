@@ -46,4 +46,11 @@
     nssmdns4 = true;
     openFirewall = true;
   };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 }

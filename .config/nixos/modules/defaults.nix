@@ -16,6 +16,7 @@
     ./defaults/nix.nix
     ./defaults/nixpkgs.nix
     ./defaults/programs.nix
+    ./defaults/security.nix
     ./defaults/services.nix
     ./defaults/time.nix
     ./defaults/users.nix
