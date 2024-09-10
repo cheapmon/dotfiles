@@ -150,8 +150,7 @@ for_window [title=".*screen share.*"] floating enable
 for_window [title="alacritty-floating"] floating enable
 
 ### Assign windows
-assign [class="firefoxdeveloperedition"] $ws6
-assign [class="firefox"] $ws6
+assign [class="firefox-aurora"] $ws6
 assign [class="thunderbird"] $ws7
 assign [class="Slack"] $ws8
 assign [class="Element"] $ws9
