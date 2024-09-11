@@ -82,7 +82,6 @@
     upower
     usbutils
     vlc
-    wezterm
     wget
     xdotool
     xorg.xkill
