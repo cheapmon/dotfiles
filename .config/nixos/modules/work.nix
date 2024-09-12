@@ -19,7 +19,7 @@
   };
 
   networking.hosts = {
-    "0.0.0.0" = [
+    "127.0.0.1" = [
       "admin.schnellestelle.club"
       "docs.inaudito.club"
       "inaudito.club"
