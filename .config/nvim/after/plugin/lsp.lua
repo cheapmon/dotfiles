@@ -7,7 +7,7 @@ lsp_zero.setup_servers({
   "rust_analyzer",
   "vuels",
   "bashls",
-  "tsserver",
+  "ts_ls",
   "jsonls",
   "eslint",
   "texlab",
