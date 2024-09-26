@@ -48,6 +48,7 @@
     htop
     inotify-tools
     jetbrains.idea-community
+    jetbrains.rust-rover
     jq
     just
     killall
@@ -65,6 +66,7 @@
     rofi
     rsync
     ruby
+    rustup
     signal-desktop
     simple-scan
     sl
