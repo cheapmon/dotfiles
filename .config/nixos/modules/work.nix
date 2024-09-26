@@ -59,6 +59,7 @@
       "images.schnellestelle.club"
       "qr-job.schnellestelle.club"
       "bewerben.schnellestelle.club"
+      "spotlight.schnellestelle.club"
     ];
   };
 }
