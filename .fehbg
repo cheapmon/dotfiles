@@ -1,2 +1,2 @@
 #!/bin/sh
-$(which feh) --no-fehbg --bg-fill '/home/seims/bg/i3-blue.png' 
+$(which feh) --no-fehbg --bg-fill '/home/seims/bg/i3-green.png'
