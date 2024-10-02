@@ -60,6 +60,7 @@
       "qr-job.schnellestelle.club"
       "bewerben.schnellestelle.club"
       "spotlight.schnellestelle.club"
+      "matomo.schnellestelle.club"
     ];
   };
 }
