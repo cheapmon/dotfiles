@@ -33,6 +33,7 @@
       "dbadmin.inaudito.club"
       "www.jobmixer.club"
       "assets.jobmixer.club"
+      "assets-console.jobmixer.club"
       "mailhog.schnellestelle.club"
       "de.schnellestelle.club"
       "jobads.schnellestelle.club"
