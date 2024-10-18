@@ -62,6 +62,7 @@
     pavucontrol
     polybarFull
     redshift
+    repgrep
     ripgrep
     rofi
     rsync
