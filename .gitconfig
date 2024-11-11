@@ -25,6 +25,7 @@
   rl = reset --soft HEAD~1
   rs = restore --staged
   main = checkout main
+  gr = "!f() { git grep \"$1\" $(git rev-list --all); }; f"
 [color]
   ui = true
 [commit]
