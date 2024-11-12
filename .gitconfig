@@ -16,7 +16,8 @@
   st = status
   pl = pull
   ps = push
-  lg = log -p
+  lg = log --graph --decorate --oneline
+  lp = log -p
   df = diff
   dfc = diff --cached
   rb = rebase
