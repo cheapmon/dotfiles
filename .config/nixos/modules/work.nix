@@ -12,6 +12,7 @@
     rbenv
     rofi-pass
     beekeeper-studio
+    gitlab-runner
   ];
 
   environment.sessionVariables = rec {
