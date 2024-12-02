@@ -5,7 +5,8 @@
   ...
 }: {
   fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["IosevkaTerm" "JetBrainsMono"];})
+    nerd-fonts.iosevka-term
+    nerd-fonts.jetbrains-mono
     material-icons
     roboto
     scientifica
