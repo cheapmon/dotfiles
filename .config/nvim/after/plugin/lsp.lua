@@ -5,7 +5,6 @@ lsp_zero.setup_servers({
   "rubocop",
   "lua_ls",
   "rust_analyzer",
-  "vuels",
   "bashls",
   "ts_ls",
   "jsonls",

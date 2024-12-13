@@ -34,6 +34,7 @@ crtc 2
 mode 1920x1080
 pos 3440x0
 rate 60.00
+x-prop-colorspace Default
 x-prop-max_bpc 8
 x-prop-non_desktop 0
 x-prop-scaling_mode None

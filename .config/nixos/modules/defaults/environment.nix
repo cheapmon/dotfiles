@@ -108,7 +108,6 @@
     nodejs
     bash-language-server
     nodePackages.typescript-language-server
-    nodePackages.vls
     nodePackages.vscode-json-languageserver
     rubocop
     rubyPackages.solargraph
