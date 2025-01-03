@@ -47,8 +47,8 @@
     gource
     htop
     inotify-tools
-    jetbrains.idea-community
-    jetbrains.rust-rover
+    # jetbrains.idea-community
+    # jetbrains.rust-rover
     jq
     just
     killall
@@ -81,7 +81,7 @@
     thunderbird
     tmux
     tokei
-    unclutter
+    # unclutter
     upower
     usbutils
     vlc
