@@ -24,7 +24,7 @@
     WORK = "";
     TOUCHPAD = "Elan Touchpad";
 
-    VIM_COLORSCHEME = "everforest";
+    VIM_COLORSCHEME = "catppuccin-mocha";
     TMUX_COLORSCHEME = "mocha";
     FZF_DEFAULT_OPTS = ''
       --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
