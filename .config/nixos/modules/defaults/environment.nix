@@ -81,7 +81,7 @@
     thunderbird
     tmux
     tokei
-    # unclutter
+    unclutter-xfixes
     upower
     usbutils
     vlc
