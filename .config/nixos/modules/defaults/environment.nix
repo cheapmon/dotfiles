@@ -47,8 +47,8 @@
     gource
     htop
     inotify-tools
-    # jetbrains.idea-community
-    # jetbrains.rust-rover
+    jetbrains.idea-community
+    jetbrains.rust-rover
     jq
     just
     killall
