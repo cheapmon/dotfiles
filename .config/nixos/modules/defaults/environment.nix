@@ -21,6 +21,7 @@
     cowsay
     cups
     curlie
+    difftastic
     dig
     direnv
     docker
