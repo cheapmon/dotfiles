@@ -1,0 +1,21 @@
+window-decoration = false
+window-padding-x = 0
+window-padding-y = 0
+
+background-opacity = 0.8
+
+font-family = "IosevkaTerm Nerd Font"
+font-size = 14
+
+scrollback-limit = 100000
+
+shell-integration = zsh
+shell-integration-features = no-cursor
+
+confirm-close-surface = false
+
+theme = catppuccin-mocha
+
+cursor-style = block
+
+keybind = clear

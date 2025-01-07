@@ -37,6 +37,7 @@
     flameshot
     fzf
     gcc
+    ghostty
     gimp
     git
     glow

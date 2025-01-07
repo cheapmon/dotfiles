@@ -147,7 +147,6 @@ smart_borders yes
 for_window [title="win0"] floating enable
 for_window [title=".*Emulator.*"] floating enable
 for_window [title=".*screen share.*"] floating enable
-for_window [title="alacritty-floating"] floating enable
 
 ### Assign windows
 assign [class="firefox-aurora"] $ws6
@@ -162,7 +161,7 @@ for_window [class="Spotify"] move to workspace $ws10
 ## Custom keybindings
 
 ### Baseline
-bindsym $mod+Return exec alacritty -e tmux -- new -As main
+bindsym $mod+Return exec ghostty -e "tmux new -As main"
 bindsym $mod+space exec rofi -show run
 
 ### Control
