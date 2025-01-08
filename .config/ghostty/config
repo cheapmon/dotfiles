@@ -19,3 +19,4 @@ theme = catppuccin-mocha
 cursor-style = block
 
 keybind = clear
+keybind = ctrl+shift+v=paste_from_clipboard
