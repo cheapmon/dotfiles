@@ -9,6 +9,7 @@
     age
     alacritty
     alejandra
+    alsa-utils
     arandr
     autorandr
     baobab
@@ -53,6 +54,7 @@
     jetbrains.rust-rover
     jq
     just
+    kbd
     killall
     lolcat
     magic-wormhole
@@ -89,7 +91,9 @@
     vlc
     wget
     xdotool
+    xorg.xev
     xorg.xkill
+    xorg.xprop
     xsel
     yq
     zsh

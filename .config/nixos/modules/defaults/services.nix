@@ -40,6 +40,7 @@
   services.blueman.enable = true;
   services.printing.enable = true;
   services.gvfs.enable = true;
+  services.pulseaudio.enable = false;
 
   services.avahi = {
     enable = true;
