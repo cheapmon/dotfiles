@@ -49,6 +49,7 @@
     gopass
     gource
     htop
+    i3lock-fancy-rapid
     inotify-tools
     jetbrains.idea-community
     jetbrains.rust-rover
@@ -97,16 +98,6 @@
     xsel
     yq
     zsh
-
-    # Overrides
-    (i3lock-fancy-rapid.overrideAttrs {
-      propagatedBuildInputs = [i3lock-color];
-
-      postPatch = ''
-        substituteInPlace i3lock-fancy-rapid.c \
-          --replace '"i3lock"' '"${i3lock-color}/bin/i3lock-color"'
-      '';
-    })
 
     # Neovim
     lua-language-server
