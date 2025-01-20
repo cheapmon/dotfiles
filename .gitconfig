@@ -1,51 +1,63 @@
-# .:.
-# gitconfig
-
 [user]
-  email = simon.kaleschke.leipzig@gmail.com
-  name = Simon Kaleschke
+email = simon.kaleschke.leipzig@gmail.com
+name = Simon Kaleschke
+
 [alias]
-  ap = add --patch
-  co = checkout
-  cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
-  cl = clean -fd
-  cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
-  br = branch
-  bd = !git branch -D `git branch | fzf-tmux -m`
-  cm = commit
-  st = status
-  pl = pull
-  ps = push
-  lg = log --graph --decorate --oneline
-  lp = log -p
-  df = diff
-  dfc = diff --cached
-  rb = rebase
-  rbc = rebase --continue
-  rba = rebase --abort
-  rl = reset --soft HEAD~1
-  rs = restore --staged
-  main = checkout main
-  gr = "!f() { git grep \"$1\" $(git rev-list --all); }; f"
+ap = add --patch
+co = checkout
+cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
+cl = clean -fd
+cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
+br = branch
+bd = !git branch -D `git branch | fzf-tmux -m`
+cm = commit
+st = status
+pl = pull
+ps = push
+lg = log --graph --decorate --oneline
+lp = log -p
+df = diff
+dfc = diff --cached
+rb = rebase
+rbc = rebase --continue
+rba = rebase --abort
+rl = reset --soft HEAD~1
+rs = restore --staged
+main = checkout main
+gr = "!f() { git grep \"$1\" $(git rev-list --all); }; f"
+
 [color]
-  ui = true
+ui = true
+
 [commit]
-  verbose = true
+verbose = true
+
 [push]
-  autoSetupRemote = true
+autoSetupRemote = true
+
 [pull]
-  rebase = true
+rebase = true
+
 [init]
-  defaultBranch = main
+defaultBranch = main
+
 [rebase]
-  autoStash = true
+autoStash = true
+
 [diff]
-  tool = difftastic
+tool = difftastic
+
 [difftool]
-  prompt = false
+prompt = false
+
 [difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
+cmd = difft "$LOCAL" "$REMOTE"
+
 [pager]
-  difftool = true
+difftool = true
+
 [core]
-  excludesfile = ~/.gitexclude
+excludesfile = ~/.gitexclude
+
+[help]
+autocorrect = prompt
