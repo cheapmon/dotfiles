@@ -66,6 +66,7 @@
     paper-icon-theme
     pavucontrol
     polybarFull
+    postman
     redshift
     repgrep
     ripgrep
