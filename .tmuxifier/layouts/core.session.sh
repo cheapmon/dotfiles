@@ -3,7 +3,7 @@ session_root "~/git/architecture/apps/core"
 if initialize_session "core"; then
   load_window "nvim"
   load_window "core-console"
-  load_window "zsh"
+  load_window "core-shell"
 
   select_window 3
 fi
