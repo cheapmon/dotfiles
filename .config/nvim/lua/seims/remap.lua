@@ -38,3 +38,6 @@ vim.keymap.set("n", "<leader>dh", vim.diagnostic.hide)
 vim.keymap.set("n", "<leader>ds", vim.diagnostic.show)
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
+
+vim.keymap.set("n", "<leader>-", vim.cmd.sp)
+vim.keymap.set("n", "<leader>|", vim.cmd.vsp)
