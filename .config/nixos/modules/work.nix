@@ -6,13 +6,14 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    slack
-    terraform
     ansible
-    rbenv
-    rofi-pass
     beekeeper-studio
     gitlab-runner
+    rbenv
+    rofi-pass
+    slack
+    terraform
+    traefik
   ];
 
   environment.sessionVariables = rec {
