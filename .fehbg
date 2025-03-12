@@ -1,2 +1,2 @@
 #!/bin/sh
-/run/current-system/sw/bin/feh --no-fehbg --bg-fill '/home/seims/bg/i3-mauve.png' 
+/run/current-system/sw/bin/feh --no-fehbg --bg-fill '/home/seims/bg/img23.jpg' 
