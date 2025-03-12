@@ -14,7 +14,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "catppuccin/nvim" },
+  { "catppuccin/nvim",
+    config = function()
+      require("catppuccin").setup({
+        flavour = "auto",
+        transparent_background = true
+      })
+    end
+  },
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
