@@ -126,12 +126,12 @@ workspace $ws10 output $main $right
 workspace_auto_back_and_forth yes
 
 ### Window colors
-# class                 border  backgr. text    indicator child_border
-client.focused          #ffffff #000000 #ffffff #ffffff   #8839efff
-client.focused_inactive #ffffff #5f676a #ffffff #ffffff   #00000000
-client.unfocused        #000000 #222222 #ffffff #ffffff   #00000000
-client.urgent           #647a82 #900000 #ffffff #ffffff   #00000000
-client.placeholder      #000000 #0c0c0c #ffffff #ffffff   #00000000
+# class                 border    backgr.   text      indicator   child_border
+client.focused          #8839efff #181825a6 #ffffffff #ffffffff   #8839efff
+client.focused_inactive #00000000 #181825a6 #ffffffff #ffffffff   #00000000
+client.unfocused        #00000000 #181825a6 #ffffffff #ffffffff   #00000000
+client.urgent           #00000000 #d20f39a6 #ffffffff #ffffffff   #00000000
+client.placeholder      #00000000 #181825a6 #ffffffff #ffffffff   #00000000
 
 ### Gaps
 gaps inner 15
