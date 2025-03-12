@@ -41,3 +41,6 @@ vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
 
 vim.keymap.set("n", "<leader>-", vim.cmd.sp)
 vim.keymap.set("n", "<leader>|", vim.cmd.vsp)
+
+vim.keymap.set("n", "<M-j>", "5<C-w><")
+vim.keymap.set("n", "<M-k>", "5<C-w>>")
