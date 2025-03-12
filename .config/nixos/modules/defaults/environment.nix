@@ -67,6 +67,7 @@
     pavucontrol
     polybarFull
     postman
+    ranger
     redshift
     repgrep
     ripgrep

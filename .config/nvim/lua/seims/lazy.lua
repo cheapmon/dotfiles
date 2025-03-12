@@ -18,9 +18,16 @@ require("lazy").setup({
     config = function()
       require("catppuccin").setup({
         flavour = "auto",
-        transparent_background = true
+        transparent_background = true,
+        integrations = {
+          cmp = true,
+          flash = true,
+          harpoon = true,
+          telescope = true,
+          treesitter = true,
+        }
       })
-    end
+    end,
   },
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -29,22 +36,17 @@ require("lazy").setup({
   { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
   { "neovim/nvim-lspconfig", dependencies = { "hrsh7th/cmp-nvim-lsp" } },
   { "hrsh7th/nvim-cmp", dependencies = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-vsnip", "hrsh7th/vim-vsnip" } },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = {},
-    keys = {
-      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  },
   { "nvim-pack/nvim-spectre" },
-  { "mbbill/undotree" },
   { "christoomey/vim-tmux-navigator" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-commentary" },
   { "ruby-formatter/rufo-vim" },
+  {
+    "kelly-lin/ranger.nvim",
+    config = function()
+      require("ranger-nvim").setup({ replace_netrw = true })
+
+      vim.keymap.set("n", "<leader>n", function() require("ranger-nvim").open(true) end)
+    end
+  }
 })
