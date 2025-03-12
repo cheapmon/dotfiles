@@ -35,7 +35,6 @@
   };
 
   services.displayManager.defaultSession = "none+i3";
-  services.picom.enable = true;
   services.openssh.enable = true;
   services.blueman.enable = true;
   services.printing.enable = true;

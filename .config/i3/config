@@ -196,6 +196,7 @@ bindsym $mod+Ctrl+Insert exec CM_LAUNCHER=rofi clipmenu
 
 ### Preparations
 exec --no-startup-id xset r rate 200 35
+exec --no-startup-id picom -b
 exec pull-dotfiles
 exec refresh-screen
 exec redshift

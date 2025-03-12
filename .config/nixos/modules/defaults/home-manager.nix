@@ -28,6 +28,10 @@
           package = pkgs.paper-icon-theme;
           name = "Paper";
         };
+
+        home.packages = with pkgs; [
+          picom
+        ];
       };
     };
   };
