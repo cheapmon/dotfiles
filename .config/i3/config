@@ -84,10 +84,10 @@ bindsym $mod+KP_Left move workspace to output $left
 ### Resize
 bindsym $mod+d mode "resize"
 mode "resize" {
-  bindsym $mod+Left resize shrink width 1px or 1ppt
-  bindsym $mod+Right resize grow width 1px or 1ppt
-  bindsym $mod+Up resize grow height 1px or 1ppt
-  bindsym $mod+Down resize shrink height 1px or 1ppt
+  bindsym $mod+h resize shrink width 1px or 1ppt
+  bindsym $mod+l resize grow width 1px or 1ppt
+  bindsym $mod+k resize grow height 1px or 1ppt
+  bindsym $mod+j resize shrink height 1px or 1ppt
   bindsym Escape mode "default"
 }
 
