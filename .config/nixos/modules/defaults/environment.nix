@@ -56,6 +56,7 @@
     jq
     just
     kbd
+    keyd
     killall
     lolcat
     magic-wormhole
