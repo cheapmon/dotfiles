@@ -115,7 +115,9 @@
     rufo
     rust-analyzer
     texlab
+    tinymist
     tree-sitter
+    typst
     vscode-langservers-extracted
   ];
 

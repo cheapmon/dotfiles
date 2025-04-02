@@ -20,6 +20,7 @@ return {
         "jsonls",
         "eslint",
         "texlab",
+        "tinymist",
       })
 
       lsp_zero.on_attach(function(_, bufnr)
