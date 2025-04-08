@@ -7,7 +7,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     ansible
-    beekeeper-studio
+    # beekeeper-studio
     gitlab-runner
     rbenv
     rofi-pass
