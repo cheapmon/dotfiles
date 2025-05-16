@@ -11,4 +11,5 @@
       Defaults insults
     '';
   };
+  security.pam.services.i3lock.enable = true;
 }
