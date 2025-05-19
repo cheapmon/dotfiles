@@ -122,7 +122,7 @@
 
   environment.sessionVariables = rec {
     EDITOR = "nvim";
-    FLAKE = "/home/seims/.config/nixos";
+    NH_FLAKE = "/home/seims/.config/nixos";
     GTK_THEME = "Adwaita-dark";
     COMPOSE_HTTP_TIMEOUT = 86400;
   };
