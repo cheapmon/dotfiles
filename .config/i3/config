@@ -149,7 +149,7 @@ for_window [title=".*Emulator.*"] floating enable
 for_window [title=".*screen share.*"] floating enable
 
 ### Assign windows
-assign [class="firefox-aurora"] $ws6
+assign [class="firefox-dev"] $ws6
 assign [class="thunderbird"] $ws7
 assign [class="Slack"] $ws8
 assign [class="Element"] $ws9
