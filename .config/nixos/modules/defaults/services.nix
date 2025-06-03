@@ -88,7 +88,7 @@
         ids = [ "*" ];
         settings = {
           main = {
-            capslock = "backspace";
+            capslock = "overload(meta, backspace)";
           };
         };
         extraConfig = ''
