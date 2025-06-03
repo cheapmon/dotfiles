@@ -77,7 +77,7 @@ rgl() {
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(thefuck --alias)"
+eval "$(pay-respects zsh)"
 eval "$(tmuxifier init -)"
 eval "$(direnv hook zsh)"
 source <(just --completions bash)
