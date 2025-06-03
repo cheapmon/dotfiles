@@ -22,6 +22,7 @@
     cowsay
     cups
     curlie
+    dbeaver-bin
     difftastic
     dig
     direnv
@@ -66,6 +67,7 @@
     paper-gtk-theme
     paper-icon-theme
     pavucontrol
+    pay-respects
     polybarFull
     postman
     redshift
@@ -84,7 +86,6 @@
     starship
     telegram-desktop
     texliveFull
-    thefuck
     thunderbird
     tmux
     tokei
