@@ -1,9 +1,9 @@
 [Default Applications]
 x-scheme-handler/tg=org.telegram.desktop.desktop
-x-scheme-handler/https=firefox-developer-edition.desktop
-x-scheme-handler/http=firefox-developer-edition.desktop
+x-scheme-handler/https=firefox-devedition.desktop
+x-scheme-handler/http=firefox-devedition.desktop
 x-scheme-handler/chrome=firefox-developer-edition.desktop
-text/html=firefox-developer-edition.desktop
+text/html=firefox-devedition.desktop
 application/x-extension-htm=firefox-developer-edition.desktop
 application/x-extension-html=firefox-developer-edition.desktop
 application/x-extension-shtml=firefox-developer-edition.desktop
@@ -14,6 +14,8 @@ application/pdf=org.gnome.Evince.desktop
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
 x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
+x-scheme-handler/about=firefox-devedition.desktop
+x-scheme-handler/unknown=firefox-devedition.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox-developer-edition.desktop;
