@@ -49,6 +49,7 @@
     gnupg
     gopass
     gource
+    guvcview
     htop
     i3lock-fancy-rapid
     inotify-tools
@@ -100,6 +101,7 @@
     xorg.xprop
     xsel
     yq
+    zoom-us
     zsh
 
     # Neovim
