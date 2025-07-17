@@ -10,14 +10,11 @@
     alacritty
     alejandra
     alsa-utils
-    arandr
-    autorandr
     baobab
     bat
     brightnessctl
     cargo
     chromium
-    clipmenu
     cmatrix
     cowsay
     cups
@@ -28,7 +25,6 @@
     direnv
     docker
     docker-compose
-    dunst
     element-desktop
     eog
     evince
@@ -36,8 +32,7 @@
     fastfetch
     fd
     feh
-    firefox-devedition-bin
-    flameshot
+    firefox-devedition
     fzf
     gcc
     ghostty
@@ -49,9 +44,11 @@
     gnupg
     gopass
     gource
+    grim
     guvcview
     htop
-    i3lock-fancy-rapid
+    hyprlock
+    hyprpaper
     inotify-tools
     jetbrains.idea-community
     jetbrains.rust-rover
@@ -60,8 +57,10 @@
     kbd
     keyd
     killall
+    libnotify
     lolcat
     magic-wormhole
+    mako
     nautilus
     networkmanagerapplet
     nh
@@ -69,9 +68,7 @@
     paper-icon-theme
     pavucontrol
     pay-respects
-    polybarFull
     postman
-    redshift
     repgrep
     ripgrep
     rofi
@@ -81,25 +78,28 @@
     signal-desktop
     simple-scan
     sl
+    slurp
     solaar
     spotify
     spotify-cli-linux
-    starship
+    swappy
     telegram-desktop
     texliveFull
     thunderbird
     tmux
     tokei
-    unclutter-xfixes
     upower
     usbutils
     vlc
+    waybar
+    wev
     wget
-    xdotool
-    xorg.xev
-    xorg.xkill
-    xorg.xprop
-    xsel
+    wl-clipboard
+    wlr-randr
+    wlsunset
+    wofi
+    wofi-pass
+    xdg-desktop-portal-hyprland
     yq
     zoom-us
     zsh
@@ -123,11 +123,29 @@
     vscode-langservers-extracted
   ];
 
+  environment.gnome.excludePackages = (with pkgs; [
+    atomix
+    cheese
+    epiphany
+    geary
+    gedit
+    gnome-characters
+    gnome-music
+    gnome-photos
+    gnome-terminal
+    gnome-tour
+    hitori
+    iagno
+    tali
+    totem
+  ]);
+
   environment.sessionVariables = rec {
     EDITOR = "nvim";
     NH_FLAKE = "/home/seims/.config/nixos";
     GTK_THEME = "Adwaita-dark";
     COMPOSE_HTTP_TIMEOUT = 86400;
+    NIXOS_OZONE_WL = "1";
   };
 
   environment.etc = {

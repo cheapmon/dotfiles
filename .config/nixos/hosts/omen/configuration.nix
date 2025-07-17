@@ -25,7 +25,7 @@
   environment.sessionVariables = rec {
     MONITOR = "";
     MONITOR_LEFT = "DP-1";
-    MONITOR_RIGHT = "HDMI-1";
+    MONITOR_RIGHT = "HDMI-A-1";
     AUTORANDR_PROFILE = "omen";
 
     WORK = "yes";

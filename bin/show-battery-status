@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-dunstify -a Battery "$(acpi -b)"
+notify-send -a Battery "$(acpi -b)"

@@ -32,6 +32,16 @@
         home.packages = with pkgs; [
           picom
         ];
+
+        services.mako = {
+          enable = true;
+          settings.default-timeout = 4000;
+        };
+
+        dconf = {
+          enable = true;
+          settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        };
       };
     };
   };
