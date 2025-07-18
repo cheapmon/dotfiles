@@ -18,6 +18,7 @@
   },
   "clock": {
     "timezone": "Europe/Berlin",
+    "tooltip-format": "{calendar}",
     "format-alt": "\udb80\udced {:%d/%m/%Y}",
     "format": "\uf017 {:%H:%M}"
   },

@@ -24,15 +24,6 @@
           recursive = true;
         };
 
-        home.pointerCursor = {
-          package = pkgs.paper-icon-theme;
-          name = "Paper";
-        };
-
-        home.packages = with pkgs; [
-          picom
-        ];
-
         services.mako = {
           enable = true;
           settings.default-timeout = 4000;

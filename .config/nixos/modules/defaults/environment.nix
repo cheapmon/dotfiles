@@ -64,14 +64,11 @@
     nautilus
     networkmanagerapplet
     nh
-    paper-gtk-theme
-    paper-icon-theme
     pavucontrol
     pay-respects
     postman
     repgrep
     ripgrep
-    rofi
     rsync
     ruby
     rustup
@@ -121,9 +118,11 @@
     tree-sitter
     typst
     vscode-langservers-extracted
+
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
   ];
 
-  environment.gnome.excludePackages = (with pkgs; [
+  environment.gnome.excludePackages = with pkgs; [
     atomix
     cheese
     epiphany
@@ -138,7 +137,7 @@
     iagno
     tali
     totem
-  ]);
+  ];
 
   environment.sessionVariables = rec {
     EDITOR = "nvim";
