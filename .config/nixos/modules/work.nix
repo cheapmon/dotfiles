@@ -10,7 +10,6 @@
     # beekeeper-studio
     gitlab-runner
     rbenv
-    rofi-pass
     slack
     terraform
     traefik
