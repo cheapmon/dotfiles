@@ -36,9 +36,11 @@
 }
 
 #window,
-#tray,
+#battery,
+#backlight,
+#pulseaudio,
 #clock,
-#pulseaudio {
+#tray {
   background-color: @surface0;
   padding: 0.5rem 1rem;
   margin: 5px 0;
@@ -48,16 +50,24 @@
   border-radius: 1rem;
 }
 
-#clock {
-  color: @blue;
-  border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
+#battery {
+  color: @yellow;
+  margin-left: 1rem;
+  border-radius: 1rem 0px 0px 1rem;
+}
+
+#backlight {
+  color: @lavender;
 }
 
 #pulseaudio {
   color: @maroon;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 1rem;
 }
 
 #tray {

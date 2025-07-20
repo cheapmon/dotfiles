@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["pulseaudio", "clock", "tray"],
+  "modules-right": ["battery", "backlight", "pulseaudio", "clock", "tray"],
   "hyprland/workspaces": {
     "disable-scroll": true,
     "sort-by-name": true,
@@ -12,15 +12,31 @@
       "default": ""
     }
   },
-  "tray": {
-    "icon-size": 21,
-    "spacing": 10
+  "battery": {
+    "format": " {icon} {capacity}%",
+    "format-icons": [
+      "\uf244",
+      "\uf243",
+      "\uf242",
+      "\uf241",
+      "\uf240"
+    ]
   },
-  "clock": {
-    "timezone": "Europe/Berlin",
-    "tooltip-format": "{calendar}",
-    "format-alt": "\udb80\udced {:%d/%m/%Y}",
-    "format": "\uf017 {:%H:%M}"
+  "backlight": {
+    "format": " {icon} {percent}%",
+    "format-icons": [
+      "\udb81\udee9",
+      "\udb86\ude4e",
+      "\udb86\ude4f",
+      "\udb86\ude50",
+      "\udb86\ude51",
+      "\udb86\ude52",
+      "\udb86\ude53",
+      "\udb86\ude54",
+      "\udb86\ude55",
+      "\udb86\ude56",
+      "\udb81\udee8"
+    ]
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -29,5 +45,15 @@
       "default": ["", "", " "]
     },
     "on-click": "pavucontrol"
+  },
+  "clock": {
+    "timezone": "Europe/Berlin",
+    "tooltip-format": "{calendar}",
+    "format-alt": "\udb80\udced {:%d/%m/%Y}",
+    "format": "\uf017 {:%H:%M}"
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
   }
 }
