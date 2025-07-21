@@ -119,7 +119,11 @@
     typst
     vscode-langservers-extracted
 
+    # Inputs
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+
+    # Custom packages
+    (callPackage ./derivations/toml-bombadil.nix {})
   ];
 
   environment.gnome.excludePackages = with pkgs; [
