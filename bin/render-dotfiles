@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+HOSTNAME="$(cat /etc/hostname)"
+MESSAGE="$(bombadil link -p "$HOSTNAME" 2>&1)"
+
+case $? in
+  0)
+    ;;
+  *)
+    notify-send -a bombadil -u "critical" "$MESSAGE"
+    ;;
+esac

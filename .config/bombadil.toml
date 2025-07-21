@@ -1,0 +1,19 @@
+dotfiles_dir = "."
+
+import = []
+
+[settings]
+vars = [ ".toml-bombadil/default.toml" ]
+
+[profiles.omen]
+vars = [ ".toml-bombadil/omen.toml" ]
+
+[profiles.t14s]
+vars = [ ".toml-bombadil/t14s.toml" ]
+
+[profiles.t480s]
+vars = [ ".toml-bombadil/t480s.toml" ]
+
+[settings.dots]
+waybar-config = { source = ".toml-bombadil/waybar/config.jsonc.tera", target = ".config/waybar/config.jsonc" }
+waybar-styles = { source = ".toml-bombadil/waybar/style.css.tera", target = ".config/waybar/style.css" }

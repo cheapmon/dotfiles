@@ -13,5 +13,4 @@ case $? in
     ;;
 esac
 
-i3-msg restart
-dunstify -a dotfiles -u "$URGENCY" "$MESSAGE"
+notify-send -a dotfiles -u "$URGENCY" "$MESSAGE"
