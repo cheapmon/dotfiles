@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull --all
+MESSAGE="$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull --all 2>&1)"
 
 case $? in
   0)
@@ -8,9 +8,8 @@ case $? in
     URGENCY="normal"
     ;;
   *)
-    MESSAGE="something went wrong"
     URGENCY="critical"
     ;;
 esac
 
-notify-send -a dotfiles -u "$URGENCY" "$MESSAGE"
+notify-send -u "$URGENCY" dotfiles "$MESSAGE"
