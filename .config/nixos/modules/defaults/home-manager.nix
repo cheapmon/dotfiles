@@ -24,10 +24,7 @@
           recursive = true;
         };
 
-        services.mako = {
-          enable = true;
-          settings.default-timeout = 4000;
-        };
+        services.mako.enable = true;
 
         dconf = {
           enable = true;
