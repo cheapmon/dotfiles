@@ -47,6 +47,7 @@
     grim
     guvcview
     htop
+    hypridle
     hyprlock
     hyprpaper
     inotify-tools
