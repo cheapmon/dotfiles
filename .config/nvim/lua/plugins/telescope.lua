@@ -4,6 +4,10 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
     opts = {
       defaults = {
+        cache_picker = {
+          num_pickers = 10,
+          ignore_empty_prompt = true,
+        },
         extensions = {
           fzf = {
             fuzzy = true,
@@ -23,6 +27,7 @@ return {
       { "<leader>td", function() require("telescope.builtin").lsp_document_symbols() end },
       { "<leader>tr", function() require("telescope.builtin").resume() end },
       { "<leader>to", function() require("telescope.builtin").oldfiles() end },
+      { "<leader>tp", function() require("telescope.builtin").pickers() end },
     },
   },
   {
