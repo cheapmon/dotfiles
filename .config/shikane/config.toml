@@ -1,0 +1,69 @@
+[[profile]]
+name = "t14s"
+
+[[profile.output]]
+enable = true
+search = ["m=DELL S2715H", "s=PP92G52PA5ML", "v=Dell Inc."]
+mode = "1920x1080@60Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = false
+search = ["m=0x06F7", "s=", "v=LG Display"]
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U3415W", "s=68MCF51304CL", "v=Dell Inc."]
+mode = "3440x1440@59.973Hz"
+position = "-3440,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile]]
+name = "mobile"
+
+[[profile.output]]
+enable = false
+search = ["m=DELL S2715H", "s=PP92G52PA5ML", "v=Dell Inc."]
+
+[[profile.output]]
+enable = true
+search = ["m=0x06F7", "s=", "v=LG Display"]
+mode = "1920x1200@60.001Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = false
+search = ["m=DELL U3415W", "s=68MCF51304CL", "v=Dell Inc."]
+
+[[profile]]
+name = "presentation"
+
+[[profile.output]]
+enable = false
+search = ["m=DELL S2715H", "s=PP92G52PA5ML", "v=Dell Inc."]
+
+[[profile.output]]
+enable = true
+search = ["m=0x06F7", "s=", "v=LG Display"]
+mode = "1920x1200@60.001Hz"
+position = "-960,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=DELL U3415W", "s=68MCF51304CL", "v=Dell Inc."]
+mode = "3440x1440@59.973Hz"
+position = "-1720,-1440"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false

@@ -73,6 +73,7 @@
     rsync
     ruby
     rustup
+    shikane
     signal-desktop
     simple-scan
     sl
