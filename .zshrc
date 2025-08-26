@@ -52,7 +52,7 @@ zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa $realpath'
 bindkey -e
 
 # Environment
-export PATH="$PATH:$HOME/.tmuxifier/bin"
+export PATH="$PATH:$HOME/.tmuxifier/bin:$HOME/bin"
 export LESS="-R"
 export GLOBALIAS_FILTER_VALUES=(d ls ia iacli)
 export DIRENV_LOG_FORMAT=
