@@ -1,4 +1,25 @@
 [[profile]]
+name = "omen"
+
+[[profile.output]]
+enable = true
+search = ["m=LG ULTRAGEAR", "s=307MAEG9EB12", "v=LG Electronics"]
+mode = "2560x1440@143.973Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=LG ULTRAGEAR", "s=104NTRL1C974", "v=LG Electronics"]
+mode = "2560x1440@119.998Hz"
+position = "-2560,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile]]
 name = "t14s"
 
 [[profile.output]]
