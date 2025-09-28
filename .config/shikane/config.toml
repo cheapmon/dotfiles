@@ -45,6 +45,17 @@ transform = "normal"
 adaptive_sync = false
 
 [[profile]]
+name = "t480s"
+
+[[profile.output]]
+enable = true
+search = ["m=0x058B", "s=", "v=LG Display"]
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile]]
 name = "mobile"
 
 [[profile.output]]
