@@ -8,6 +8,8 @@
   environment.systemPackages = with pkgs; [
     ansible
     # beekeeper-studio
+    bruno
+    bruno-cli
     gitlab-runner
     rbenv
     slack
