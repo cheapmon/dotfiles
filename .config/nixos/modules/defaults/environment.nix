@@ -65,6 +65,7 @@
     nautilus
     networkmanagerapplet
     nh
+    openssl
     pavucontrol
     pay-respects
     postman
