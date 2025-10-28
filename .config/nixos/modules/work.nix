@@ -10,6 +10,8 @@
     # beekeeper-studio
     bruno
     bruno-cli
+    claude-code
+    codex
     gitlab-runner
     rbenv
     slack

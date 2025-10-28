@@ -4,6 +4,7 @@ if [ "$WORK" = "yes" ]; then
   export FORCE_INIT=yes
   export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
   export DIGITALOCEAN_TOKEN=$(cat $HOME/.vault/digitalocean_token)
+  export ANTHROPIC_API_KEY=$(cat $HOME/.vault/anthropic_api_key)
   export IA_PASSWORDSTORE_MOUNT="inaudito"
 
   # Project aliases
