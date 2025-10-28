@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+hyprctl dispatch moveworkspacetomonitor 1 l
+hyprctl dispatch moveworkspacetomonitor 2 l
+hyprctl dispatch moveworkspacetomonitor 3 l
+hyprctl dispatch moveworkspacetomonitor 4 l
+hyprctl dispatch moveworkspacetomonitor 5 l
+hyprctl dispatch moveworkspacetomonitor 6 r
+hyprctl dispatch moveworkspacetomonitor 7 r
+hyprctl dispatch moveworkspacetomonitor 8 r
+hyprctl dispatch moveworkspacetomonitor 9 r
+hyprctl dispatch moveworkspacetomonitor 10 r
