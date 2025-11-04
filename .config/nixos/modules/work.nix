@@ -11,6 +11,7 @@
     bruno
     bruno-cli
     claude-code
+    codebuff
     codex
     gitlab-runner
     rbenv

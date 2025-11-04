@@ -42,6 +42,7 @@
     gnome-themes-extra
     gnumake
     gnupg
+    google-chrome
     gopass
     gource
     grim
