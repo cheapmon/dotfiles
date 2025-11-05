@@ -1,1 +1,4 @@
 Justfile
+
+# Age encryption keys
+.config/age/

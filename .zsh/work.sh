@@ -2,9 +2,10 @@
 if [ "$WORK" = "yes" ]; then
   # Environment
   export FORCE_INIT=yes
-  export GITLAB_API_TOKEN=$(cat $HOME/.vault/api_token)
-  export DIGITALOCEAN_TOKEN=$(cat $HOME/.vault/digitalocean_token)
-  export ANTHROPIC_API_KEY=$(cat $HOME/.vault/anthropic_api_key)
+  SECRETS="/run/user/$(id -u)/secrets"
+  export GITLAB_API_TOKEN=$(cat $SECRETS/api_token)
+  export DIGITALOCEAN_TOKEN=$(cat $SECRETS/digitalocean_token)
+  export ANTHROPIC_API_KEY=$(cat $SECRETS/anthropic_api_key)
   export IA_PASSWORDSTORE_MOUNT="inaudito"
   export CORE_SERVICE="core-native"
 

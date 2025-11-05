@@ -3,7 +3,26 @@
 RED="\033[0;31m"
 NC="\033[0m"
 
-if [ ! -f "$HOME/.vault/key.txt" ]; then
+KEY="${XDG_CONFIG_HOME:-$HOME/.config}/age/key.txt"
+
+if [ ! -f "$KEY" ]; then
   echo -e "${RED}Private key file not found!${NC}"
+  echo "Expected location: $KEY"
+  exit 1
+fi
+
+PERMS=$(stat -c "%a" "$KEY")
+OWNER=$(stat -c "%u" "$KEY")
+CURRENT_UID=$(id -u)
+
+if [ "$OWNER" -ne "$CURRENT_UID" ]; then
+  echo -e "${RED}Private key must be owned by the current user!${NC}"
+  echo "Current uid: $CURRENT_UID, owner uid: $OWNER"
+  exit 1
+fi
+
+if [ "$PERMS" != "600" ]; then
+  echo -e "${RED}Private key permissions must be 600!${NC}"
+  echo "Current permissions: $PERMS"
   exit 1
 fi
