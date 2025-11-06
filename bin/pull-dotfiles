@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+#
+# pull-dotfiles - Pull latest dotfiles and notify user
+#
+# Pulls all branches from dotfiles bare repository and sends desktop notification
+# with either the latest commit message (success) or error message (failure).
+#
+# Dependencies: git, notify-send
+# Side effects:
+#   - Updates dotfiles working tree
+#   - Sends desktop notification
 
 MESSAGE="$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull --all 2>&1)"
 

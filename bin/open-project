@@ -1,7 +1,43 @@
 #!/usr/bin/env bash
+#
+# open-project - Open architecture project in tmux session
+#
+# Uses fzf to select from available projects in architecture/apps, then:
+#   - Loads existing tmuxifier session if available, OR
+#   - Creates new tmux session in the project directory
+#
+# Dependencies: fzf-tmux, tmux, tmuxifier, ripgrep (rg)
+# Side effects: Creates or switches to tmux session
 
-app="$(find /home/seims/git/architecture/apps -maxdepth 1 -exec basename {} \; | tail -n +2 | fzf-tmux)"
-dir="$HOME/git/architecture/apps/$app"
+set -e
+set -o pipefail
+
+# Check dependencies
+for cmd in fzf-tmux tmux tmuxifier rg; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "Error: Required command '$cmd' not found" >&2
+    exit 1
+  fi
+done
+
+APPS_DIR="$HOME/git/architecture/apps"
+
+if [ ! -d "$APPS_DIR" ]; then
+  echo "Error: Architecture apps directory not found: $APPS_DIR" >&2
+  exit 1
+fi
+
+set +e
+app="$(find "$APPS_DIR" -maxdepth 1 -exec basename {} \; | tail -n +2 | fzf-tmux)"
+status=$?
+set -e
+
+if [ $status -ne 0 ] || [ -z "$app" ]; then
+  echo "No project selected" >&2
+  exit 1
+fi
+
+dir="$APPS_DIR/$app"
 
 if tmuxifier list-sessions | rg -q "$app"; then
   tmuxifier load-session "$app"

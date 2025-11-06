@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
+#
+# start-work-programs - Launch work applications during work hours
+#
+# Automatically starts work-related programs if:
+#   - WORK environment variable is set to "yes"
+#   - Current time is between 8 AM and 6 PM
+#
+# Programs launched: firefox-devedition, thunderbird, slack, element-desktop,
+#                    telegram-desktop, signal-desktop, spotify
+#
+# Dependencies: Listed programs must be installed
+# Side effects: Launches multiple background processes
+
+set -e
+set -o pipefail
 
 HOUR=$(($(date +%H)))
 
 if [ "$WORK" == "yes" ] && [ $HOUR -ge 8 ] && [ $HOUR -lt 18 ]; then
-  firefox-devedition &
-  thunderbird &
-  slack &
-  element-desktop &
-  telegram-desktop &
-  signal-desktop &
-  spotify &
+  command -v firefox-devedition >/dev/null && firefox-devedition &
+  command -v thunderbird >/dev/null && thunderbird &
+  command -v slack >/dev/null && slack &
+  command -v element-desktop >/dev/null && element-desktop &
+  command -v telegram-desktop >/dev/null && telegram-desktop &
+  command -v signal-desktop >/dev/null && signal-desktop &
+  command -v spotify >/dev/null && spotify &
 fi

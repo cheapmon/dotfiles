@@ -1,4 +1,17 @@
 #!/usr/bin/env bash
+#
+# bootstrap-inaudito - Clone Inaudito work repositories
+#
+# Initializes gopass password store and clones all Inaudito repositories:
+#   - passwords repo (GitLab)
+#   - architecture repo
+#   - All application repos into architecture/apps/
+#
+# Dependencies: git, gopass
+# Side effects:
+#   - Clones multiple repositories into ~/git/
+#   - Initializes gopass password store
+#   - Requires SSH access to gitlab.com:inaudito-ops and gitlab.com:inaudito
 
 set -e
 set -o pipefail

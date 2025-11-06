@@ -1,4 +1,21 @@
 #!/usr/bin/env bash
+#
+# refresh - Reorganize Hyprland workspaces across monitors
+#
+# Moves workspaces 1-5 to the left monitor and 6-10 to the right monitor.
+# Useful after: reconnecting external monitors, waking from sleep, or monitor
+# configuration changes.
+#
+# Dependencies: hyprctl (Hyprland compositor)
+# Side effects: Moves all workspaces, may disrupt current layout
+
+set -e
+set -o pipefail
+
+if ! command -v hyprctl >/dev/null 2>&1; then
+  echo "Error: hyprctl command not found. Is Hyprland running?" >&2
+  exit 1
+fi
 
 hyprctl dispatch moveworkspacetomonitor 1 l
 hyprctl dispatch moveworkspacetomonitor 2 l

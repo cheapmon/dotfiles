@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+#
+# check-vault-key - Validate age encryption key permissions
+#
+# Verifies that the age private key exists, has correct permissions (600),
+# and is owned by the current user. Used by other scripts before decryption.
+#
+# Expected key location: ~/.config/age/key.txt
+#
+# Dependencies: stat
+# Side effects: None (read-only validation)
 
 RED="\033[0;31m"
 NC="\033[0m"

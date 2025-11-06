@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
+#
+# bootstrap-nixos - Bootstrap new NixOS system from dotfiles
+#
+# Performs initial system setup:
+#   1. Validates age key exists and has correct permissions
+#   2. Clones dotfiles as bare repository
+#   3. Checks out dotfiles to home directory
+#   4. Rebuilds NixOS from flake configuration
+#   5. Decrypts secrets
+#
+# Prerequisites:
+#   - Age key must exist at ~/.config/age/key.txt with 600 permissions
+#   - SSH access to github.com/cheapmon/dotfiles
+#
+# Dependencies: git, nix, nixos-rebuild, age, decrypt-secrets
+# Side effects:
+#   - Clones dotfiles repository
+#   - Overwrites files in home directory
+#   - Rebuilds entire NixOS system
+#   - Decrypts and installs secrets
 
 set -e
 set -o pipefail

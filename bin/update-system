@@ -1,7 +1,31 @@
 #!/usr/bin/env bash
+#
+# update-system - Update NixOS flake and rebuild system
+#
+# This script:
+#   1. Pulls latest dotfiles from remote
+#   2. Updates all flake inputs (nix flake update)
+#   3. Rebuilds NixOS system configuration
+#   4. Cleans old generations
+#   5. Commits and pushes the updated flake.lock
+#
+# Dependencies: git, nix, nh
+# Side effects:
+#   - Modifies system configuration
+#   - Creates git commits in dotfiles repo
+#   - Pushes to remote repository
+#   - Removes old NixOS generations
 
 set -e
 set -o pipefail
+
+# Check dependencies
+for cmd in git nix nh; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "Error: Required command '$cmd' not found" >&2
+    exit 1
+  fi
+done
 
 cd "$HOME/.config/nixos" || exit
 git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" checkout flake.lock
