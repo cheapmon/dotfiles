@@ -1,0 +1,2 @@
+- Use `acli jira workitem view [key]` to view Jira tickets.
+- If available, always include the ticket key when checking out new branches.
