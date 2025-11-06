@@ -128,6 +128,7 @@
 
     # Custom packages
     (callPackage ./derivations/toml-bombadil.nix {})
+    (callPackage ./derivations/acli.nix {})
   ];
 
   environment.gnome.excludePackages = with pkgs; [

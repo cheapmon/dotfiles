@@ -19,6 +19,7 @@ if [ "$WORK" = "yes" ]; then
   source <($HOME/git/architecture/bin/ia completion)
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C terraform terraform
+  source <(acli completion zsh)
 
   # Ansible
   setup_ansible() {
