@@ -1,2 +1,3 @@
 - Use `acli jira workitem view [key]` to view Jira tickets.
 - If available, always include the ticket key when checking out new branches.
+- Use `acli jira workitem view [key] --fields 'customfield_10261' --json` to extract QA steps from a Jira ticket.
