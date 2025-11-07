@@ -14,6 +14,7 @@
     codebuff
     codex
     gitlab-runner
+    glab
     rbenv
     slack
     terraform
