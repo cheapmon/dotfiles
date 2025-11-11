@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Bump Version
+# Fetch the latest semantic version tag, increment the specified version component,
+# create the new tag, and push it to remote.
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+DRY_RUN=false
+SKIP_CONFIRM=false
+
+usage() {
+    echo "Usage: bump-version [OPTIONS] <major|minor|patch>"
+    echo ""
+    echo "Options:"
+    echo "  --dry-run, -n    Show what would be done without making changes"
+    echo "  --yes, -y        Skip confirmation prompt"
+    echo ""
+    echo "Examples:"
+    echo "  bump-version major          # v1.2.3 -> v2.0.0"
+    echo "  bump-version minor          # v1.2.3 -> v1.3.0"
+    echo "  bump-version patch          # v1.2.3 -> v1.2.4"
+    echo "  bump-version --dry-run major"
+    echo "  bump-version -y patch"
+    exit 1
+}
+
+if [ $# -lt 1 ]; then
+    usage
+fi
+
+# Parse options
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --dry-run|-n)
+            DRY_RUN=true
+            shift
+            ;;
+        --yes|-y)
+            SKIP_CONFIRM=true
+            shift
+            ;;
+        major|minor|patch)
+            bump_type="$1"
+            shift
+            ;;
+        *)
+            echo "Error: Invalid argument '$1'"
+            usage
+            ;;
+    esac
+done
+
+if [ -z "${bump_type:-}" ]; then
+    echo "Error: Version type (major|minor|patch) is required"
+    usage
+fi
+
+# Check if on main branch
+current_branch=$(git branch --show-current)
+if [ "$current_branch" != "main" ]; then
+    echo -e "${RED}Error: You must be on the 'main' branch to bump version.${NC}"
+    echo -e "Current branch: ${YELLOW}$current_branch${NC}"
+    exit 1
+fi
+
+# Check for uncommitted changes
+if ! git diff-index --quiet HEAD --; then
+    echo -e "${RED}Error: You have uncommitted changes in your working directory.${NC}"
+    echo -e "Please commit or stash your changes before bumping version."
+    git status --short
+    exit 1
+fi
+
+# Check for untracked files
+if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    echo -e "${YELLOW}Warning: You have untracked files in your working directory.${NC}"
+    git ls-files --others --exclude-standard
+    if [ "$SKIP_CONFIRM" = false ] && [ "$DRY_RUN" = false ]; then
+        read -p "Continue anyway? (y/N) " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            exit 1
+        fi
+    fi
+fi
+
+echo -e "${BLUE}→ Fetching from remote...${NC}"
+git fetch --tags origin main
+
+# Check if main is up-to-date with remote
+LOCAL=$(git rev-parse main)
+REMOTE=$(git rev-parse origin/main)
+
+if [ "$LOCAL" != "$REMOTE" ]; then
+    echo -e "${RED}Error: Your local 'main' branch is not in sync with 'origin/main'.${NC}"
+    echo -e "Please pull the latest changes first: ${CYAN}git pull origin main${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}→ Finding latest semantic version tag...${NC}"
+latest_tag=$(git tag -l "v*.*.*" | sort -V | tail -n1)
+
+if [ -z "$latest_tag" ]; then
+    echo -e "${YELLOW}No semantic version tags found.${NC}"
+    case "$bump_type" in
+        major)
+            new_tag="v1.0.0"
+            ;;
+        minor)
+            new_tag="v0.1.0"
+            ;;
+        patch)
+            new_tag="v0.0.1"
+            ;;
+    esac
+else
+    echo -e "Latest tag: ${CYAN}$latest_tag${NC}"
+
+    # Extract version numbers
+    version=${latest_tag#v}
+    IFS='.' read -r major minor patch <<< "$version"
+
+    # Increment the appropriate version component
+    case "$bump_type" in
+        major)
+            new_major=$((major + 1))
+            new_tag="v${new_major}.0.0"
+            ;;
+        minor)
+            new_minor=$((minor + 1))
+            new_tag="v${major}.${new_minor}.0"
+            ;;
+        patch)
+            new_patch=$((patch + 1))
+            new_tag="v${major}.${minor}.${new_patch}"
+            ;;
+    esac
+fi
+
+if [ "$DRY_RUN" = true ]; then
+    echo ""
+    echo -e "${YELLOW}${BOLD}DRY RUN${NC}${YELLOW} - No changes will be made${NC}"
+    echo -e "Would create tag: ${GREEN}${BOLD}$new_tag${NC}"
+    echo -e "Would push tag to: ${CYAN}origin${NC}"
+    exit 0
+fi
+
+# Confirmation prompt
+if [ "$SKIP_CONFIRM" = false ]; then
+    echo ""
+    echo -e "${BOLD}Create and push tag ${GREEN}$new_tag${NC}${BOLD}?${NC}"
+    read -p "(y/N) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo -e "${YELLOW}Aborted.${NC}"
+        exit 0
+    fi
+fi
+
+echo -e "${BLUE}→ Creating new tag: ${GREEN}${BOLD}$new_tag${NC}"
+if ! git tag -a "$new_tag" -m "Bump $bump_type version to $new_tag"; then
+    echo -e "${RED}Error: Failed to create tag.${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}→ Pushing tag to origin...${NC}"
+if ! git push origin "$new_tag"; then
+    echo -e "${RED}Error: Failed to push tag to origin.${NC}"
+    echo -e "The local tag has been created but not pushed."
+    echo -e "You can manually push it with: ${CYAN}git push origin $new_tag${NC}"
+    echo -e "Or delete it with: ${CYAN}git tag -d $new_tag${NC}"
+    exit 1
+fi
+
+echo ""
+echo -e "${GREEN}${BOLD}✓ Successfully created and pushed tag $new_tag${NC}"
