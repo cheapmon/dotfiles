@@ -16,6 +16,8 @@ NC='\033[0m' # No Color
 
 DRY_RUN=false
 SKIP_CONFIRM=false
+TARGET_BRANCH="main"
+REMOTE_NAME=""
 
 usage() {
     echo "Usage: bump-version [OPTIONS] <major|minor|patch>"
@@ -23,6 +25,8 @@ usage() {
     echo "Options:"
     echo "  --dry-run, -n    Show what would be done without making changes"
     echo "  --yes, -y        Skip confirmation prompt"
+    echo "  --branch, -b     Base branch to validate/tag from (default: main)"
+    echo "  --remote, -r     Remote name to fetch/push (default: origin or first remote)"
     echo ""
     echo "Examples:"
     echo "  bump-version major          # v1.2.3 -> v2.0.0"
@@ -48,6 +52,22 @@ while [[ $# -gt 0 ]]; do
             SKIP_CONFIRM=true
             shift
             ;;
+        --branch|-b)
+            if [ $# -lt 2 ]; then
+                echo "Error: --branch requires a value"
+                usage
+            fi
+            TARGET_BRANCH="$2"
+            shift 2
+            ;;
+        --remote|-r)
+            if [ $# -lt 2 ]; then
+                echo "Error: --remote requires a value"
+                usage
+            fi
+            REMOTE_NAME="$2"
+            shift 2
+            ;;
         major|minor|patch)
             bump_type="$1"
             shift
@@ -64,10 +84,27 @@ if [ -z "${bump_type:-}" ]; then
     usage
 fi
 
-# Check if on main branch
+# Determine remote if not provided
+if [ -z "$REMOTE_NAME" ]; then
+    remotes=$(git remote)
+    if echo "$remotes" | grep -qx "origin"; then
+        REMOTE_NAME="origin"
+    elif [ -n "$remotes" ]; then
+        REMOTE_NAME=$(echo "$remotes" | head -n1)
+    fi
+fi
+
+if [ -z "$REMOTE_NAME" ]; then
+    echo -e "${RED}Error: Could not determine git remote. Specify one with --remote.${NC}"
+    exit 1
+fi
+
+REMOTE_REF="$REMOTE_NAME/$TARGET_BRANCH"
+
+# Check if on target branch
 current_branch=$(git branch --show-current)
-if [ "$current_branch" != "main" ]; then
-    echo -e "${RED}Error: You must be on the 'main' branch to bump version.${NC}"
+if [ "$current_branch" != "$TARGET_BRANCH" ]; then
+    echo -e "${RED}Error: You must be on the '${TARGET_BRANCH}' branch to bump version.${NC}"
     echo -e "Current branch: ${YELLOW}$current_branch${NC}"
     exit 1
 fi
@@ -93,25 +130,33 @@ if [ -n "$(git ls-files --others --exclude-standard)" ]; then
     fi
 fi
 
-echo -e "${BLUE}→ Fetching from remote...${NC}"
-git fetch --tags origin main
-
-echo -e "${BLUE}→ Checking synchronization with origin/main...${NC}"
-read -r behind ahead <<< "$(git rev-list --left-right --count origin/main...main)"
-
-if [ "$behind" -gt 0 ]; then
-    echo -e "${RED}Error: Your local 'main' branch is $behind commit(s) behind 'origin/main'.${NC}"
-    echo -e "Please pull the latest changes first: ${CYAN}git pull origin main${NC}"
-    exit 1
+if [ "$DRY_RUN" = false ]; then
+    echo -e "${BLUE}→ Fetching from $REMOTE_NAME/$TARGET_BRANCH...${NC}"
+    git fetch --tags "$REMOTE_NAME" "$TARGET_BRANCH"
+else
+    echo -e "${BLUE}→ Skipping fetch in dry-run mode (using local refs).${NC}"
 fi
 
-if [ "$ahead" -gt 0 ]; then
-    echo -e "${YELLOW}Warning: Your local 'main' branch is $ahead commit(s) ahead of 'origin/main'.${NC}"
-    echo -e "The tag will point to a commit that is not yet on origin. Push main after tagging."
+echo -e "${BLUE}→ Checking synchronization with $REMOTE_REF...${NC}"
+if git rev-parse --verify "$REMOTE_REF" >/dev/null 2>&1; then
+    read -r behind ahead <<< "$(git rev-list --left-right --count "$REMOTE_REF"...$TARGET_BRANCH)"
+
+    if [ "$behind" -gt 0 ]; then
+        echo -e "${RED}Error: Your local '$TARGET_BRANCH' branch is $behind commit(s) behind '$REMOTE_REF'.${NC}"
+        echo -e "Please pull the latest changes first: ${CYAN}git pull $REMOTE_NAME $TARGET_BRANCH${NC}"
+        exit 1
+    fi
+
+    if [ "$ahead" -gt 0 ]; then
+        echo -e "${YELLOW}Warning: Your local '$TARGET_BRANCH' branch is $ahead commit(s) ahead of '$REMOTE_REF'.${NC}"
+        echo -e "The tag will point to a commit that is not yet on $REMOTE_REF. Push after tagging."
+    fi
+else
+    echo -e "${YELLOW}Warning: Remote branch '$REMOTE_REF' not found locally. Skipping sync check.${NC}"
 fi
 
-echo -e "${BLUE}→ Finding latest semantic version tag on main...${NC}"
-latest_tag=$(git tag --merged main --list "v*.*.*" | sort -V | tail -n1)
+echo -e "${BLUE}→ Finding latest semantic version tag on $TARGET_BRANCH...${NC}"
+latest_tag=$(git tag --merged "$TARGET_BRANCH" --list "v*.*.*" | sort -V | tail -n1)
 
 if [ -z "$latest_tag" ]; then
     echo -e "${YELLOW}No semantic version tags found.${NC}"
@@ -160,7 +205,7 @@ if [ "$DRY_RUN" = true ]; then
     echo ""
     echo -e "${YELLOW}${BOLD}DRY RUN${NC}${YELLOW} - No changes will be made${NC}"
     echo -e "Would create tag: ${GREEN}${BOLD}$new_tag${NC}"
-    echo -e "Would push tag to: ${CYAN}origin${NC}"
+    echo -e "Would push tag to: ${CYAN}$REMOTE_NAME${NC}"
     exit 0
 fi
 
@@ -182,11 +227,11 @@ if ! git tag -a "$new_tag" -m "Bump $bump_type version to $new_tag"; then
     exit 1
 fi
 
-echo -e "${BLUE}→ Pushing tag to origin...${NC}"
-if ! git push origin "$new_tag"; then
-    echo -e "${RED}Error: Failed to push tag to origin.${NC}"
+echo -e "${BLUE}→ Pushing tag to $REMOTE_NAME...${NC}"
+if ! git push "$REMOTE_NAME" "$new_tag"; then
+    echo -e "${RED}Error: Failed to push tag to $REMOTE_NAME.${NC}"
     echo -e "The local tag has been created but not pushed."
-    echo -e "You can manually push it with: ${CYAN}git push origin $new_tag${NC}"
+    echo -e "You can manually push it with: ${CYAN}git push $REMOTE_NAME $new_tag${NC}"
     echo -e "Or delete it with: ${CYAN}git tag -d $new_tag${NC}"
     exit 1
 fi
