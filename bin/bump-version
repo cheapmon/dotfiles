@@ -96,18 +96,22 @@ fi
 echo -e "${BLUE}→ Fetching from remote...${NC}"
 git fetch --tags origin main
 
-# Check if main is up-to-date with remote
-LOCAL=$(git rev-parse main)
-REMOTE=$(git rev-parse origin/main)
+echo -e "${BLUE}→ Checking synchronization with origin/main...${NC}"
+read -r behind ahead <<< "$(git rev-list --left-right --count origin/main...main)"
 
-if [ "$LOCAL" != "$REMOTE" ]; then
-    echo -e "${RED}Error: Your local 'main' branch is not in sync with 'origin/main'.${NC}"
+if [ "$behind" -gt 0 ]; then
+    echo -e "${RED}Error: Your local 'main' branch is $behind commit(s) behind 'origin/main'.${NC}"
     echo -e "Please pull the latest changes first: ${CYAN}git pull origin main${NC}"
     exit 1
 fi
 
-echo -e "${BLUE}→ Finding latest semantic version tag...${NC}"
-latest_tag=$(git tag -l "v*.*.*" | sort -V | tail -n1)
+if [ "$ahead" -gt 0 ]; then
+    echo -e "${YELLOW}Warning: Your local 'main' branch is $ahead commit(s) ahead of 'origin/main'.${NC}"
+    echo -e "The tag will point to a commit that is not yet on origin. Push main after tagging."
+fi
+
+echo -e "${BLUE}→ Finding latest semantic version tag on main...${NC}"
+latest_tag=$(git tag --merged main --list "v*.*.*" | sort -V | tail -n1)
 
 if [ -z "$latest_tag" ]; then
     echo -e "${YELLOW}No semantic version tags found.${NC}"
@@ -125,9 +129,15 @@ if [ -z "$latest_tag" ]; then
 else
     echo -e "Latest tag: ${CYAN}$latest_tag${NC}"
 
-    # Extract version numbers
+    # Extract version numbers (ignore prerelease/build suffixes)
     version=${latest_tag#v}
-    IFS='.' read -r major minor patch <<< "$version"
+    core_version=${version%%[-+]*}
+    IFS='.' read -r major minor patch <<< "$core_version"
+
+    if [[ -z ${major:-} || -z ${minor:-} || -z ${patch:-} ]]; then
+        echo -e "${RED}Error: Unable to parse semantic version from tag '$latest_tag'.${NC}"
+        exit 1
+    fi
 
     # Increment the appropriate version component
     case "$bump_type" in
