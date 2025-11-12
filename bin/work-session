@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 #
-# start-work-programs - Launch work applications during work hours
+# work-session - Launch work applications during work hours
 #
 # Automatically starts work-related programs if:
 #   - WORK environment variable is set to "yes"
@@ -79,7 +80,7 @@ main() {
   log "START: start-work-programs"
 
   # Check WORK environment variable
-  if [ "$WORK" != "yes" ]; then
+  if [ "${WORK:-no}" != "yes" ]; then
     log "EXIT: WORK environment variable not set to 'yes' (current: ${WORK:-unset})"
     exit 0
   fi

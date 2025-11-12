@@ -35,6 +35,15 @@ log() {
 mkdir -p "$(dirname "$LOG_FILE")"
 log "→ Starting dotfiles pull"
 
+# Check dependencies early so Hyprland logs a clear error
+for cmd in git notify-send; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        log "ERROR: Required command '$cmd' not found"
+        echo "pull-dotfiles: missing dependency '$cmd'" >&2
+        exit 1
+    fi
+done
+
 # Function to send notification and log
 notify() {
     local urgency="$1"
