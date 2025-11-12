@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#
-# organize-workspaces - Reorganize Hyprland workspaces across monitors
+set -euo pipefail
+
+# organize-workspaces
+# Reorganize Hyprland workspaces across monitors.
 #
 # Moves workspaces 1-5 to the left monitor and 6-10 to the right monitor.
 # Useful after: reconnecting external monitors, waking from sleep, or monitor
@@ -12,9 +14,6 @@
 # Dependencies: hyprctl (Hyprland compositor), jq, notify-send
 # Side effects: Moves all workspaces, may disrupt current layout, sends
 #               desktop notifications on errors
-
-set -e
-set -o pipefail
 
 # Check dependencies
 if ! command -v hyprctl >/dev/null 2>&1; then
@@ -64,7 +63,7 @@ move_workspace() {
       notify-send -u critical -i "$ICON" "organize-workspaces" "Failed to move workspace $workspace to monitor $monitor"
       return 1
     fi
-    moved_count=$((moved_count + 1))
+    moved_count=$((moved_count + 1)) || true
   fi
 }
 
