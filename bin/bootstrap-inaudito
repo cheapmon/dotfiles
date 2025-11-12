@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#
-# bootstrap-inaudito - Clone Inaudito work repositories
+set -euo pipefail
+
+# bootstrap-inaudito
+# Clone Inaudito work repositories.
 #
 # Initializes gopass password store and clones all Inaudito repositories:
 #   - passwords repo (GitLab)
@@ -12,41 +14,185 @@
 #   - Clones multiple repositories into ~/git/
 #   - Initializes gopass password store
 #   - Requires SSH access to gitlab.com:inaudito-ops and gitlab.com:inaudito
+#   - Logs to ~/.cache/bootstrap-inaudito.log
+#
 
-set -e
-set -o pipefail
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
 
+# Configuration
+LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/bootstrap-inaudito.log"
+
+# Counters
+SUCCESS_COUNT=0
+FAILURE_COUNT=0
+SKIP_COUNT=0
+
+# Logging function
+log() {
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$timestamp] $*" >> "$LOG_FILE"
+}
+
+# Initialize log
+mkdir -p "$(dirname "$LOG_FILE")"
+log "→ Starting Inaudito bootstrap"
+
+echo -e "${BLUE}→ Bootstrapping Inaudito repositories${NC}"
+
+# Check dependencies
+for cmd in git gopass; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo -e "${RED}Error: Required command '$cmd' not found${NC}"
+        log "ERROR: $cmd not found"
+        exit 1
+    fi
+done
+
+log "Dependencies checked: git, gopass"
+
+# Clone passwords repo and initialize gopass
 if [ ! -d "$HOME/git/passwords" ]; then
-  git clone git@gitlab.com:inaudito-ops/passwords.git "$HOME/git/passwords"
-  yes 0 | gopass init
-  gopass show inaudito/architecture-init-test
+    echo -e "${BLUE}→ Cloning passwords repository${NC}"
+    log "Cloning passwords repository"
+
+    if git clone git@gitlab.com:inaudito-ops/passwords.git "$HOME/git/passwords" >> "$LOG_FILE" 2>&1; then
+        echo -e "${GREEN}✓ Cloned passwords repository${NC}"
+        log "SUCCESS: Cloned passwords repository"
+        ((SUCCESS_COUNT++)) || true
+
+        echo -e "${BLUE}→ Initializing gopass${NC}"
+        log "Initializing gopass"
+
+        if yes 0 | gopass init >> "$LOG_FILE" 2>&1; then
+            echo -e "${GREEN}✓ Initialized gopass${NC}"
+            log "SUCCESS: Initialized gopass"
+            ((SUCCESS_COUNT++)) || true
+
+            echo -e "${BLUE}→ Testing gopass access${NC}"
+            log "Testing gopass access"
+
+            if gopass show inaudito/architecture-init-test >> "$LOG_FILE" 2>&1; then
+                echo -e "${GREEN}✓ Gopass access verified${NC}"
+                log "SUCCESS: Gopass access verified"
+                ((SUCCESS_COUNT++)) || true
+            else
+                echo -e "${YELLOW}Warning: Could not verify gopass access${NC}"
+                log "WARNING: Could not verify gopass access"
+                ((FAILURE_COUNT++)) || true
+            fi
+        else
+            echo -e "${RED}Error: Failed to initialize gopass${NC}"
+            log "ERROR: Failed to initialize gopass"
+            ((FAILURE_COUNT++)) || true
+        fi
+    else
+        echo -e "${RED}Error: Failed to clone passwords repository${NC}"
+        log "ERROR: Failed to clone passwords repository"
+        ((FAILURE_COUNT++)) || true
+    fi
+else
+    echo -e "${CYAN}→ Passwords repository already exists${NC}"
+    log "SKIP: Passwords repository already exists"
+    ((SKIP_COUNT++)) || true
 fi
 
+# Clone architecture repo
 if [ ! -d "$HOME/git/architecture" ]; then
-  git clone git@gitlab.com:inaudito/architecture.git "$HOME/git/architecture"
+    echo -e "${BLUE}→ Cloning architecture repository${NC}"
+    log "Cloning architecture repository"
+
+    if git clone git@gitlab.com:inaudito/architecture.git "$HOME/git/architecture" >> "$LOG_FILE" 2>&1; then
+        echo -e "${GREEN}✓ Cloned architecture repository${NC}"
+        log "SUCCESS: Cloned architecture repository"
+        ((SUCCESS_COUNT++)) || true
+    else
+        echo -e "${RED}Error: Failed to clone architecture repository${NC}"
+        log "ERROR: Failed to clone architecture repository"
+        ((FAILURE_COUNT++)) || true
+    fi
+else
+    echo -e "${CYAN}→ Architecture repository already exists${NC}"
+    log "SKIP: Architecture repository already exists"
+    ((SKIP_COUNT++)) || true
 fi
 
+# Application repositories
 APPS=(
-  ci
-  cli
-  configurator
-  core
-  dumpster
-  infrastructure
-  jobads
-  jobcrawler
-  jobcrawler-browser
-  jobmixer-legacy
-  notes
-  odoo
-  partner-docs
-  util
+    agents
+    ci
+    cli
+    configurator
+    core
+    dumper
+    dumpster
+    file_server
+    http-requests
+    infrastructure
+    jobads
+    jobcrawler
+    jobcrawler-browser
+    jobmixer-legacy
+    ki-server
+    n8n-workflows
+    notes
+    odoo
+    partner-docs
+    salesforce-archive
+    util
+    whitelabel
 )
 
-for APP in "${APPS[@]}"; do
-  DIR="$HOME/git/architecture/apps/$APP"
+echo -e "${BLUE}→ Cloning application repositories${NC}"
+log "Cloning ${#APPS[@]} application repositories"
 
-  if [ ! -d "$DIR" ]; then
-    git clone "git@gitlab.com:inaudito/${APP}.git" "$DIR"
-  fi
+for APP in "${APPS[@]}"; do
+    DIR="$HOME/git/architecture/apps/$APP"
+
+    if [ ! -d "$DIR" ]; then
+        echo -e "${BLUE}  → Cloning $APP${NC}"
+        log "Cloning $APP"
+
+        if git clone "git@gitlab.com:inaudito/${APP}.git" "$DIR" >> "$LOG_FILE" 2>&1; then
+            echo -e "${GREEN}  ✓ Cloned $APP${NC}"
+            log "SUCCESS: Cloned $APP"
+            ((SUCCESS_COUNT++)) || true
+        else
+            echo -e "${RED}  ✗ Failed to clone $APP${NC}"
+            log "ERROR: Failed to clone $APP"
+            ((FAILURE_COUNT++)) || true
+        fi
+    else
+        echo -e "${CYAN}  → $APP already exists${NC}"
+        log "SKIP: $APP already exists"
+        ((SKIP_COUNT++)) || true
+    fi
 done
+
+# Summary
+echo ""
+echo -e "${BOLD}→ Bootstrap complete${NC}"
+echo -e "Successful: ${GREEN}$SUCCESS_COUNT${NC}"
+echo -e "Skipped:    ${CYAN}$SKIP_COUNT${NC}"
+echo -e "Failed:     ${RED}$FAILURE_COUNT${NC}"
+
+log ""
+log "→ Bootstrap complete"
+log "Successful operations: $SUCCESS_COUNT"
+log "Skipped operations: $SKIP_COUNT"
+log "Failed operations: $FAILURE_COUNT"
+
+if [ "$FAILURE_COUNT" -gt 0 ]; then
+    echo ""
+    echo -e "${YELLOW}Some operations failed. Check log for details: $LOG_FILE${NC}"
+    exit 1
+fi
+
+exit 0
