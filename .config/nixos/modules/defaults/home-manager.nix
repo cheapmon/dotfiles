@@ -6,7 +6,9 @@
 }: {
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
-    users = {
+    users = let
+      tpm = pkgs.callPackage ./derivations/tpm.nix {};
+    in {
       seims = {
         home.stateVersion = "23.11";
 
@@ -14,13 +16,7 @@
         home.homeDirectory = "/home/seims";
 
         home.file.".tmux/plugins/tpm" = {
-          source =
-            (fetchGit {
-              url = "https://github.com/tmux-plugins/tpm.git";
-              ref = "refs/heads/master";
-              rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
-            })
-            .outPath;
+          source = "${tpm}/share/tmux/plugins/tpm";
           recursive = true;
         };
 
