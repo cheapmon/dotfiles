@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#
-# check-vault-key - Validate age encryption key permissions
+set -euo pipefail
+
+# check-vault-key
+# Validate age encryption key permissions.
 #
 # Verifies that the age private key exists, has correct permissions (600),
 # and is owned by the current user. Used by other scripts before decryption.
