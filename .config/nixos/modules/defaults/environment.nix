@@ -25,7 +25,6 @@
     direnv
     docker
     docker-compose
-    element-desktop
     eog
     evince
     eza
@@ -124,7 +123,7 @@
     vscode-langservers-extracted
 
     # Inputs
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Custom packages
     (callPackage ./derivations/toml-bombadil.nix {})
