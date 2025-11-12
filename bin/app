@@ -4,13 +4,13 @@ set -euo pipefail
 # app
 # Open architecture app or tmuxifier session in tmux.
 #
-# Uses fzf to select from merged list of:
-#   - Tmuxifier sessions (marked with [S] if standalone)
+# Uses fzf to select from merged, deduplicated, sorted list of:
+#   - Tmuxifier sessions
 #   - Architecture app directories
 #
 # Then:
 #   - Loads existing tmuxifier session if available, OR
-#   - Creates new tmux session in the app directory (for non-session entries)
+#   - Creates new tmux session in the app directory
 #
 # Dependencies: fzf-tmux, tmux, tmuxifier, ripgrep (rg)
 # Side effects: Creates or switches to tmux session
@@ -49,48 +49,22 @@ if [ -z "$(ls -A "$APPS_DIR")" ]; then
   exit 1
 fi
 
-# Build merged list of sessions and apps
-# 1. Get all tmuxifier sessions
-# 2. Get all app directories
-# 3. Mark session-only entries (not in apps dir) with [S] prefix
-
+# Build merged, deduplicated, sorted list of sessions and apps
 sessions=$(tmuxifier list-sessions 2>/dev/null || echo "")
 apps=$(ls -1 "$APPS_DIR")
 
-# Build the merged list
-merged_list=""
-
-# Add session-only entries with [S] marker
-if [ -n "$sessions" ]; then
-  while IFS= read -r session; do
-    # Check if this session corresponds to an app directory
-    if ! echo "$apps" | grep -q "^$session$"; then
-      merged_list+="[S] $session"$'\n'
-    fi
-  done <<< "$sessions"
-fi
-
-# Add all apps (they may or may not have tmuxifier sessions)
-merged_list+="$apps"
+# Merge and deduplicate
+merged_list=$(printf "%s\n%s" "$sessions" "$apps" | sort -u)
 
 # Use fzf to select (allow cancellation)
 set +e
-selection="$(echo "$merged_list" | fzf-tmux)"
+app="$(echo "$merged_list" | fzf-tmux)"
 status=$?
 set -e
 
-if [ $status -ne 0 ] || [ -z "$selection" ]; then
+if [ $status -ne 0 ] || [ -z "$app" ]; then
   echo "No project selected" >&2
   exit 1
-fi
-
-# Parse selection: strip [S] prefix if present
-is_session_only=false
-if [[ "$selection" =~ ^\[S\]\ (.+)$ ]]; then
-  is_session_only=true
-  app="${BASH_REMATCH[1]}"
-else
-  app="$selection"
 fi
 
 dir="$APPS_DIR/$app"
@@ -108,13 +82,12 @@ if tmuxifier list-sessions | rg -q "^$app$"; then
   exit 0
 fi
 
-# For session-only entries without a matching session, something went wrong
-if [ "$is_session_only" = true ]; then
-  echo "Error: Session '$app' not found in tmuxifier" >&2
+# Fall back to creating basic tmux session in app directory
+if [ ! -d "$dir" ]; then
+  echo "Error: Neither tmuxifier session nor app directory found for '$app'" >&2
   exit 1
 fi
 
-# Fall back to creating basic tmux session in app directory
 if [ "$inside_tmux" = true ]; then
   tmux new -ds "$app" -c "$dir" 2>/dev/null || true
   tmux switch -t "$app"
