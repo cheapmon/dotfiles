@@ -11,6 +11,19 @@ set -euo pipefail
 # Dependencies: fzf-tmux, tmux, tmuxifier, ripgrep (rg)
 # Side effects: Creates or switches to tmux session
 
+# Initialize tmuxifier if the environment wasn’t prepared by the parent shell.
+if [ -z "${TMUXIFIER_LAYOUT_PATH:-}" ]; then
+  case ":$PATH:" in
+    *":$HOME/.tmuxifier/bin:"*) ;;
+    *) PATH="$PATH:$HOME/.tmuxifier/bin" ;;
+  esac
+
+  if command -v tmuxifier >/dev/null 2>&1; then
+    TMUXIFIER_NO_COMPLETE="${TMUXIFIER_NO_COMPLETE:-1}"
+    eval "$(tmuxifier init -)"
+  fi
+fi
+
 # Check dependencies
 for cmd in fzf-tmux tmux tmuxifier rg; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
@@ -44,18 +57,23 @@ if [ $status -ne 0 ] || [ -z "$app" ]; then
 fi
 
 dir="$APPS_DIR/$app"
+inside_tmux=false
+if [ -n "${TMUX:-}" ] || [ -n "${TMUX_PANE:-}" ]; then
+  inside_tmux=true
+fi
 
 # Check if tmuxifier session exists
 if tmuxifier list-sessions | rg -q "^$app$"; then
   tmuxifier load-session "$app"
-else
-  # Create new tmux session and switch to it if not already inside tmux
-  if [ -n "${TMUX:-}" ]; then
-    # Already in tmux, create session and switch
-    tmux new -ds "$app" -c "$dir" 2>/dev/null || true
+  if [ "$inside_tmux" = true ]; then
     tmux switch -t "$app"
-  else
-    # Not in tmux, create and attach
-    tmux new -As "$app" -c "$dir"
   fi
+  exit 0
+fi
+
+if [ "$inside_tmux" = true ]; then
+  tmux new -ds "$app" -c "$dir" 2>/dev/null || true
+  tmux switch -t "$app"
+else
+  tmux new -As "$app" -c "$dir"
 fi
