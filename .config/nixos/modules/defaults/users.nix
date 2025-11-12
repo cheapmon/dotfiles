@@ -5,6 +5,7 @@
   ...
 }: {
   users.groups.plugdev = {};
+  users.extraGroups.vboxusers.members = ["seims"];
 
   users.users.seims = {
     isNormalUser = true;
