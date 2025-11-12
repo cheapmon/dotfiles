@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+#
+# start-work-programs - Launch work applications during work hours
+#
+# Automatically starts work-related programs if:
+#   - WORK environment variable is set to "yes"
+#   - Current time is between configured work hours
+#
+# Programs launched: firefox-devedition, thunderbird, slack, element-desktop,
+#                    telegram-desktop, signal-desktop, spotify
+#
+# Environment variables:
+#   WORK                    - Set to "yes" to enable launching (required)
+#   WORK_PROGRAMS_DELAY     - Initial delay in seconds before starting (default: 5)
+#   WORK_PROGRAMS_STAGGER   - Delay between each program in seconds (default: 2)
+#
+# Dependencies: Listed programs must be installed
+# Side effects: Launches multiple background processes
+# Logging: Outputs to ~/.cache/start-work-programs.log
+
+# Configuration
+WORK_START_HOUR=8
+WORK_END_HOUR=18
+INITIAL_DELAY=${WORK_PROGRAMS_DELAY:-5}
+STAGGER_DELAY=${WORK_PROGRAMS_STAGGER:-2}
+LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/start-work-programs.log"
+
+# List of programs to launch (order matters for staggering)
+PROGRAMS=(
+  "firefox-devedition"
+  "thunderbird"
+  "slack"
+  "element-desktop"
+  "telegram-desktop"
+  "signal-desktop"
+  "spotify"
+)
+
+# Logging function
+log() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
+}
+
+# Check if program is already running
+is_running() {
+  pgrep -x "$1" >/dev/null 2>&1
+}
+
+# Launch program in background
+launch_program() {
+  local program="$1"
+
+  # Check if command exists
+  if ! command -v "$program" >/dev/null 2>&1; then
+    log "SKIP: $program (not installed)"
+    return 1
+  fi
+
+  # Check if already running
+  if is_running "$program"; then
+    log "SKIP: $program (already running)"
+    return 0
+  fi
+
+  # Launch program detached from this process
+  log "LAUNCHING: $program"
+  setsid "$program" >/dev/null 2>&1 &
+  disown
+
+  return 0
+}
+
+# Main execution
+main() {
+  # Create log directory if needed
+  mkdir -p "$(dirname "$LOG_FILE")"
+
+  log "========================================="
+  log "START: start-work-programs"
+
+  # Check WORK environment variable
+  if [ "$WORK" != "yes" ]; then
+    log "EXIT: WORK environment variable not set to 'yes' (current: ${WORK:-unset})"
+    exit 0
+  fi
+
+  # Check work hours
+  HOUR=$(date +%H)
+  if [ "$HOUR" -lt "$WORK_START_HOUR" ] || [ "$HOUR" -ge "$WORK_END_HOUR" ]; then
+    log "EXIT: Outside work hours ($HOUR is not between $WORK_START_HOUR and $WORK_END_HOUR)"
+    exit 0
+  fi
+
+  log "Within work hours ($HOUR is between $WORK_START_HOUR and $WORK_END_HOUR)"
+
+  # Initial delay to let system stabilize
+  if [ "$INITIAL_DELAY" -gt 0 ]; then
+    log "Waiting ${INITIAL_DELAY}s for system to stabilize..."
+    sleep "$INITIAL_DELAY"
+  fi
+
+  # Launch programs with staggered delays
+  local launched=0
+  local skipped=0
+
+  for program in "${PROGRAMS[@]}"; do
+    if launch_program "$program"; then
+      launched=$((launched + 1))
+      # Add delay between launches (except after last program)
+      if [ "$program" != "${PROGRAMS[-1]}" ] && [ "$STAGGER_DELAY" -gt 0 ]; then
+        sleep "$STAGGER_DELAY"
+      fi
+    else
+      skipped=$((skipped + 1))
+    fi
+  done
+
+  log "COMPLETE: Launched $launched programs, skipped $skipped"
+  log "========================================="
+}
+
+# Run main function
+main
