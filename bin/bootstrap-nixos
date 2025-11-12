@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#
-# bootstrap-nixos - Bootstrap new NixOS system from dotfiles
+set -euo pipefail
+
+# bootstrap-nixos
+# Bootstrap new NixOS system from dotfiles.
 #
 # Performs initial system setup:
 #   1. Validates age key exists and has correct permissions
@@ -16,23 +18,51 @@
 # Dependencies: git, nix, nixos-rebuild, age, decrypt-secrets
 # Side effects:
 #   - Clones dotfiles repository
-#   - Overwrites files in home directory
+#   - Overwrites files in home directory (checkout -f)
 #   - Rebuilds entire NixOS system
 #   - Decrypts and installs secrets
+#   - Logs to ~/.cache/bootstrap-nixos.log
+#
 
-set -e
-set -o pipefail
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
 
-RED="\033[0;31m"
-NC="\033[0m"
-
+# Configuration
+LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/bootstrap-nixos.log"
 KEY="${XDG_CONFIG_HOME:-$HOME/.config}/age/key.txt"
+DOTFILES_REPO="https://github.com/cheapmon/dotfiles.git"
+DOTFILES_DIR="$HOME/git/dotfiles"
+
+# Logging function
+log() {
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$timestamp] $*" | tee -a "$LOG_FILE"
+}
+
+# Initialize log
+mkdir -p "$(dirname "$LOG_FILE")"
+log "→ Starting NixOS bootstrap"
+
+echo -e "${BOLD}${BLUE}→ Bootstrapping NixOS system${NC}"
+echo ""
+
+# Validate age key
+echo -e "${BLUE}→ Validating age key${NC}"
+log "Validating age key at $KEY"
 
 if [ ! -f "$KEY" ]; then
-  echo -e "${RED}Private key file not found!${NC}"
-  echo "Expected location: $KEY"
-  echo "Make sure to place your age key at $KEY before running bootstrap"
-  exit 1
+    echo -e "${RED}Error: Private key file not found!${NC}"
+    echo "Expected location: $KEY"
+    echo "Make sure to place your age key at $KEY before running bootstrap"
+    log "ERROR: Age key not found at $KEY"
+    exit 1
 fi
 
 PERMS=$(stat -c "%a" "$KEY")
@@ -40,20 +70,103 @@ OWNER=$(stat -c "%u" "$KEY")
 CURRENT_UID=$(id -u)
 
 if [ "$OWNER" -ne "$CURRENT_UID" ]; then
-  echo -e "${RED}Private key must be owned by the current user!${NC}"
-  echo "Current uid: $CURRENT_UID, owner uid: $OWNER"
-  exit 1
+    echo -e "${RED}Error: Private key must be owned by the current user!${NC}"
+    echo "Current uid: $CURRENT_UID, owner uid: $OWNER"
+    log "ERROR: Age key has wrong owner (expected $CURRENT_UID, got $OWNER)"
+    exit 1
 fi
 
 if [ "$PERMS" != "600" ]; then
-  echo -e "${RED}Private key permissions must be 600!${NC}"
-  echo "Current permissions: $PERMS"
-  exit 1
+    echo -e "${RED}Error: Private key permissions must be 600!${NC}"
+    echo "Current permissions: $PERMS"
+    log "ERROR: Age key has wrong permissions (expected 600, got $PERMS)"
+    exit 1
 fi
 
-nix-shell -p "git" --command "git clone --bare https://github.com/cheapmon/dotfiles.git $HOME/git/dotfiles"
-nix-shell -p "git" --command "git --git-dir=$HOME/git/dotfiles --work-tree=$HOME checkout -f"
-sudo nix-shell -p "git" --command "nixos-rebuild switch --impure --flake .config/nixos#default"
+echo -e "${GREEN}✓ Age key validated${NC}"
+log "Age key validation passed"
+
+# Check if already bootstrapped
+if [ -d "$DOTFILES_DIR" ]; then
+    echo -e "${YELLOW}Warning: Dotfiles repository already exists at $DOTFILES_DIR${NC}"
+    echo -e "${YELLOW}Bootstrap appears to have already been run.${NC}"
+    log "WARNING: Dotfiles directory already exists"
+    read -p "Continue anyway? This will overwrite files. (y/N) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo -e "${CYAN}Aborted${NC}"
+        log "User aborted due to existing dotfiles"
+        exit 0
+    fi
+    log "User chose to continue despite existing dotfiles"
+fi
+
+# Clone dotfiles repository
+echo -e "${BLUE}→ Cloning dotfiles repository${NC}"
+log "Cloning dotfiles from $DOTFILES_REPO"
+
+if [ -d "$DOTFILES_DIR" ]; then
+    echo -e "${CYAN}  Removing existing dotfiles directory${NC}"
+    log "Removing existing dotfiles directory"
+    rm -rf "$DOTFILES_DIR"
+fi
+
+if nix-shell -p git --command "git clone --bare $DOTFILES_REPO $DOTFILES_DIR" >> "$LOG_FILE" 2>&1; then
+    echo -e "${GREEN}✓ Cloned dotfiles repository${NC}"
+    log "Successfully cloned dotfiles repository"
+else
+    echo -e "${RED}Error: Failed to clone dotfiles repository${NC}"
+    log "ERROR: Failed to clone dotfiles repository"
+    exit 1
+fi
+
+# Checkout dotfiles to home directory
+echo -e "${BLUE}→ Checking out dotfiles to home directory${NC}"
+log "Checking out dotfiles (will overwrite existing files)"
+
+if nix-shell -p git --command "git --git-dir=$DOTFILES_DIR --work-tree=$HOME checkout -f" >> "$LOG_FILE" 2>&1; then
+    echo -e "${GREEN}✓ Checked out dotfiles${NC}"
+    log "Successfully checked out dotfiles"
+else
+    echo -e "${RED}Error: Failed to checkout dotfiles${NC}"
+    log "ERROR: Failed to checkout dotfiles"
+    exit 1
+fi
+
+# Rebuild NixOS system
+echo -e "${BLUE}→ Rebuilding NixOS system (this may take a while)${NC}"
+log "Starting NixOS rebuild"
+
+if sudo nix-shell -p git --command "nixos-rebuild switch --impure --flake $HOME/.config/nixos#default" >> "$LOG_FILE" 2>&1; then
+    echo -e "${GREEN}✓ NixOS system rebuilt${NC}"
+    log "Successfully rebuilt NixOS system"
+else
+    echo -e "${RED}Error: Failed to rebuild NixOS system${NC}"
+    echo -e "${YELLOW}Check log for details: $LOG_FILE${NC}"
+    log "ERROR: Failed to rebuild NixOS system"
+    exit 1
+fi
+
+# Decrypt secrets
+echo -e "${BLUE}→ Decrypting secrets${NC}"
+log "Running decrypt-secrets"
 
 export PATH="$PATH:$HOME/bin"
-decrypt-secrets
+
+if decrypt-secrets >> "$LOG_FILE" 2>&1; then
+    echo -e "${GREEN}✓ Secrets decrypted${NC}"
+    log "Successfully decrypted secrets"
+else
+    echo -e "${RED}Error: Failed to decrypt secrets${NC}"
+    echo -e "${YELLOW}Check log for details: $LOG_FILE${NC}"
+    log "ERROR: Failed to decrypt secrets"
+    exit 1
+fi
+
+# Success
+echo ""
+echo -e "${GREEN}${BOLD}✓ Bootstrap complete!${NC}"
+echo -e "NixOS system is now configured from your dotfiles."
+echo ""
+log "→ Bootstrap completed successfully"
+exit 0
