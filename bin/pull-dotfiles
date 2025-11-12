@@ -1,25 +1,97 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+# pull-dotfiles
+# Pull latest dotfiles and notify user.
+# This script runs on Hyprland startup.
 #
-# pull-dotfiles - Pull latest dotfiles and notify user
-#
-# Pulls all branches from dotfiles bare repository and sends desktop notification
+# Pulls latest changes from dotfiles bare repository and sends desktop notification
 # with either the latest commit message (success) or error message (failure).
+#
+# Git configuration handles rebase and autostash automatically:
+#   - pull.rebase = true (rebase instead of merge)
+#   - rebase.autoStash = true (auto-stash uncommitted changes)
 #
 # Dependencies: git, notify-send
 # Side effects:
 #   - Updates dotfiles working tree
 #   - Sends desktop notification
+#   - Logs to ~/.cache/pull-dotfiles.log
+#
 
-MESSAGE="$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull --all 2>&1)"
+# Configuration
+DOTFILES_DIR="$HOME/git/dotfiles"
+WORK_TREE="$HOME"
+LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/pull-dotfiles.log"
 
-case $? in
-  0)
-    MESSAGE="$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" log -1 --pretty=%B)"
-    URGENCY="normal"
-    ;;
-  *)
-    URGENCY="critical"
-    ;;
-esac
+# Logging function
+log() {
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$timestamp] $*" >> "$LOG_FILE"
+}
 
-notify-send -u "$URGENCY" dotfiles "$MESSAGE"
+# Initialize log
+mkdir -p "$(dirname "$LOG_FILE")"
+log "→ Starting dotfiles pull"
+
+# Function to send notification and log
+notify() {
+    local urgency="$1"
+    local message="$2"
+
+    log "NOTIFY [$urgency]: $message"
+    notify-send -u "$urgency" "dotfiles" "$message"
+}
+
+# Check if git repo exists
+if [ ! -d "$DOTFILES_DIR" ]; then
+    notify "critical" "Dotfiles repository not found at $DOTFILES_DIR"
+    log "ERROR: Dotfiles directory does not exist"
+    exit 1
+fi
+
+# Perform git pull
+log "Running: git pull"
+if ! OUTPUT=$(git --git-dir="$DOTFILES_DIR" --work-tree="$WORK_TREE" pull 2>&1); then
+    EXIT_CODE=$?
+    log "ERROR: Git pull failed with exit code $EXIT_CODE"
+    log "Output: $OUTPUT"
+
+    # Try to determine the type of error
+    if echo "$OUTPUT" | grep -qi "could not resolve host\|network\|connection"; then
+        notify "critical" "Network error - could not pull dotfiles"
+    elif echo "$OUTPUT" | grep -qi "conflict\|merge conflict"; then
+        notify "critical" "Merge conflict detected - manual resolution needed"
+    elif echo "$OUTPUT" | grep -qi "rebase"; then
+        notify "critical" "Rebase error - check git status"
+    else
+        # Generic error - show first line of output
+        ERROR_MSG=$(echo "$OUTPUT" | head -n1)
+        notify "critical" "Pull failed: $ERROR_MSG"
+    fi
+
+    exit 1
+fi
+
+# Log the output
+log "Pull output: $OUTPUT"
+
+# Check if anything was actually updated
+if echo "$OUTPUT" | grep -qi "already up to date\|already up-to-date"; then
+    log "Already up to date"
+    notify "low" "Already up to date"
+    exit 0
+fi
+
+# Get the latest commit message
+if COMMIT_MSG=$(git --git-dir="$DOTFILES_DIR" --work-tree="$WORK_TREE" log -1 --pretty=%B 2>&1); then
+    log "Latest commit: $COMMIT_MSG"
+    notify "normal" "$COMMIT_MSG"
+else
+    log "WARNING: Could not get latest commit message"
+    notify "normal" "Dotfiles updated successfully"
+fi
+
+log "→ Pull completed successfully"
+exit 0
