@@ -17,6 +17,7 @@ set -euo pipefail
 
 # Configuration
 LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/link-dotfiles.log"
+ICON="$HOME/.local/share/icons/link-dotfiles.svg"
 
 # Logging function
 log() {
@@ -35,7 +36,7 @@ notify() {
     local message="$2"
 
     log "NOTIFY [$urgency]: $message"
-    notify-send -u "$urgency" "bombadil" "$message"
+    notify-send -u "$urgency" -i "$ICON" "bombadil" "$message"
 }
 
 # Check if bombadil is installed

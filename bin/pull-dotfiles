@@ -23,6 +23,7 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/git/dotfiles"
 WORK_TREE="$HOME"
 LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/pull-dotfiles.log"
+ICON="$HOME/.local/share/icons/pull-dotfiles.svg"
 
 # Logging function
 log() {
@@ -50,7 +51,7 @@ notify() {
     local message="$2"
 
     log "NOTIFY [$urgency]: $message"
-    notify-send -u "$urgency" "dotfiles" "$message"
+    notify-send -u "$urgency" -i "$ICON" "dotfiles" "$message"
 }
 
 # Check if git repo exists

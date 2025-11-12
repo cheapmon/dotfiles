@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="22" fill="#2ECC71" opacity="0.1"/>
+
+  <!-- Cloud/remote icon at top -->
+  <g transform="translate(24, 13)">
+    <path d="M -6 0 Q -6 -3 -3 -3 Q -3 -5 0 -5 Q 3 -5 3 -3 Q 6 -3 6 0 L 6 2 L -6 2 Z"
+          fill="#2ECC71"/>
+  </g>
+
+  <!-- Download arrow -->
+  <g transform="translate(24, 24)">
+    <!-- Arrow shaft -->
+    <line x1="0" y1="0" x2="0" y2="12" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Arrow head -->
+    <polyline points="-5,7 0,12 5,7" stroke="#2ECC71" stroke-width="2.5"
+              fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Local folder/files at bottom -->
+  <g transform="translate(24, 38)">
+    <rect x="-8" y="-4" width="16" height="3" rx="1" fill="#2ECC71"/>
+    <path d="M -8 -1 L -8 2 Q -8 3 -7 3 L 7 3 Q 8 3 8 2 L 8 -1"
+          fill="#2ECC71"/>
+  </g>
+</svg>

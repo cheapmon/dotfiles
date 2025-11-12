@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="22" fill="#4A90E2" opacity="0.1"/>
+
+  <!-- Chain link icon representing linking/symlinking -->
+  <g transform="translate(12, 12)">
+    <!-- Left link -->
+    <path d="M 8 6 L 4 6 C 2.3 6 1 7.3 1 9 L 1 15 C 1 16.7 2.3 18 4 18 L 8 18"
+          stroke="#4A90E2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Right link -->
+    <path d="M 16 6 L 20 6 C 21.7 6 23 7.3 23 9 L 23 15 C 23 16.7 21.7 18 20 18 L 16 18"
+          stroke="#4A90E2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Connecting line -->
+    <line x1="8" y1="12" x2="16" y2="12" stroke="#4A90E2" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Dots at the ends for visual emphasis -->
+    <circle cx="4" cy="9" r="1.5" fill="#4A90E2"/>
+    <circle cx="4" cy="15" r="1.5" fill="#4A90E2"/>
+    <circle cx="20" cy="9" r="1.5" fill="#4A90E2"/>
+    <circle cx="20" cy="15" r="1.5" fill="#4A90E2"/>
+  </g>
+</svg>
