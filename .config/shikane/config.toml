@@ -1,6 +1,6 @@
 [[profile]]
 name = "omen"
-exec = ["refresh"]
+exec = ["organize-workspaces"]
 
 [[profile.output]]
 enable = true
@@ -22,7 +22,7 @@ adaptive_sync = false
 
 [[profile]]
 name = "t14s"
-exec = ["refresh"]
+exec = ["organize-workspaces"]
 
 [[profile.output]]
 enable = true

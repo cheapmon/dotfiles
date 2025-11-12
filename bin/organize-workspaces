@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# organize-workspaces - Reorganize Hyprland workspaces across monitors
+#
+# Moves workspaces 1-5 to the left monitor and 6-10 to the right monitor.
+# Useful after: reconnecting external monitors, waking from sleep, or monitor
+# configuration changes.
+#
+# Uses environment variables $MONITOR_LEFT and $MONITOR_RIGHT if set,
+# otherwise falls back to 'l' and 'r' positional references.
+#
+# Dependencies: hyprctl (Hyprland compositor), jq, notify-send
+# Side effects: Moves all workspaces, may disrupt current layout, sends
+#               desktop notifications on errors
+
+set -e
+set -o pipefail
+
+# Check dependencies
+if ! command -v hyprctl >/dev/null 2>&1; then
+  echo "Error: hyprctl command not found. Is Hyprland running?" >&2
+  exit 1
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+  echo "Error: jq command not found. Please install jq." >&2
+  exit 1
+fi
+
+# Determine monitor references
+LEFT="${MONITOR_LEFT:-l}"
+RIGHT="${MONITOR_RIGHT:-r}"
+
+# Get list of available monitors
+available_monitors=$(hyprctl monitors -j | jq -r '.[].name')
+
+# Icon for notifications
+ICON="$HOME/.local/share/icons/organize-workspaces.svg"
+
+# Validate monitors exist (if using specific names, not positional references)
+if [ "$LEFT" != "l" ] && ! echo "$available_monitors" | grep -qx "$LEFT"; then
+  notify-send -u critical -i "$ICON" "organize-workspaces" "Left monitor '$LEFT' not found"
+  exit 1
+fi
+
+if [ "$RIGHT" != "r" ] && ! echo "$available_monitors" | grep -qx "$RIGHT"; then
+  notify-send -u critical -i "$ICON" "organize-workspaces" "Right monitor '$RIGHT' not found"
+  exit 1
+fi
+
+# Get list of existing workspaces
+existing_workspaces=$(hyprctl workspaces -j | jq -r '.[].id')
+
+# Track moved workspaces
+moved_count=0
+
+# Function to move workspace if it exists
+move_workspace() {
+  local workspace=$1
+  local monitor=$2
+
+  if echo "$existing_workspaces" | grep -qx "$workspace"; then
+    if ! hyprctl dispatch moveworkspacetomonitor "$workspace" "$monitor" 2>/dev/null; then
+      notify-send -u critical -i "$ICON" "organize-workspaces" "Failed to move workspace $workspace to monitor $monitor"
+      return 1
+    fi
+    moved_count=$((moved_count + 1))
+  fi
+}
+
+# Move workspaces 1-5 to left monitor
+for i in {1..5}; do
+  move_workspace "$i" "$LEFT"
+done
+
+# Move workspaces 6-10 to right monitor
+for i in {6..10}; do
+  move_workspace "$i" "$RIGHT"
+done
+
+# Send success notification
+if [ $moved_count -gt 0 ]; then
+  notify-send -u normal -i "$ICON" "organize-workspaces" "Organized $moved_count workspace(s) across monitors"
+fi
