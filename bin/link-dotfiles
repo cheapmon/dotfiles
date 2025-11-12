@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# link-dotfiles
+# Link dotfiles templates with bombadil.
+# This script runs on Hyprland startup.
+#
+# Uses bombadil to link and render dotfiles for the current hostname.
+# Only sends notification on failure (critical errors).
+#
+# Dependencies: bombadil, notify-send
+# Side effects:
+#   - Creates/updates symlinks for dotfiles
+#   - May overwrite existing files based on bombadil configuration
+#   - Logs to ~/.cache/link-dotfiles.log
+#
+
+# Configuration
+LOG_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/link-dotfiles.log"
+
+# Logging function
+log() {
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$timestamp] $*" >> "$LOG_FILE"
+}
+
+# Initialize log
+mkdir -p "$(dirname "$LOG_FILE")"
+log "→ Starting dotfiles linking"
+
+# Function to send notification and log
+notify() {
+    local urgency="$1"
+    local message="$2"
+
+    log "NOTIFY [$urgency]: $message"
+    notify-send -u "$urgency" "bombadil" "$message"
+}
+
+# Check if bombadil is installed
+if ! command -v bombadil >/dev/null 2>&1; then
+    notify "critical" "bombadil not found - cannot link dotfiles"
+    log "ERROR: bombadil command not found"
+    exit 1
+fi
+
+log "bombadil found at: $(command -v bombadil)"
+
+# Get hostname
+if [ ! -f /etc/hostname ]; then
+    notify "critical" "Cannot determine hostname - /etc/hostname not found"
+    log "ERROR: /etc/hostname does not exist"
+    exit 1
+fi
+
+HOSTNAME=$(cat /etc/hostname)
+log "Hostname: $HOSTNAME"
+
+# Run bombadil link
+log "Running: bombadil link -p $HOSTNAME"
+if ! OUTPUT=$(bombadil link -p "$HOSTNAME" 2>&1); then
+    EXIT_CODE=$?
+    log "ERROR: bombadil link failed with exit code $EXIT_CODE"
+    log "Output: $OUTPUT"
+
+    # Try to determine the type of error
+    if echo "$OUTPUT" | grep -qi "profile.*not found\|unknown profile"; then
+        notify "critical" "Profile '$HOSTNAME' not found in bombadil config"
+    elif echo "$OUTPUT" | grep -qi "permission denied"; then
+        notify "critical" "Permission denied - check file permissions"
+    elif echo "$OUTPUT" | grep -qi "config.*not found\|no such file"; then
+        notify "critical" "Bombadil config not found"
+    else
+        # Generic error - show first line of output
+        ERROR_MSG=$(echo "$OUTPUT" | head -n1)
+        notify "critical" "Link failed: $ERROR_MSG"
+    fi
+
+    exit 1
+fi
+
+# Log the output
+log "Bombadil output: $OUTPUT"
+
+# Check if anything was actually done
+if echo "$OUTPUT" | grep -qi "no changes\|up to date\|nothing to"; then
+    log "No changes needed"
+else
+    log "Dotfiles linked successfully"
+fi
+
+log "→ Linking completed successfully"
+exit 0
