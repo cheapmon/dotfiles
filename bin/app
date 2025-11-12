@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#
-# open-project - Open architecture project in tmux session
+set -euo pipefail
+
+# app
+# Open architecture app in tmux session.
 #
 # Uses fzf to select from available projects in architecture/apps, then:
 #   - Loads existing tmuxifier session if available, OR
@@ -8,9 +10,6 @@
 #
 # Dependencies: fzf-tmux, tmux, tmuxifier, ripgrep (rg)
 # Side effects: Creates or switches to tmux session
-
-set -e
-set -o pipefail
 
 # Check dependencies
 for cmd in fzf-tmux tmux tmuxifier rg; do
@@ -27,8 +26,15 @@ if [ ! -d "$APPS_DIR" ]; then
   exit 1
 fi
 
+# Check if apps directory is empty
+if [ -z "$(ls -A "$APPS_DIR")" ]; then
+  echo "Error: No projects found in $APPS_DIR" >&2
+  exit 1
+fi
+
+# Use fzf to select project (allow cancellation)
 set +e
-app="$(find "$APPS_DIR" -maxdepth 1 -exec basename {} \; | tail -n +2 | fzf-tmux)"
+app="$(ls -1 "$APPS_DIR" | fzf-tmux)"
 status=$?
 set -e
 
@@ -39,9 +45,17 @@ fi
 
 dir="$APPS_DIR/$app"
 
-if tmuxifier list-sessions | rg -q "$app"; then
+# Check if tmuxifier session exists
+if tmuxifier list-sessions | rg -q "^$app$"; then
   tmuxifier load-session "$app"
 else
-  tmux new -Ads "$app" -c "$dir"
-  tmux switch -t "$app"
+  # Create new tmux session and switch to it if not already inside tmux
+  if [ -n "${TMUX:-}" ]; then
+    # Already in tmux, create session and switch
+    tmux new -ds "$app" -c "$dir" 2>/dev/null || true
+    tmux switch -t "$app"
+  else
+    # Not in tmux, create and attach
+    tmux new -As "$app" -c "$dir"
+  fi
 fi

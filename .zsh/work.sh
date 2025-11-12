@@ -11,7 +11,6 @@ if [ "$WORK" = "yes" ]; then
 
   # Project aliases
   source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"cd $HOME/git/architecture/apps/%\"")
-  alias prj="open-project"
   alias ia="$HOME/git/architecture/bin/ia"
   alias iacli="$HOME/git/architecture/apps/cli/iacli"
 
