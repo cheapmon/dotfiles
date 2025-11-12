@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# nixup
+# Update NixOS flake inputs and rebuild system configuration.
+# This script pulls dotfiles, updates flake inputs, rebuilds the system,
+# cleans old generations, and commits changes to the dotfiles repository.
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Configuration
+NIXOS_DIR="$HOME/.config/nixos"
+AUTO_YES=false
+
+usage() {
+    echo "Usage: nixup [OPTIONS]"
+    echo ""
+    echo "Update NixOS system with latest flake inputs"
+    echo ""
+    echo "Options:"
+    echo "  --yes, -y    Skip confirmation prompts (non-interactive mode)"
+    echo "  --help, -h   Show this help message"
+    echo ""
+    echo "Steps performed:"
+    echo "  1. Pull latest dotfiles"
+    echo "  2. Update flake inputs"
+    echo "  3. Rebuild system"
+    echo "  4. Clean old generations"
+    echo "  5. Commit and push changes"
+    exit 1
+}
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --yes|-y)
+            AUTO_YES=true
+            shift
+            ;;
+        --help|-h)
+            usage
+            ;;
+        *)
+            echo "Error: Invalid argument '$1'"
+            usage
+            ;;
+    esac
+done
+
+# Ask for confirmation
+confirm() {
+    if [ "$AUTO_YES" = true ]; then
+        return 0
+    fi
+
+    local prompt="$1"
+    read -p "$prompt (y/N) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        return 1
+    fi
+    return 0
+}
+
+# Check dependencies
+echo -e "${BLUE}→ Checking dependencies...${NC}"
+for cmd in git nix nh; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo -e "${RED}Error: Required command '$cmd' not found${NC}"
+        exit 1
+    fi
+done
+
+# Change to NixOS config directory
+if ! cd "$NIXOS_DIR" 2>/dev/null; then
+    echo -e "${RED}Error: Failed to change to $NIXOS_DIR${NC}"
+    exit 1
+fi
+
+# Store current flake.lock for comparison
+if [ -f flake.lock ]; then
+    cp flake.lock flake.lock.backup
+fi
+
+# Pull latest dotfiles
+echo -e "${BLUE}→ Pulling latest dotfiles...${NC}"
+if ! confirm "Pull latest dotfiles from remote?"; then
+    echo -e "${YELLOW}Skipping dotfiles pull${NC}"
+else
+    git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" checkout flake.lock
+    git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" pull
+fi
+
+# Update flake inputs
+echo -e "${BLUE}→ Updating flake inputs...${NC}"
+if ! confirm "Update all flake inputs?"; then
+    echo -e "${YELLOW}Aborted - flake update cancelled${NC}"
+    exit 0
+fi
+
+nix flake update
+
+# Show what changed
+if [ -f flake.lock.backup ]; then
+    echo -e "${BLUE}→ Flake input changes:${NC}"
+    git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" show HEAD:.config/nixos/flake.lock > flake.lock.old 2>/dev/null || touch flake.lock.old
+    if diff -q flake.lock.old flake.lock >/dev/null 2>&1; then
+        echo -e "${YELLOW}No changes in flake.lock${NC}"
+    else
+        # Show a summary of changes
+        echo ""
+        git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" diff --no-index flake.lock.old flake.lock | grep "narHash\|rev" | head -20 || echo "  (Changes detected)"
+        echo ""
+    fi
+    rm -f flake.lock.backup flake.lock.old
+fi
+
+# Rebuild system
+echo -e "${BLUE}→ Rebuilding NixOS system...${NC}"
+if ! confirm "Rebuild system with updated flake?"; then
+    echo -e "${YELLOW}Aborted - system rebuild cancelled${NC}"
+    echo -e "Run ${CYAN}git --git-dir=\$HOME/git/dotfiles --work-tree=\$HOME checkout .config/nixos/flake.lock${NC} to restore"
+    exit 0
+fi
+
+if ! nh os switch; then
+    echo -e "${RED}Error: System rebuild failed!${NC}"
+    echo -e "To rollback: ${CYAN}sudo nixos-rebuild switch --rollback${NC}"
+    echo -e "To restore flake.lock: ${CYAN}git --git-dir=\$HOME/git/dotfiles --work-tree=\$HOME checkout .config/nixos/flake.lock${NC}"
+    exit 1
+fi
+
+# Clean old generations
+echo -e "${BLUE}→ Cleaning old generations...${NC}"
+if confirm "Clean old system generations?"; then
+    nh clean all
+else
+    echo -e "${YELLOW}Skipping generation cleanup${NC}"
+fi
+
+# Commit changes
+echo -e "${BLUE}→ Committing flake.lock changes...${NC}"
+if ! confirm "Commit and push flake.lock update?"; then
+    echo -e "${YELLOW}Changes not committed - flake.lock is uncommitted${NC}"
+    echo -e "You can commit manually later with:"
+    echo "  cd ~"
+    echo "  d add -f ./.config/nixos/flake.lock"
+    echo "  d commit -m '[nix] Update system'"
+    echo "  d push"
+    exit 0
+fi
+
+# Generate commit message with update info
+COMMIT_MSG="[nix] Update system"
+if command -v nix >/dev/null 2>&1; then
+    # Try to get some update details
+    UPDATED_INPUTS=$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" diff HEAD .config/nixos/flake.lock | grep -oP '(?<=repo": ")[^"]+' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+    if [ -n "$UPDATED_INPUTS" ]; then
+        COMMIT_MSG="[nix] Update flake inputs"
+    fi
+fi
+
+cd ~
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" add -f ./.config/nixos/flake.lock
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" commit -m "$COMMIT_MSG"
+
+# Push changes
+echo -e "${BLUE}→ Pushing to remote...${NC}"
+if ! confirm "Push changes to remote?"; then
+    echo -e "${YELLOW}Changes committed locally but not pushed${NC}"
+    echo -e "Push manually with: ${CYAN}d push${NC}"
+    exit 0
+fi
+
+git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" push
+
+echo ""
+echo -e "${GREEN}${BOLD}✓ System update complete!${NC}"
