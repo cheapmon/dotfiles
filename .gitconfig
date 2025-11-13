@@ -1,6 +1,7 @@
 [user]
 email = simon.kaleschke.leipzig@gmail.com
 name = Simon Kaleschke
+	signingkey = /home/seims/.ssh/id_ed25519.pub
 
 [alias]
 ap = add --patch
@@ -31,6 +32,7 @@ ui = true
 
 [commit]
 verbose = true
+	gpgsign = true
 
 [push]
 autoSetupRemote = true
@@ -80,6 +82,7 @@ sort = -committerdate
 
 [tag]
 sort = version:refname
+	gpgsign = true
 
 [fetch]
 prune = true
@@ -92,3 +95,7 @@ autoupdate = true
 
 [merge]
 conflictstyle = zdiff3
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /home/seims/.config/git/allowed_signers
