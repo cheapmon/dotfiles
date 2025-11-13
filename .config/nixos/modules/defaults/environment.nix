@@ -68,6 +68,7 @@
     openssl
     pavucontrol
     pay-respects
+    pinentry-tty
     postman
     repgrep
     ripgrep
