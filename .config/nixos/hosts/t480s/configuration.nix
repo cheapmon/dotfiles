@@ -22,4 +22,8 @@
 
     WORK = "";
   };
+
+  environment.systemPackages = with pkgs; [
+    codex
+  ];
 }
