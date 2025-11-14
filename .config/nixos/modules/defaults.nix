@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    inputs.home-manager.nixosModules.default
     ./defaults/console.nix
     ./defaults/environment.nix
     ./defaults/fonts.nix
