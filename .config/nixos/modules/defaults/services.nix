@@ -14,6 +14,7 @@
   services.gvfs.enable = true;
   services.pulseaudio.enable = false;
   services.gnome.gnome-keyring.enable = true;
+  services.tailscale.enable = true;
 
   services.avahi = {
     enable = true;
