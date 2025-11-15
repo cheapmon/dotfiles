@@ -133,6 +133,22 @@ else
     exit 1
 fi
 
+# Configure dotfiles git remote tracking
+echo -e "${BLUE}→ Configuring git remote tracking${NC}"
+log "Configuring fetch refspec and branch tracking"
+
+DOTFILES_CMD="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
+if nix-shell -p git --command "$DOTFILES_CMD config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'" >> "$LOG_FILE" 2>&1 && \
+   nix-shell -p git --command "$DOTFILES_CMD fetch origin" >> "$LOG_FILE" 2>&1 && \
+   nix-shell -p git --command "$DOTFILES_CMD branch --set-upstream-to=origin/main main" >> "$LOG_FILE" 2>&1; then
+    echo -e "${GREEN}✓ Configured git remote tracking${NC}"
+    log "Successfully configured remote tracking"
+else
+    echo -e "${RED}Error: Failed to configure git remote tracking${NC}"
+    log "ERROR: Failed to configure git remote tracking"
+    exit 1
+fi
+
 # Install tmuxifier
 echo -e "${BLUE}→ Installing tmuxifier${NC}"
 log "Installing tmuxifier"
