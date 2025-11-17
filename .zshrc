@@ -58,6 +58,10 @@ export GLOBALIAS_FILTER_VALUES=(d ls ia iacli)
 export DIRENV_LOG_FORMAT=
 export GPG_TTY=$(tty)
 
+# Secrets
+SECRETS="/run/user/$(id -u)/secrets"
+export ANSIBLE_VAULT_PASSWORD_FILE="$SECRETS/ansible_vault_password"
+
 # Aliases
 alias d='git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
 alias ls="exa --color"
