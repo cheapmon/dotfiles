@@ -16,6 +16,7 @@
     cargo
     chromium
     cmatrix
+    codebuff
     cowsay
     cups
     curlie
