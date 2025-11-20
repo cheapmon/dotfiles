@@ -46,7 +46,7 @@
     gopass
     gource
     grim
-    guvcview
+    # guvcview
     htop
     hypridle
     hyprlock
