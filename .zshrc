@@ -85,7 +85,7 @@ ruby-shell() {
 
   if [ $# -eq 0 ]; then
     # No arguments - start interactive zsh session
-    nix-shell ~/.config/nix/shells/ruby.nix --command zsh
+    RUBY_INIT_VERBOSE=1 nix-shell ~/.config/nix/shells/ruby.nix --command zsh
   else
     # Arguments provided - pass them through to nix-shell
     nix-shell ~/.config/nix/shells/ruby.nix "$@"

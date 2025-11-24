@@ -9,6 +9,7 @@ set -euo pipefail
 # Environment variables:
 #   RUBY_BUILD_SKIP_UPDATE - Skip ruby-build update (default: 0)
 #   SKIP_BUNDLE_INSTALL    - Skip bundle install (default: 0)
+#   RUBY_INIT_VERBOSE      - Show informational messages (default: 0)
 #
 # Side effects:
 #   - Installs/updates ruby-build plugin
@@ -28,9 +29,16 @@ NC='\033[0m' # No Color
 # Configuration
 RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
 
+# Helper function to print messages only in verbose mode
+info() {
+  if [ "${RUBY_INIT_VERBOSE:-0}" = "1" ]; then
+    echo -e "$@"
+  fi
+}
+
 # Install ruby-build plugin if not present
 if [ ! -d "$RBENV_ROOT"/plugins/ruby-build ]; then
-  echo -e "${BLUE}→ Installing ruby-build plugin...${NC}"
+  info "${BLUE}→ Installing ruby-build plugin...${NC}"
   mkdir -p "$RBENV_ROOT"/plugins
   git clone --quiet https://github.com/rbenv/ruby-build.git "$RBENV_ROOT"/plugins/ruby-build
 fi
@@ -39,7 +47,7 @@ fi
 if [ "${RUBY_BUILD_SKIP_UPDATE:-0}" != "1" ]; then
   RUBY_BUILD_UPDATED="$RBENV_ROOT/plugins/ruby-build/.last_update"
   if [ ! -f "$RUBY_BUILD_UPDATED" ] || [ $(find "$RUBY_BUILD_UPDATED" -mtime +1 2>/dev/null | wc -l) -gt 0 ]; then
-    echo -e "${BLUE}→ Updating ruby-build definitions...${NC}"
+    info "${BLUE}→ Updating ruby-build definitions...${NC}"
     if git -C "$RBENV_ROOT"/plugins/ruby-build pull --quiet 2>/dev/null; then
       touch "$RUBY_BUILD_UPDATED"
     else
@@ -59,13 +67,13 @@ else
     tail -1)
 fi
 
-echo -e "${CYAN}→ Using Ruby ${RUBY_VERSION}${NC}"
+info "${CYAN}→ Using Ruby ${RUBY_VERSION}${NC}"
 
 # Install Ruby if not already installed
 if ! rbenv versions --bare | grep -Fx "$RUBY_VERSION" >/dev/null 2>&1; then
-  echo -e "${BLUE}→ Installing Ruby ${RUBY_VERSION} (this may take a while)...${NC}"
+  info "${BLUE}→ Installing Ruby ${RUBY_VERSION} (this may take a while)...${NC}"
   rbenv install "$RUBY_VERSION"
-  echo -e "${GREEN}✓ Ruby ${RUBY_VERSION} installed${NC}"
+  info "${GREEN}✓ Ruby ${RUBY_VERSION} installed${NC}"
 fi
 rbenv global "$RUBY_VERSION"
 
@@ -74,17 +82,18 @@ export LD_LIBRARY_PATH="$RBENV_ROOT/versions/$RUBY_VERSION/lib:${LD_LIBRARY_PATH
 
 # Install bundler if not present
 if ! rbenv exec gem list -i "^bundler$" > /dev/null 2>&1; then
-  echo -e "${BLUE}→ Installing bundler...${NC}"
+  info "${BLUE}→ Installing bundler...${NC}"
   rbenv exec gem install bundler --quiet
 fi
 
 # Run bundle install only if Gemfile changed (unless SKIP_BUNDLE_INSTALL=1)
 if [ "${SKIP_BUNDLE_INSTALL:-0}" != "1" ] && [ -f Gemfile ]; then
   if [ ! -f Gemfile.lock ] || [ Gemfile -nt Gemfile.lock ]; then
-    echo -e "${BLUE}→ Running bundle install...${NC}"
+    info "${BLUE}→ Running bundle install...${NC}"
     rbenv exec bundle install
   fi
 fi
 
-echo -e "${GREEN}✓ Ruby environment ready${NC}"
-echo ""
+info "${GREEN}✓ Ruby environment ready${NC}"
+
+set +euo pipefail
