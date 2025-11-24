@@ -52,6 +52,7 @@
     # context                 # user@host
     dir                       # current directory
     vcs                       # git status
+    rbenv                     # ruby version
     # command_execution_time  # previous command duration
     # =========================[ Line #2 ]=========================
     newline                   # \n
@@ -99,6 +100,10 @@
   # Don't show Python version.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
+
+  # Red Ruby version.
+  typeset -g POWERLEVEL9K_RBENV_FOREGROUND=$red
+  typeset -g POWERLEVEL9K_RBENV_PROMPT_ALWAYS_SHOW=true
 
   # Blue current directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue

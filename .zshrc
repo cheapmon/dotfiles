@@ -77,6 +77,12 @@ rgl() {
 
 # Launch Ruby development environment
 ruby-shell() {
+  # Prevent nesting nix-shells
+  if [[ -n "$IN_NIX_SHELL" ]]; then
+    echo "Already in a nix-shell. Exit first to avoid nesting." >&2
+    return 1
+  fi
+
   if [ $# -eq 0 ]; then
     # No arguments - start interactive zsh session
     nix-shell ~/.config/nix/shells/ruby.nix --command zsh

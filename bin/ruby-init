@@ -67,7 +67,7 @@ if ! rbenv versions --bare | grep -Fx "$RUBY_VERSION" >/dev/null 2>&1; then
   rbenv install "$RUBY_VERSION"
   echo -e "${GREEN}✓ Ruby ${RUBY_VERSION} installed${NC}"
 fi
-rbenv local "$RUBY_VERSION"
+rbenv global "$RUBY_VERSION"
 
 # Add Ruby's lib directory to library path (needed for shared library)
 export LD_LIBRARY_PATH="$RBENV_ROOT/versions/$RUBY_VERSION/lib:${LD_LIBRARY_PATH:-}"
