@@ -38,11 +38,6 @@ pkgs.mkShell {
     export PATH="$RBENV_ROOT/bin:$PATH"
     eval "$(rbenv init -)"
 
-    # Configure gem installation location
-    export GEM_HOME=$HOME/.gems
-    export GEM_PATH=$GEM_HOME
-    export PATH=$GEM_HOME/bin:$PATH
-
     # Help pkg-config find library metadata files
     export PKG_CONFIG_PATH="${pkgs.lib.makeSearchPath "lib/pkgconfig" (with pkgs; [
       libffi.dev
