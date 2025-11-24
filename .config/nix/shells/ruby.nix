@@ -68,9 +68,6 @@ pkgs.mkShell {
     export RUBY_MAKE_INSTALL_OPTS="PKG_CONFIG=:"
 
     # Run Ruby environment initialization script
-    $HOME/bin/ruby-init
-
-    # Start an interactive zsh session
-    exec zsh
+    source $HOME/bin/ruby-init
   '';
 }

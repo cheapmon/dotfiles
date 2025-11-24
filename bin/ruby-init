@@ -31,6 +31,7 @@ RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
 # Install ruby-build plugin if not present
 if [ ! -d "$RBENV_ROOT"/plugins/ruby-build ]; then
   echo -e "${BLUE}→ Installing ruby-build plugin...${NC}"
+  mkdir -p "$RBENV_ROOT"/plugins
   git clone --quiet https://github.com/rbenv/ruby-build.git "$RBENV_ROOT"/plugins/ruby-build
 fi
 
@@ -61,7 +62,7 @@ fi
 echo -e "${CYAN}→ Using Ruby ${RUBY_VERSION}${NC}"
 
 # Install Ruby if not already installed
-if ! rbenv versions | grep -q "$RUBY_VERSION"; then
+if ! rbenv versions --bare | grep -Fx "$RUBY_VERSION" >/dev/null 2>&1; then
   echo -e "${BLUE}→ Installing Ruby ${RUBY_VERSION} (this may take a while)...${NC}"
   rbenv install "$RUBY_VERSION"
   echo -e "${GREEN}✓ Ruby ${RUBY_VERSION} installed${NC}"

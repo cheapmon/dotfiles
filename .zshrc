@@ -77,7 +77,13 @@ rgl() {
 
 # Launch Ruby development environment
 ruby-shell() {
-  nix-shell ~/.config/nix/shells/ruby.nix "$@"
+  if [ $# -eq 0 ]; then
+    # No arguments - start interactive zsh session
+    nix-shell ~/.config/nix/shells/ruby.nix --command zsh
+  else
+    # Arguments provided - pass them through to nix-shell
+    nix-shell ~/.config/nix/shells/ruby.nix "$@"
+  fi
 }
 
 # Shell integrations
