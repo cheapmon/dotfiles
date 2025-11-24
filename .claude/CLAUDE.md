@@ -19,3 +19,4 @@
   d commit -m "[category] message"  # Commit with category prefix
   d push                      # Push to remote
   ```
+- Always run `rspec` like this: `docker-compose run -e RAILS_ENV=test --rm core rspec [files]`.
