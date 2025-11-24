@@ -238,3 +238,38 @@ fi
 
 echo ""
 echo -e "${GREEN}${BOLD}✓ Successfully created and pushed tag $new_tag${NC}"
+
+# Generate Jira comment message with pipeline URL
+echo ""
+echo -e "${BLUE}→ Fetching GitLab pipeline information...${NC}"
+
+# Wait a moment for GitLab to create the pipeline
+sleep 2
+
+# Get the latest pipeline for this tag
+if command -v glab &> /dev/null; then
+    if command -v jq &> /dev/null; then
+        pipeline_url=$(glab ci list --ref "$new_tag" --per-page 1 --output json 2>/dev/null | jq -r '.[0].web_url // empty')
+
+        if [ -n "$pipeline_url" ]; then
+            # Format the Jira comment message
+            jira_message="Release erfolgt mit [$new_tag](${pipeline_url}). 🚀"
+
+            echo ""
+            echo -e "${CYAN}${BOLD}═══════════════════════════════════════════════════════════════${NC}"
+            echo -e "${CYAN}${BOLD}Jira Comment Message:${NC}"
+            echo -e "${CYAN}${BOLD}═══════════════════════════════════════════════════════════════${NC}"
+            echo ""
+            echo -e "${BOLD}$jira_message${NC}"
+            echo ""
+            echo -e "${CYAN}${BOLD}═══════════════════════════════════════════════════════════════${NC}"
+        else
+            echo -e "${YELLOW}Warning: Could not fetch pipeline URL. Pipeline may still be initializing.${NC}"
+            echo -e "You can manually check: ${CYAN}glab ci list --ref $new_tag${NC}"
+        fi
+    else
+        echo -e "${YELLOW}Warning: 'jq' command not found. Install it to auto-generate Jira messages.${NC}"
+    fi
+else
+    echo -e "${YELLOW}Warning: 'glab' command not found. Install it to auto-generate Jira messages.${NC}"
+fi
