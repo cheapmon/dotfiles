@@ -74,7 +74,6 @@
     repgrep
     ripgrep
     rsync
-    ruby
     rustup
     shikane
     signal-desktop
@@ -113,10 +112,6 @@
     bash-language-server
     nodePackages.typescript-language-server
     nodePackages.vscode-json-languageserver
-    rubocop
-    rubyPackages.solargraph
-    rubyPackages.rexml
-    rufo
     rust-analyzer
     texlab
     tinymist

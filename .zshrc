@@ -75,6 +75,11 @@ rgl() {
   rg -p $@ | less
 }
 
+# Launch Ruby development environment
+ruby-shell() {
+  nix-shell ~/.config/nix/shells/ruby.nix "$@"
+}
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(pay-respects zsh)"

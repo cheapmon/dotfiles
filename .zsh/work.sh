@@ -32,12 +32,6 @@ if [ "$WORK" = "yes" ]; then
   }
   alias ab="setup_ansible"
 
-  # rbenv
-  if [ -d "$HOME/.rbenv" ]; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-  fi
-
   openspec() {
     npx @fission-ai/openspec@latest -- "$@"
   }
