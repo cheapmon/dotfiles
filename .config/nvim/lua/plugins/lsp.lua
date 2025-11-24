@@ -11,8 +11,6 @@ return {
       lsp_zero.extend_lspconfig()
 
       lsp_zero.setup_servers({
-        "solargraph",
-        "rubocop",
         "lua_ls",
         "rust_analyzer",
         "bashls",
@@ -21,6 +19,18 @@ return {
         "eslint",
         "texlab",
         "tinymist",
+      })
+
+      -- Configure Ruby LSPs to run through nix-shell
+      local lspconfig = require("lspconfig")
+      local nix_shell_path = vim.fn.expand("~/.config/nix/shells/ruby.nix")
+
+      lspconfig.solargraph.setup({
+        cmd = { "nix-shell", nix_shell_path, "--run", "solargraph stdio" },
+      })
+
+      lspconfig.rubocop.setup({
+        cmd = { "nix-shell", nix_shell_path, "--run", "rubocop --lsp" },
       })
 
       lsp_zero.on_attach(function(_, bufnr)
