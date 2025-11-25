@@ -16,6 +16,7 @@ if [ "$WORK" = "yes" ]; then
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C terraform terraform
   source <(acli completion zsh)
+  source <(gopass completion zsh)
 
   # Ansible
   setup_ansible() {
