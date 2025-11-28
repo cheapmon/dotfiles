@@ -24,6 +24,14 @@
     WORK = lib.mkForce "yes";
   };
 
+  # Allow traefik to bind to privileged ports (80, 443) without root
+  security.wrappers.traefik = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_net_bind_service+ep";
+    source = "${pkgs.traefik}/bin/traefik";
+  };
+
   networking.hosts = {
     "127.0.0.1" = [
       "admin.schnellestelle.club"
@@ -69,5 +77,28 @@
       "www.support-your-team.club"
       "www.supportyourteam.club"
     ];
+  };
+
+  home-manager.users.seims = {
+    systemd.user.services.traefik-ia = {
+      Unit = {
+        Description = "Traefik proxy for IN AUDITO applications";
+        After = ["network.target"];
+      };
+
+      Service = {
+        Type = "simple";
+        WorkingDirectory = "/home/seims/git/architecture/apps/ci/traefik";
+        EnvironmentFile = "/home/seims/.ia.architecture.env";
+        # Use security wrapper at /run/wrappers/bin/traefik which has CAP_NET_BIND_SERVICE
+        ExecStart = "/run/wrappers/bin/traefik --configFile traefik.yml";
+        Restart = "on-failure";
+        RestartSec = "5s";
+      };
+
+      Install = {
+        WantedBy = ["default.target"];
+      };
+    };
   };
 }
