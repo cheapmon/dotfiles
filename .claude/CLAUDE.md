@@ -3,9 +3,10 @@
 **Priority**: These user-level instructions take precedence over project-specific context.
 
 ## Jira Integration
-- Use `acli jira workitem view [key]` to view Jira tickets.
 - If available, always include the ticket key when checking out new branches.
+- Use `acli jira workitem view [key]` to view Jira tickets.
 - Use `acli jira workitem view [key] --fields 'customfield_10261' --json` to extract QA steps from a Jira ticket.
+- Use `acli jira workitem comment list --key [key]` to retrieve for a Jira ticket.
 
 ## Project Structure & Workflow
 - Primary tech stack: **Ruby** (Rails monolith, some Sinatra apps)
