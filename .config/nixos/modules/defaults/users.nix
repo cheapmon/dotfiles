@@ -11,6 +11,7 @@
     isNormalUser = true;
     description = "Simon Kaleschke";
     extraGroups = ["networkmanager" "wheel" "audio" "docker" "plugdev"];
+    linger = true;
   };
 
   users.defaultUserShell = pkgs.zsh;
