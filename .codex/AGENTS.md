@@ -1,0 +1,1 @@
+/home/seims/.claude/CLAUDE.md

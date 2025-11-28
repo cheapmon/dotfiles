@@ -19,4 +19,4 @@ Generate comprehensive QA steps for the Jira ticket we've been working on, follo
 - Emojis: 🔍 verify, ↪️ merge, 🚀 deploy, 📕 close, 🌟 review
 - Always end: "Ticket schließen. 📕"
 
-**For complex cases or full details, read:** `QA_STYLE_GUIDE_FOR_AGENTS.md` in this skill directory.
+**For complex cases or full details, read:** `~/.claude/skills/qa/QA_STYLE_GUIDE_FOR_AGENTS.md`.
