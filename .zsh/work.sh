@@ -7,7 +7,6 @@ if [ "$WORK" = "yes" ]; then
   export DIGITALOCEAN_TOKEN=$(cat $SECRETS/digitalocean_token)
   export ANTHROPIC_API_KEY=$(cat $SECRETS/anthropic_api_key)
   export IA_PASSWORDSTORE_MOUNT="inaudito"
-  export CORE_SERVICE="core-native"
 
   # Project aliases
   source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"cd $HOME/git/architecture/apps/%\"")
