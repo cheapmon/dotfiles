@@ -21,6 +21,7 @@
     cups
     curlie
     dbeaver-bin
+    delta
     difftastic
     dig
     direnv

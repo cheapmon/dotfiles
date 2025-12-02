@@ -70,6 +70,7 @@ difftool = true
 excludesfile = ~/.gitexclude
 fsmonitor = true
 untrackedCache = true
+	pager = delta
 
 [help]
 autocorrect = prompt
@@ -94,8 +95,12 @@ enabled = true
 autoupdate = true
 
 [merge]
-conflictstyle = zdiff3
+	conflictStyle = zdiff3
 [gpg]
 	format = ssh
 [gpg "ssh"]
 	allowedSignersFile = /home/seims/.config/git/allowed_signers
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
