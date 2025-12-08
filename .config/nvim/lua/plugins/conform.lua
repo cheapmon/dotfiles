@@ -4,6 +4,7 @@ return {
     formatters_by_ft = {
       ruby = { "rufo" },
       nix = { "alejandra" },
+      typst = { "typstyle" },
     },
     formatters = {
       rufo = {

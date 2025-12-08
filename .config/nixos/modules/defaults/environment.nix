@@ -118,6 +118,7 @@
     tinymist
     tree-sitter
     typst
+    typstyle
     vscode-langservers-extracted
 
     # Inputs
