@@ -78,6 +78,10 @@
       "www.support-your-team.club"
       "www.supportyourteam.club"
     ];
+
+    "10.18.10.50" = [
+      "ci-alpha"
+    ];
   };
 
   home-manager.users.seims = {
