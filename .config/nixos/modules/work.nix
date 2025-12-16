@@ -79,7 +79,7 @@
       "www.supportyourteam.club"
     ];
 
-    "10.18.10.50" = [
+    "192.168.178.222" = [
       "ci-alpha"
     ];
   };
