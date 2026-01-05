@@ -8,8 +8,8 @@
   environment.systemPackages = with pkgs; [
     ansible
     # beekeeper-studio
-    bruno
-    bruno-cli
+    # bruno
+    # bruno-cli
     claude-code
     claude-code-acp
     codebuff
