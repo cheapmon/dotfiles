@@ -20,4 +20,5 @@
       openssl
     ];
   };
+  programs.steam.enable = true;
 }
