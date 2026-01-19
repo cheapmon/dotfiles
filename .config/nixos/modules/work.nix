@@ -17,6 +17,7 @@
     gitlab-runner
     glab
     slack
+    sqlite
     terraform
     traefik
   ];

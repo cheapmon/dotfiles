@@ -27,6 +27,7 @@
     direnv
     docker
     docker-compose
+    element-desktop
     eog
     evince
     eza
@@ -61,6 +62,7 @@
     keyd
     killall
     libnotify
+    libreoffice
     lolcat
     magic-wormhole
     mako
