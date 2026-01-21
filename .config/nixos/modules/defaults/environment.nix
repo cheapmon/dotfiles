@@ -54,7 +54,7 @@
     hyprlock
     hyprpaper
     inotify-tools
-    jetbrains.idea-community
+    jetbrains.idea-oss
     jetbrains.rust-rover
     jq
     just
