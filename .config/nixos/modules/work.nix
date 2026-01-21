@@ -14,6 +14,7 @@
     claude-code-acp
     codebuff
     codex
+    csvlens
     gitlab-runner
     glab
     slack
