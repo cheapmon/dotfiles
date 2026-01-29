@@ -17,6 +17,7 @@
     csvlens
     gitlab-runner
     glab
+    ollama-cpu
     slack
     sqlite
     terraform

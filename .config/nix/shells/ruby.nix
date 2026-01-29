@@ -1,4 +1,11 @@
-{ pkgs ? import <nixpkgs> {} }:
+{
+  # Pin nixpkgs to prevent library paths from changing after NixOS updates.
+  # To update: change the version and run `nix-prefetch-url --unpack <url>` for new sha256.
+  pkgs ? import (fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
+    sha256 = "1s2gr5rcyqvpr58vxdcb095mdhblij9bfzaximrva2243aal3dgx";
+  }) {}
+}:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [

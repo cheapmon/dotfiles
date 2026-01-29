@@ -92,6 +92,7 @@
     thunderbird
     tmux
     tokei
+    unzip
     upower
     usbutils
     vlc
