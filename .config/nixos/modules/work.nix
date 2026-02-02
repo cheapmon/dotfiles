@@ -11,7 +11,6 @@
     # bruno
     # bruno-cli
     claude-code
-    claude-code-acp
     codebuff
     codex
     csvlens

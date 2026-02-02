@@ -6,7 +6,6 @@ if [ "$WORK" = "yes" ]; then
   export GITLAB_API_TOKEN=$(cat $SECRETS/api_token)
   export DIGITALOCEAN_TOKEN=$(cat $SECRETS/digitalocean_token)
   export ANTHROPIC_API_KEY=$(cat $SECRETS/anthropic_api_key)
-  export CLAUDE_CODE_OAUTH_TOKEN=$(cat $SECRETS/claude_code_oauth_token)
   export IA_PASSWORDSTORE_MOUNT="inaudito"
 
   # Project aliases
