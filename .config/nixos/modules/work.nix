@@ -17,6 +17,7 @@
     gitlab-runner
     glab
     ollama-cpu
+    opencode
     slack
     sqlite
     terraform
