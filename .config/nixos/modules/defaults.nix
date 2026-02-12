@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./defaults/boot.nix
     ./defaults/console.nix
     ./defaults/environment.nix
     ./defaults/fonts.nix
