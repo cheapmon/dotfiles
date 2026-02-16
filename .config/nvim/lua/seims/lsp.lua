@@ -49,20 +49,16 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable("lua_ls")
 
 -- rubocop
-local nix_shell_path = vim.fn.expand("~/.config/nix/shells/ruby.nix")
-
 vim.lsp.config("rubocop", {
-  cmd = { "nix-shell", nix_shell_path, "--run", "rubocop --lsp" },
+  cmd = { "rubocop --lsp" },
   filetypes = { "ruby" },
   root_markers = { "Gemfile", ".git" },
 })
 vim.lsp.enable("rubocop")
 
 -- solargraph
-local nix_shell_path = vim.fn.expand("~/.config/nix/shells/ruby.nix")
-
 vim.lsp.config("solargraph", {
-  cmd = { "nix-shell", nix_shell_path, "--run", "solargraph stdio" },
+  cmd = { "solargraph stdio" },
   settings = {
     solargraph = {
       diagnostics = true,

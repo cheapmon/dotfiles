@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# rb - Install Ruby versions via rbenv
+# Usage: rb [version]
+# Examples:
+#   rb           # Install Ruby version from .ruby-version if present
+#   rb 3.3.0     # Install Ruby 3.3.0
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Configuration
+RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+NIX_SHELL_FILE="$HOME/.config/nix/shells/ruby.nix"
+
+# Check if rbenv is available
+if ! command -v rbenv &> /dev/null; then
+  echo -e "${RED}Error: rbenv not found. Please install it via NixOS config.${NC}" >&2
+  exit 1
+fi
+
+# Determine which Ruby version to install
+if [ $# -eq 0 ]; then
+  # No argument - check for .ruby-version
+  if [ -f .ruby-version ]; then
+    RUBY_VERSION="$(cat .ruby-version)"
+    echo -e "${BLUE}→ Using Ruby $RUBY_VERSION from .ruby-version${NC}"
+  else
+    echo -e "${RED}Error: No .ruby-version file found in current directory${NC}" >&2
+    echo "Usage: rb [version]" >&2
+    echo "" >&2
+    echo "Installed versions:" >&2
+    rbenv versions
+    exit 1
+  fi
+else
+  RUBY_VERSION="$1"
+fi
+
+# Check if ruby-build plugin exists
+if [ ! -d "$RBENV_ROOT/plugins/ruby-build" ]; then
+  echo -e "${BLUE}→ Installing ruby-build plugin...${NC}"
+  mkdir -p "$RBENV_ROOT/plugins"
+  git clone https://github.com/rbenv/ruby-build.git "$RBENV_ROOT/plugins/ruby-build"
+fi
+
+# Check if Ruby version is already installed
+if rbenv versions --bare | grep -Fx "$RUBY_VERSION" >/dev/null 2>&1; then
+  echo -e "${GREEN}✓ Ruby $RUBY_VERSION is already installed${NC}"
+  exit 0
+fi
+
+# Ruby not installed - need to build it in nix-shell
+echo -e "${BLUE}→ Ruby $RUBY_VERSION not found, installing...${NC}"
+
+if [ ! -f "$NIX_SHELL_FILE" ]; then
+  echo -e "${RED}Error: Nix shell file not found at $NIX_SHELL_FILE${NC}" >&2
+  exit 1
+fi
+
+# Run rbenv install inside nix-shell with all build dependencies
+nix-shell "$NIX_SHELL_FILE" --run "rbenv install $RUBY_VERSION"
+
+echo -e "${GREEN}✓ Ruby $RUBY_VERSION installed successfully${NC}"

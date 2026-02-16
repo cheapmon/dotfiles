@@ -74,6 +74,7 @@
     pay-respects
     pinentry-tty
     postman
+    rbenv
     repgrep
     ripgrep
     rsync

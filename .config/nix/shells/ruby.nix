@@ -1,24 +1,24 @@
 {
   # Pin nixpkgs to prevent library paths from changing after NixOS updates.
   # To update: change the version and run `nix-prefetch-url --unpack <url>` for new sha256.
-  pkgs ? import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
-    sha256 = "1s2gr5rcyqvpr58vxdcb095mdhblij9bfzaximrva2243aal3dgx";
-  }) {}
+  pkgs ?
+    import (fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
+      sha256 = "1s2gr5rcyqvpr58vxdcb095mdhblij9bfzaximrva2243aal3dgx";
+    }) {},
 }:
-
 pkgs.mkShell {
   buildInputs = with pkgs; [
     # Core tools
-    git      # For cloning ruby-build plugin
-    rbenv    # Ruby version manager
-    zsh      # Shell to exec into
+    git # For cloning ruby-build plugin
+    rbenv # Ruby version manager
+    zsh # Shell to exec into
 
     # Build tools needed for compiling Ruby and native gem extensions
-    gcc        # C compiler
-    gnumake    # Build system
+    gcc # C compiler
+    gnumake # Build system
     pkg-config # For finding library metadata
-    bison      # Parser generator (required by Ruby)
+    bison # Parser generator (required by Ruby)
 
     # Runtime libraries (Ruby and gems link against these)
     libffi
@@ -68,8 +68,5 @@ pkgs.mkShell {
 
     # Skip pkg-config validation during make install (avoids build failure)
     export RUBY_MAKE_INSTALL_OPTS="PKG_CONFIG=:"
-
-    # Run Ruby environment initialization script
-    source $HOME/bin/ruby-init
   '';
 }

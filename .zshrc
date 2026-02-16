@@ -75,22 +75,10 @@ rgl() {
   rg -p $@ | less
 }
 
-# Launch Ruby development environment
-ruby-shell() {
-  # Prevent nesting nix-shells
-  if [[ -n "$IN_NIX_SHELL" ]]; then
-    echo "Already in a nix-shell. Exit first to avoid nesting." >&2
-    return 1
-  fi
-
-  if [ $# -eq 0 ]; then
-    # No arguments - start interactive zsh session
-    nix-shell ~/.config/nix/shells/ruby.nix --command zsh
-  else
-    # Arguments provided - pass them through to nix-shell
-    nix-shell ~/.config/nix/shells/ruby.nix "$@"
-  fi
-}
+# Ruby environment
+export RBENV_ROOT=$HOME/.rbenv
+export PATH="$RBENV_ROOT/bin:$PATH"
+eval "$(rbenv init - zsh)"
 
 # Shell integrations
 eval "$(fzf --zsh)"
