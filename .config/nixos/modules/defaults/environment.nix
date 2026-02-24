@@ -46,7 +46,7 @@
     gnupg
     google-chrome
     gopass
-    gource
+    # gource
     grim
     # guvcview
     htop
