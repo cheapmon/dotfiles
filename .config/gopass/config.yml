@@ -9,4 +9,5 @@ parsing: true
 path: /home/seims/.local/share/gopass/stores/root
 safecontent: false
 mounts:
-    inaudito: /home/seims/git/passwords
+  inaudito: /home/seims/git/passwords
+  inaudito-otp: /home/seims/git/otp

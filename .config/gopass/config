@@ -15,3 +15,5 @@
 	autoclip = false
 [mounts "inaudito"]
 	path = /home/seims/git/passwords
+[mounts "inaudito-otp"]
+	path = /home/seims/git/otp
