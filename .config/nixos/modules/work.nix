@@ -6,10 +6,10 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    ansible
-    # beekeeper-studio
     # bruno
     # bruno-cli
+    ansible
+    appimage-run
     claude-code
     codebuff
     codex
@@ -18,6 +18,7 @@
     glab
     ollama-cpu
     opencode
+    postgresql
     slack
     sqlite
     terraform
