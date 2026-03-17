@@ -8,6 +8,9 @@ if [ "$WORK" = "yes" ]; then
   export ANTHROPIC_API_KEY=$(cat $SECRETS/anthropic_api_key)
   export IA_PASSWORDSTORE_MOUNT="inaudito"
 
+  export AGENT_BROWSER_EXECUTABLE_PATH="$(which chromium)"
+  export PLAYWRIGHT_MCP_EXECUTABLE_PATH="$(which chromium)"
+
   # Project aliases
   source <(ls -d $HOME/git/architecture/apps/* | xargs -I% basename % | xargs -I% echo "alias %=\"cd $HOME/git/architecture/apps/%\"")
 
