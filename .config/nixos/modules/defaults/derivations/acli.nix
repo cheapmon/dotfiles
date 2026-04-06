@@ -6,7 +6,7 @@ stdenv.mkDerivation {
   name = "acli";
   src = fetchurl {
     url = "https://acli.atlassian.com/linux/latest/acli_linux_amd64/acli";
-    sha256 = "se4xxM9NG0ko/ThUSoMpzNSxAB/r+9iO4jpId2fLHKg=";
+    sha256 = "zIDmQTzI0nyCE4+Hw7QO92o+9KYAbSnh2vHtj9tODxo=";
   };
   unpackPhase = ''
     runHook preUnpack
