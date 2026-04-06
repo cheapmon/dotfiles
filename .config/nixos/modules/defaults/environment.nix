@@ -5,6 +5,8 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    # gource
+    # guvcview
     acpi
     age
     alacritty
@@ -46,9 +48,7 @@
     gnupg
     google-chrome
     gopass
-    # gource
     grim
-    # guvcview
     htop
     hypridle
     hyprlock
@@ -79,6 +79,7 @@
     ripgrep
     rsync
     rustup
+    sesh
     shikane
     signal-desktop
     simple-scan
@@ -89,6 +90,7 @@
     spotify-cli-linux
     swappy
     telegram-desktop
+    television
     texliveFull
     thunderbird
     tmux
@@ -108,6 +110,7 @@
     xdg-desktop-portal-hyprland
     yq
     zoom-us
+    zoxide
     zsh
 
     # Neovim
