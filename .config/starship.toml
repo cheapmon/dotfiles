@@ -1,0 +1,14 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '''
+$directory$git_branch$ruby
+[;](bold) '''
+
+[directory]
+format = '[$path](bold blue) '
+
+[git_branch]
+format = '[$branch(:$remote_branch)](243) '
+
+[ruby]
+format = '[($version )](red)'

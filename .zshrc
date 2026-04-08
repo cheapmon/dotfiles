@@ -9,13 +9,13 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Install prompt
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit ice depth=1
 
 # Plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# zinit light Aloxaf/fzf-tab
 
 # Snippets
 zinit snippet OMZP::globalias
@@ -24,9 +24,6 @@ zinit snippet OMZP::globalias
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zinit cdreplay -q
-
-# Setup prompt
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # History
 HISTSIZE=10000
@@ -75,11 +72,6 @@ rgl() {
   rg -p $@ | less
 }
 
-# Ruby environment
-export RBENV_ROOT=$HOME/.rbenv
-export PATH="$RBENV_ROOT/bin:$PATH"
-eval "$(rbenv init - zsh)"
-
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(pay-respects zsh)"
@@ -87,6 +79,8 @@ eval "$(tmuxifier init -)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(tv init zsh)"
+eval "$(mise activate zsh)"
+eval "$(starship init zsh)"
 source <(just --completions bash)
 source <(sesh completion zsh)
 

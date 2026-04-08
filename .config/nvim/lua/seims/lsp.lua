@@ -56,19 +56,26 @@ vim.lsp.config("rubocop", {
 })
 vim.lsp.enable("rubocop")
 
--- solargraph
-vim.lsp.config("solargraph", {
-  cmd = { "solargraph stdio" },
-  settings = {
-    solargraph = {
-      diagnostics = true,
-    },
+-- ruby-lsp
+vim.lsp.config("ruby-lsp", {
+  cmd = function(dispatchers, config)
+    return vim.lsp.rpc.start(
+      { 'ruby-lsp' },
+      dispatchers,
+      config and config.root_dir and { cwd = config.cmd_cwd or config.root_dir }
+    )
+  end,
+  filetypes = { 'ruby', 'eruby' },
+  root_markers = { 'Gemfile', '.git' },
+  init_options = {
+    formatter = 'auto',
   },
-  init_options = { formatting = true },
-  filetypes = { "ruby" },
-  root_markers = { "Gemfile", ".git" },
+  reuse_client = function(client, config)
+    config.cmd_cwd = config.root_dir
+    return client.config.cmd_cwd == config.cmd_cwd
+  end,
 })
-vim.lsp.enable("solargraph")
+vim.lsp.enable("ruby-lsp")
 
 -- tinymist
 vim.lsp.config("tinymist", {

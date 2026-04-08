@@ -18,6 +18,7 @@
     ./defaults/programs.nix
     ./defaults/security.nix
     ./defaults/services.nix
+    ./defaults/system.nix
     ./defaults/time.nix
     ./defaults/users.nix
     ./defaults/virtualisation.nix

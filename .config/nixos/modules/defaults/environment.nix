@@ -66,6 +66,7 @@
     lolcat
     magic-wormhole
     mako
+    mise
     nautilus
     networkmanagerapplet
     nh
@@ -74,7 +75,6 @@
     pay-respects
     pinentry-tty
     postman
-    rbenv
     repgrep
     ripgrep
     rsync
@@ -89,6 +89,7 @@
     spotify
     spotify-cli-linux
     swappy
+    starship
     telegram-desktop
     television
     texliveFull
@@ -112,6 +113,12 @@
     zoom-us
     zoxide
     zsh
+
+    # Ruby
+    libyaml
+    libffi
+    libpq
+    openssl.dev
 
     # Neovim
     lua-language-server
