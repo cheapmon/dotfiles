@@ -5,6 +5,7 @@ vim.lsp.enable({
   "jsonls",
   "lua_ls",
   "ruby-lsp",
+  "taplo",
   "tinymist",
   "ts_ls",
 })

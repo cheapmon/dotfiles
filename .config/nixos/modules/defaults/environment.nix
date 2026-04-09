@@ -121,13 +121,14 @@
     openssl.dev
 
     # Neovim
+    bash-language-server
     lua-language-server
     neovim
-    nodejs
-    bash-language-server
     nodePackages.typescript-language-server
     nodePackages.vscode-json-languageserver
+    nodejs
     rust-analyzer
+    taplo
     texlab
     tinymist
     tree-sitter
