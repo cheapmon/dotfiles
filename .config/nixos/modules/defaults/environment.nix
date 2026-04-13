@@ -124,8 +124,8 @@
     bash-language-server
     lua-language-server
     neovim
-    nodePackages.typescript-language-server
-    nodePackages.vscode-json-languageserver
+    typescript-language-server
+    vscode-json-languageserver
     nodejs
     rust-analyzer
     taplo
