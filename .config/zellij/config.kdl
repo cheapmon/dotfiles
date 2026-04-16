@@ -144,9 +144,22 @@ keybinds clear-defaults=true {
       SwitchToMode "normal";
     }
 
+    bind "o" {
+      Run "zj-url" {
+        name "zj-url"
+        floating true
+        close_on_exit true
+
+        x 0
+        y 0
+        width "100%"
+        height "100%"
+      };
+      SwitchToMode "normal";
+    }
     bind "Shift p" {
-      Run "app" {
-        name "app"
+      Run "zj-app" {
+        name "zj-app"
         floating true
         close_on_exit true
 
@@ -158,8 +171,8 @@ keybinds clear-defaults=true {
       SwitchToMode "normal";
     }
     bind "Shift o" {
-      Run "session" {
-        name "session"
+      Run "zj-session" {
+        name "zj-session"
         floating true
         close_on_exit true
 

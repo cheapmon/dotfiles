@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+f="$(mktemp)"
+
+out="$(zellij action list-panes --json | jq ".[] | select(.is_focused) | .id")" || exit 0
+readarray -t pane_ids <<<"$out"
+
+for pane_id in "${pane_ids[@]}"; do
+  zellij action dump-screen --pane-id="$pane_id" >> "$f"
+done
+
+if urls=$(grep -oP 'https?://[^\s]+' "$f"); then
+  url=$(printf '%s\n' "${urls[@]}" | fzf --popup 100%) || exit 0
+  xdg-open "$url"
+  rm -f "$f"
+else
+  rm -f "$f"
+  exit 0
+fi
