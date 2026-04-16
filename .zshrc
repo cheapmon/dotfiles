@@ -66,6 +66,7 @@ alias g="git"
 alias dc="docker-compose"
 alias n="nvim"
 alias j="just"
+alias z="zellij"
 
 # Functions
 rgl() {
