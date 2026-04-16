@@ -1,112 +1,3 @@
-theme "catppuccin-mocha"
-
-session_name "main"
-attach_to_session true
-
-show_startup_tips false
-show_release_notes false
-
-copy_on_select true
-
-plugins {
-  vim-zellij-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
-  zellij-choose-tree location="https://github.com/laperlej/zellij-choose-tree/releases/download/v0.4.2/zellij-choose-tree.wasm"
-  zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
-}
-
-keybinds clear-defaults=true {
-  shared {
-    bind "Ctrl Space" { SwitchToMode "tmux"; }
-
-    // bind "Ctrl h" { MoveFocus "Left"; }
-    // bind "Ctrl j" { MoveFocus "Down"; }
-    // bind "Ctrl k" { MoveFocus "Up"; }
-    // bind "Ctrl l" { MoveFocus "Right"; }
-
-    bind "Alt h" { GoToPreviousTab; }
-    bind "Alt l" { GoToNextTab; }
-  }
-
-  shared_except "locked" {
-    bind "Ctrl h" {
-      MessagePlugin "vim-zellij-navigator" {
-        name "move_focus";
-        payload "left";
-
-        move_mod "ctrl";
-        use_arrow_keys "false";
-      };
-    }
-
-    bind "Ctrl j" {
-      MessagePlugin "vim-zellij-navigator" {
-        name "move_focus";
-        payload "down";
-
-        move_mod "ctrl";
-        use_arrow_keys "false";
-      };
-    }
-
-    bind "Ctrl k" {
-      MessagePlugin "vim-zellij-navigator" {
-        name "move_focus";
-        payload "up";
-
-        move_mod "ctrl";
-        use_arrow_keys "false";
-      };
-    }
-
-    bind "Ctrl l" {
-      MessagePlugin "vim-zellij-navigator" {
-        name "move_focus";
-        payload "right";
-
-        move_mod "ctrl";
-        use_arrow_keys "false";
-      };
-    }
-  }
-
-  tmux {
-    bind "Esc" { SwitchToMode "normal"; }
-
-    bind "Space" { NextSwapLayout; SwitchToMode "normal"; }
-
-    bind "|" { NewPane "right"; SwitchToMode "normal"; }
-    bind "-" { NewPane "down"; SwitchToMode "normal"; }
-
-    bind "c" { NewTab; SwitchToMode "normal"; }
-    bind "q" { CloseTab; SwitchToMode "normal"; }
-    bind "," { SwitchToMode "renametab"; TabNameInput 0; }
-
-    bind "1" { GoToTab 1; }
-    bind "2" { GoToTab 2; }
-    bind "3" { GoToTab 3; }
-    bind "4" { GoToTab 4; }
-    bind "5" { GoToTab 5; }
-    bind "6" { GoToTab 6; }
-    bind "7" { GoToTab 7; }
-    bind "8" { GoToTab 8; }
-    bind "9" { GoToTab 9; }
-    bind "0" { GoToTab 10; }
-
-    bind "s" {
-      LaunchOrFocusPlugin "zellij-choose-tree" {
-        floating true
-        move_to_focused_tab true
-        show_plugins false
-      }; SwitchToMode "Locked";
-    }
-  }
-
-  renametab {
-    bind "Esc" { UndoRenameTab; SwitchToMode "normal"; }
-    bind "Enter" { SwitchToMode "normal"; }
-  }
-}
-
 themes {
   catppuccin-mocha {
     bg "#585b70"
@@ -120,5 +11,184 @@ themes {
     cyan "#89dceb"
     black "#181825"
     white "#cdd6f4"
+  }
+}
+
+theme "catppuccin-mocha"
+
+ui {
+  pane_frames {
+    rounded_corners true
+  }
+}
+
+session_name "main"
+attach_to_session true
+
+show_startup_tips false
+show_release_notes false
+
+copy_on_select true
+
+plugins {
+  // vim-zellij-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+  zellij-choose-tree location="https://github.com/laperlej/zellij-choose-tree/releases/download/v0.4.2/zellij-choose-tree.wasm"
+  zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+    color_bg      "#585b70"
+    color_fg      "#cdd6f4"
+    color_red     "#f38ba8"
+    color_green   "#a6e3a1"
+    color_blue    "#89b4fa"
+    color_yellow  "#f9e2af"
+    color_magenta "#f5c2e7"
+    color_orange  "#fab387"
+    color_cyan    "#89dceb"
+    color_black   "#181825"
+    color_white   "#cdd6f4"
+
+    hide_frame_for_single_pane "false"
+
+    format_left  "{tabs}"
+    format_right "{swap_layout} {mode} #[bg=$bg,fg=$fg] {session} "
+
+    tab_normal "#[bg=$white,fg=$black] {index} #[bg=$bg,fg=$fg] {name} "
+    tab_active "#[bg=$magenta,fg=$black] {index} #[bg=$bg,fg=$fg] {name} "
+    tab_rename "#[bg=$red,fg=$black] {index} #[bg=$bg,fg=$fg] {name} "
+
+    tab_separator " "
+
+    mode_normal        "#[bg=$green,fg=$black] {name} "
+    mode_locked        "#[bg=$white,fg=$black] {name} "
+    mode_resize        "#[bg=$white,fg=$black] {name} "
+    mode_pane          "#[bg=$white,fg=$black] {name} "
+    mode_tab           "#[bg=$white,fg=$black] {name} "
+    mode_scroll        "#[bg=$white,fg=$black] {name} "
+    mode_enter_search  "#[bg=$white,fg=$black] {name} "
+    mode_search        "#[bg=$white,fg=$black] {name} "
+    mode_rename_tab    "#[bg=$white,fg=$black] {name} "
+    mode_rename_pane   "#[bg=$white,fg=$black] {name} "
+    mode_session       "#[bg=$white,fg=$black] {name} "
+    mode_move          "#[bg=$white,fg=$black] {name} "
+    mode_prompt        "#[bg=$white,fg=$black] {name} "
+    mode_tmux          "#[bg=$red,fg=$black] {name} "
+
+    swap_layout_format "#[bg=$blue,fg=$black] {name} "
+    swap_layout_hide_if_empty "true"
+  }
+}
+
+load_plugins {
+  "zellij:link"
+}
+
+keybinds clear-defaults=true {
+  shared_except "locked" {
+    bind "Ctrl Space" { SwitchToMode "tmux"; }
+
+    bind "Ctrl h" { MoveFocus "Left"; }
+    bind "Ctrl j" { MoveFocus "Down"; }
+    bind "Ctrl k" { MoveFocus "Up"; }
+    bind "Ctrl l" { MoveFocus "Right"; }
+
+    bind "Alt h" { GoToPreviousTab; }
+    bind "Alt l" { GoToNextTab; }
+  }
+
+  shared_except "normal" "renamepane" "renametab" {
+    bind "Esc" { SwitchToMode "normal"; }
+  }
+
+  tmux {
+    bind "Space" { NextSwapLayout; SwitchToMode "normal"; }
+
+    bind "|" { NewPane "right"; SwitchToMode "normal"; }
+    bind "-" { NewPane "down"; SwitchToMode "normal"; }
+
+    bind "x" { CloseFocus; SwitchToMode "normal"; }
+    bind "n" { SwitchToMode "renamepane"; PaneNameInput 0; }
+
+    bind "c" { NewTab; SwitchToMode "normal"; }
+    bind "q" { CloseTab; SwitchToMode "normal"; }
+    bind "," { SwitchToMode "renametab"; TabNameInput 0; }
+    bind "Tab" { ToggleTab; SwitchToMode "normal"; }
+
+    bind "1" { GoToTab 1; SwitchToMode "normal"; }
+    bind "2" { GoToTab 2; SwitchToMode "normal"; }
+    bind "3" { GoToTab 3; SwitchToMode "normal"; }
+    bind "4" { GoToTab 4; SwitchToMode "normal"; }
+    bind "5" { GoToTab 5; SwitchToMode "normal"; }
+    bind "6" { GoToTab 6; SwitchToMode "normal"; }
+    bind "7" { GoToTab 7; SwitchToMode "normal"; }
+    bind "8" { GoToTab 8; SwitchToMode "normal"; }
+    bind "9" { GoToTab 9; SwitchToMode "normal"; }
+    bind "0" { GoToTab 10; SwitchToMode "normal"; }
+
+    bind "f" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+    bind "Shift f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+
+    bind "r" { SwitchToMode "resize"; }
+    bind "m" { SwitchToMode "move"; }
+    bind "[" { SwitchToMode "scroll"; }
+    bind "/" { SwitchToMode "entersearch"; }
+
+    bind "d" { Detach; }
+
+    bind "s" {
+      LaunchOrFocusPlugin "zellij-choose-tree" {
+        floating true
+        move_to_focused_tab true
+        show_plugins false
+      };
+      SwitchToMode "normal";
+    }
+  }
+
+  renamepane {
+    bind "Esc" { UndoRenamePane; SwitchToMode "normal"; }
+    bind "Enter" { SwitchToMode "normal"; }
+  }
+
+  renametab {
+    bind "Esc" { UndoRenameTab; SwitchToMode "normal"; }
+    bind "Enter" { SwitchToMode "normal"; }
+  }
+
+  resize {
+    bind "h" { Resize "Left"; }
+    bind "j" { Resize "Down"; }
+    bind "k" { Resize "Up"; }
+    bind "l" { Resize "Right"; }
+  }
+
+  move {
+    bind "h" { MovePane "Left"; }
+    bind "j" { MovePane "Down"; }
+    bind "k" { MovePane "Up"; }
+    bind "l" { MovePane "Right"; }
+
+    bind "Shift h" { MoveTab "Left"; }
+    bind "Shift l" { MoveTab "Right"; }
+  }
+
+  shared_among "scroll" "search" {
+    bind "/" { SwitchToMode "entersearch"; }
+
+    bind "j" { ScrollDown; }
+    bind "k" { ScrollUp; }
+
+    bind "Shift j" { HalfPageScrollDown; }
+    bind "Shift k" { HalfPageScrollUp; }
+
+    bind "g" { ScrollToTop; }
+    bind "Shift g" { ScrollToBottom; }
+  }
+
+  entersearch {
+    bind "Enter" { SwitchToMode "search"; }
+  }
+
+  search {
+    bind "n" { Search "down"; }
+    bind "p" { Search "up"; }
   }
 }

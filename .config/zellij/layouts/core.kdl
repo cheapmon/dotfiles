@@ -1,5 +1,5 @@
 layout {
-  cwd "~"
+  cwd "~/git/architecture/apps/core"
 
   swap_tiled_layout name="vertical" {
     tab {
@@ -30,5 +30,25 @@ layout {
     pane size=1 borderless=true {
       plugin location="zjstatus"
     }
+  }
+
+  tab name="nvim" {
+    pane command="nvim" {
+      args "."
+    }
+  }
+  tab name="console" {
+    pane command="docker-compose" {
+      args "run" "--label" "traefik.enable=false" "--rm" "core" "rails" "c"
+    }
+  }
+  tab name="zsh" focus=true {
+    pane command="docker-compose" {
+      args "logs" "-f" "core" "--tail=100"
+    }
+    pane name="zsh" focus=true
+  }
+  tab name="opencode" {
+    pane command="opencode"
   }
 }
