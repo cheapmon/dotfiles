@@ -33,22 +33,22 @@ layout {
   }
 
   tab name="nvim" {
-    pane command="nvim" {
+    pane name="nvim" command="nvim" {
       args "."
     }
   }
   tab name="console" {
-    pane command="docker-compose" {
+    pane name="console" command="docker-compose" {
       args "run" "--label" "traefik.enable=false" "--rm" "core" "rails" "c"
     }
   }
   tab name="zsh" focus=true {
-    pane command="docker-compose" {
+    pane name="logs" command="docker-compose" {
       args "logs" "-f" "core" "--tail=100"
     }
     pane name="zsh" focus=true
   }
   tab name="opencode" {
-    pane command="opencode"
+    pane name="opencode" command="opencode"
   }
 }

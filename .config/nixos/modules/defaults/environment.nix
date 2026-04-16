@@ -109,6 +109,7 @@
     yq
     zellij
     zoom-us
+    zoxide
     zsh
 
     # Ruby

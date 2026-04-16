@@ -33,6 +33,7 @@ copy_on_select true
 plugins {
   // vim-zellij-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
   zellij-choose-tree location="https://github.com/laperlej/zellij-choose-tree/releases/download/v0.4.2/zellij-choose-tree.wasm"
+  zellij-switch location="https://github.com/mostafaqanbaryan/zellij-switch/releases/download/0.2.1/zellij-switch.wasm"
   zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
     color_bg      "#585b70"
     color_fg      "#cdd6f4"
@@ -79,6 +80,7 @@ plugins {
 
 load_plugins {
   "zellij:link"
+  "zellij-switch"
 }
 
 keybinds clear-defaults=true {
@@ -138,6 +140,33 @@ keybinds clear-defaults=true {
         floating true
         move_to_focused_tab true
         show_plugins false
+      };
+      SwitchToMode "normal";
+    }
+
+    bind "Shift p" {
+      Run "app" {
+        name "app"
+        floating true
+        close_on_exit true
+
+        x 0
+        y 0
+        width "100%"
+        height "100%"
+      };
+      SwitchToMode "normal";
+    }
+    bind "Shift o" {
+      Run "session" {
+        name "session"
+        floating true
+        close_on_exit true
+
+        x 0
+        y 0
+        width "100%"
+        height "100%"
       };
       SwitchToMode "normal";
     }

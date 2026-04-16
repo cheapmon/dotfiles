@@ -66,7 +66,6 @@ alias g="git"
 alias dc="docker-compose"
 alias n="nvim"
 alias j="just"
-alias z="zellij"
 
 # Functions
 rgl() {
@@ -74,11 +73,12 @@ rgl() {
 }
 
 # Shell integrations
-eval "$(fzf --zsh)"
-eval "$(tmuxifier init -)"
 eval "$(direnv hook zsh)"
+eval "$(fzf --zsh)"
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
+eval "$(tmuxifier init -)"
+eval "$(zoxide init zsh)"
 source <(just --completions bash)
 
 # Remove folder

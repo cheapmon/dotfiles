@@ -1,95 +1,56 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# app
-# Open architecture app or tmuxifier session in tmux.
-#
-# Uses fzf to select from merged, deduplicated, sorted list of:
-#   - Tmuxifier sessions
-#   - Architecture app directories
-#
-# Then:
-#   - Loads existing tmuxifier session if available, OR
-#   - Creates new tmux session in the app directory
-#
-# Dependencies: fzf-tmux, tmux, tmuxifier, ripgrep (rg)
-# Side effects: Creates or switches to tmux session
+declare -a paths layouts sessions
+declare -A apps
 
-# Initialize tmuxifier if the environment wasn’t prepared by the parent shell.
-if [ -z "${TMUXIFIER_LAYOUT_PATH:-}" ]; then
-  case ":$PATH:" in
-    *":$HOME/.tmuxifier/bin:"*) ;;
-    *) PATH="$PATH:$HOME/.tmuxifier/bin" ;;
-  esac
-
-  if command -v tmuxifier >/dev/null 2>&1; then
-    TMUXIFIER_NO_COMPLETE="${TMUXIFIER_NO_COMPLETE:-1}"
-    eval "$(tmuxifier init -)"
-  fi
+# Build apps list
+paths+=(~/git/architecture)
+if [[ -d ~/git/architecture/apps ]]; then
+  for d in ~/git/architecture/apps/*; do
+    [[ -d "$d" ]] && paths+=("$d")
+  done
 fi
 
-# Check dependencies
-for cmd in fzf-tmux tmux tmuxifier rg; do
-  if ! command -v "$cmd" >/dev/null 2>&1; then
-    echo "Error: Required command '$cmd' not found" >&2
-    exit 1
-  fi
+for path in "${paths[@]}"; do
+  b=$(basename "$path")
+  apps[$b]=$path
 done
 
-APPS_DIR="$HOME/git/architecture/apps"
+# Get available layouts
+for f in ~/.config/zellij/layouts/*.kdl; do
+  [[ -f "$f" ]] && layouts+=("$(basename -s .kdl "$f")")
+done
 
-if [ ! -d "$APPS_DIR" ]; then
-  echo "Error: Architecture apps directory not found: $APPS_DIR" >&2
-  exit 1
-fi
+# Get active sessions
+mapfile -t sessions < <(zellij ls -s 2>/dev/null || true)
 
-# Check if apps directory is empty
-if [ -z "$(ls -A "$APPS_DIR")" ]; then
-  echo "Error: No projects found in $APPS_DIR" >&2
-  exit 1
-fi
+# Select app
+app=$(printf '%s\n' "${!apps[@]}" | sort | fzf --prompt "app " --style full) || exit 0
+path="${apps[$app]}"
 
-# Build merged, deduplicated, sorted list of sessions and apps
-sessions=$(tmuxifier list-sessions 2>/dev/null || echo "")
-apps=$(ls -1 "$APPS_DIR")
+# Find matching layout
+layout="app"
+for l in "${layouts[@]}"; do
+  [[ $l == "$app" ]] && layout=$l && break
+done
 
-# Merge and deduplicate
-merged_list=$(printf "%s\n%s" "$sessions" "$apps" | sort -u)
+# Check if session exists
+session=""
+for s in "${sessions[@]}"; do
+  [[ $s == "$app" ]] && session=$s && break
+done
 
-# Use fzf to select (allow cancellation)
-set +e
-app="$(echo "$merged_list" | fzf-tmux)"
-status=$?
-set -e
-
-if [ $status -ne 0 ] || [ -z "$app" ]; then
-  exit 0
-fi
-
-dir="$APPS_DIR/$app"
-inside_tmux=false
-if [ -n "${TMUX:-}" ] || [ -n "${TMUX_PANE:-}" ]; then
-  inside_tmux=true
-fi
-
-# Check if tmuxifier session exists
-if tmuxifier list-sessions | rg -q "^$app$"; then
-  tmuxifier load-session "$app"
-  if [ "$inside_tmux" = true ]; then
-    tmux switch -t "$app"
+if [[ -v ZELLIJ ]]; then
+  if [[ -n "$session" ]]; then
+    zellij pipe --plugin zellij-switch -- "--session ${app}"
+  else
+    zellij pipe --plugin zellij-switch -- "--session $app --cwd $path --layout $layout"
   fi
-  exit 0
-fi
-
-# Fall back to creating basic tmux session in app directory
-if [ ! -d "$dir" ]; then
-  echo "Error: Neither tmuxifier session nor app directory found for '$app'" >&2
-  exit 1
-fi
-
-if [ "$inside_tmux" = true ]; then
-  tmux new -ds "$app" -c "$dir" 2>/dev/null || true
-  tmux switch -t "$app"
 else
-  tmux new -As "$app" -c "$dir"
+  if [[ -n "$session" ]]; then
+    zellij attach "$app"
+  else
+    zellij --layout "$layout" attach -c "$app" options --default-cwd="$path"
+  fi
 fi
