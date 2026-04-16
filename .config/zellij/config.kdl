@@ -31,7 +31,7 @@ show_release_notes false
 copy_on_select true
 
 plugins {
-  // vim-zellij-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+  vim-zellij-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
   zellij-choose-tree location="https://github.com/laperlej/zellij-choose-tree/releases/download/v0.4.2/zellij-choose-tree.wasm"
   zellij-switch location="https://github.com/mostafaqanbaryan/zellij-switch/releases/download/0.2.1/zellij-switch.wasm"
   zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
@@ -80,6 +80,7 @@ plugins {
 
 load_plugins {
   "zellij:link"
+  "vim-zellij-navigator"
   "zellij-switch"
 }
 
@@ -87,10 +88,33 @@ keybinds clear-defaults=true {
   shared_except "locked" {
     bind "Ctrl Space" { SwitchToMode "tmux"; }
 
-    bind "Ctrl h" { MoveFocus "Left"; }
-    bind "Ctrl j" { MoveFocus "Down"; }
-    bind "Ctrl k" { MoveFocus "Up"; }
-    bind "Ctrl l" { MoveFocus "Right"; }
+    bind "Ctrl h" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "left";
+      };
+    }
+
+    bind "Ctrl j" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "down";
+      };
+    }
+
+    bind "Ctrl k" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "up";
+      };
+    }
+
+    bind "Ctrl l" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "right";
+      };
+    }
 
     bind "Alt h" { GoToPreviousTab; }
     bind "Alt l" { GoToNextTab; }
