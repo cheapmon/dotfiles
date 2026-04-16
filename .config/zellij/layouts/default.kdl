@@ -1,6 +1,4 @@
 layout {
-  cwd "~"
-
   swap_tiled_layout name="vertical" {
     tab {
       pane split_direction="vertical" {
