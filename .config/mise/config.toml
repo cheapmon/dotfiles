@@ -4,5 +4,13 @@ idiomatic_version_file_enable_tools = ["ruby"]
 [settings.ruby]
 compile = false
 
+[settings.python]
+compile = false
+
+[settings.node]
+compile = false
+
 [tools]
-ruby = "4.0.2"
+node = "latest"
+python = "latest"
+ruby = "latest"

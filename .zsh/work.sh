@@ -34,8 +34,4 @@ if [ "$WORK" = "yes" ]; then
     chmod 600 $ANSIBLE_PRIVATE_KEY_FILE
   }
   alias ab="setup_ansible"
-
-  openspec() {
-    npx @fission-ai/openspec@latest -- "$@"
-  }
 fi
