@@ -1,5 +1,1 @@
 **/*
-
-# tmuxifier: ignore core files, track only custom layouts
-.tmuxifier/*
-!.tmuxifier/layouts/

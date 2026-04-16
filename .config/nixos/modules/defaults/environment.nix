@@ -91,7 +91,6 @@
     telegram-desktop
     texliveFull
     thunderbird
-    tmux
     tokei
     unzip
     upower

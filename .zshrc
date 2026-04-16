@@ -49,7 +49,7 @@ zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa $realpath'
 bindkey -e
 
 # Environment
-export PATH="$PATH:$HOME/.tmuxifier/bin:$HOME/bin"
+export PATH="$PATH:$HOME/bin"
 export LESS="-R"
 export GLOBALIAS_FILTER_VALUES=(d ls ia iacli)
 export DIRENV_LOG_FORMAT=
@@ -77,7 +77,6 @@ eval "$(direnv hook zsh)"
 eval "$(fzf --zsh)"
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
-eval "$(tmuxifier init -)"
 eval "$(zoxide init zsh)"
 source <(just --completions bash)
 

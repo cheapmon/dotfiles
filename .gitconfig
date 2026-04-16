@@ -6,11 +6,11 @@ name = Simon Kaleschke
 [alias]
 ap = add --patch
 co = checkout
-cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
+cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf --popup 100%`
 cl = clean -fd
-cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf-tmux`
+cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf --popup 100%`
 br = branch
-bd = !git branch -D `git branch | fzf-tmux -m`
+bd = !git branch -D `git branch | fzf -m --popup 100%`
 cm = commit
 st = status
 pl = pull

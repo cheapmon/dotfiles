@@ -149,24 +149,6 @@ else
     exit 1
 fi
 
-# Install tmuxifier
-echo -e "${BLUE}→ Installing tmuxifier${NC}"
-log "Installing tmuxifier"
-
-TMUXIFIER_DIR="$HOME/.tmuxifier"
-TMUXIFIER_REPO="https://github.com/cappuMUC/tmuxifier.git"
-
-# Layouts directory exists from dotfiles checkout, clone tmuxifier and merge
-log "Cloning tmuxifier from $TMUXIFIER_REPO"
-if nix-shell -p git rsync --command "git clone $TMUXIFIER_REPO $TMUXIFIER_DIR.tmp && rsync -a $TMUXIFIER_DIR.tmp/ $TMUXIFIER_DIR/ && rm -rf $TMUXIFIER_DIR.tmp" >> "$LOG_FILE" 2>&1; then
-    echo -e "${GREEN}✓ Installed tmuxifier${NC}"
-    log "Successfully installed tmuxifier (preserved layouts)"
-else
-    echo -e "${RED}Error: Failed to install tmuxifier${NC}"
-    log "ERROR: Failed to install tmuxifier"
-    exit 1
-fi
-
 # Rebuild NixOS system
 echo -e "${BLUE}→ Rebuilding NixOS system (this may take a while)${NC}"
 log "Starting NixOS rebuild"

@@ -6,19 +6,12 @@
 }: {
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
-    users = let
-      tpm = pkgs.callPackage ./derivations/tpm.nix {};
-    in {
+    users = {
       seims = {
         home.stateVersion = "23.11";
 
         home.username = "seims";
         home.homeDirectory = "/home/seims";
-
-        home.file.".tmux/plugins/tpm" = {
-          source = "${tpm}/share/tmux/plugins/tpm";
-          recursive = true;
-        };
 
         services.mako.enable = true;
 
