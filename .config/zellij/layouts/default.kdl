@@ -1,0 +1,77 @@
+layout {
+  swap_tiled_layout name="default" {
+    tab {
+      pane
+    }
+  }
+
+  swap_tiled_layout name="vertical" {
+    tab {
+      pane split_direction="vertical" {
+        children
+      }
+    }
+  }
+
+  swap_tiled_layout name="horizontal" {
+    tab {
+      pane split_direction="horizontal" {
+        children
+      }
+    }
+  }
+
+  swap_tiled_layout name="stacked" {
+    tab {
+      pane stacked=true {
+        children
+      }
+    }
+  }
+
+  default_tab_template {
+    children
+
+    pane size=1 borderless=true {
+      plugin location="zjstatus" {
+        color_bg      "#585b70"
+        color_fg      "#cdd6f4"
+        color_red     "#f38ba8"
+        color_green   "#a6e3a1"
+        color_blue    "#89b4fa"
+        color_yellow  "#f9e2af"
+        color_magenta "#f5c2e7"
+        color_orange  "#fab387"
+        color_cyan    "#89dceb"
+        color_black   "#181825"
+        color_white   "#cdd6f4"
+
+        format_left  "{tabs}"
+        format_right "{mode} #[bg=$bg,fg=$fg] {session} "
+
+        hide_frame_for_single_pane "false"
+
+        mode_normal        "#[bg=$green,fg=$black] {name} "
+        mode_locked        "#[bg=$white,fg=$black] {name} "
+        mode_resize        "#[bg=$white,fg=$black] {name} "
+        mode_pane          "#[bg=$white,fg=$black] {name} "
+        mode_tab           "#[bg=$white,fg=$black] {name} "
+        mode_scroll        "#[bg=$white,fg=$black] {name} "
+        mode_enter_search  "#[bg=$white,fg=$black] {name} "
+        mode_search        "#[bg=$white,fg=$black] {name} "
+        mode_rename_tab    "#[bg=$white,fg=$black] {name} "
+        mode_rename_pane   "#[bg=$white,fg=$black] {name} "
+        mode_session       "#[bg=$white,fg=$black] {name} "
+        mode_move          "#[bg=$white,fg=$black] {name} "
+        mode_prompt        "#[bg=$white,fg=$black] {name} "
+        mode_tmux          "#[bg=$red,fg=$black] {name} "
+
+        tab_normal "#[bg=$white,fg=$black] {index} #[bg=$bg,fg=$fg] {name} "
+        tab_active "#[bg=$magenta,fg=$black] {index} #[bg=$bg,fg=$fg] {name} "
+        tab_rename "#[bg=$red,fg=$black] {index} #[bg=$bg,fg=$fg] {name} "
+
+        tab_separator " "
+      }
+    }
+  }
+}

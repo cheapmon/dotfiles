@@ -1,0 +1,124 @@
+theme "catppuccin-mocha"
+
+session_name "main"
+attach_to_session true
+
+show_startup_tips false
+show_release_notes false
+
+copy_on_select true
+
+plugins {
+  vim-zellij-navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+  zellij-choose-tree location="https://github.com/laperlej/zellij-choose-tree/releases/download/v0.4.2/zellij-choose-tree.wasm"
+  zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
+}
+
+keybinds clear-defaults=true {
+  shared {
+    bind "Ctrl Space" { SwitchToMode "tmux"; }
+
+    // bind "Ctrl h" { MoveFocus "Left"; }
+    // bind "Ctrl j" { MoveFocus "Down"; }
+    // bind "Ctrl k" { MoveFocus "Up"; }
+    // bind "Ctrl l" { MoveFocus "Right"; }
+
+    bind "Alt h" { GoToPreviousTab; }
+    bind "Alt l" { GoToNextTab; }
+  }
+
+  shared_except "locked" {
+    bind "Ctrl h" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "left";
+
+        move_mod "ctrl";
+        use_arrow_keys "false";
+      };
+    }
+
+    bind "Ctrl j" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "down";
+
+        move_mod "ctrl";
+        use_arrow_keys "false";
+      };
+    }
+
+    bind "Ctrl k" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "up";
+
+        move_mod "ctrl";
+        use_arrow_keys "false";
+      };
+    }
+
+    bind "Ctrl l" {
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus";
+        payload "right";
+
+        move_mod "ctrl";
+        use_arrow_keys "false";
+      };
+    }
+  }
+
+  tmux {
+    bind "Esc" { SwitchToMode "normal"; }
+
+    bind "Space" { NextSwapLayout; SwitchToMode "normal"; }
+
+    bind "|" { NewPane "right"; SwitchToMode "normal"; }
+    bind "-" { NewPane "down"; SwitchToMode "normal"; }
+
+    bind "c" { NewTab; SwitchToMode "normal"; }
+    bind "q" { CloseTab; SwitchToMode "normal"; }
+    bind "," { SwitchToMode "renametab"; TabNameInput 0; }
+
+    bind "1" { GoToTab 1; }
+    bind "2" { GoToTab 2; }
+    bind "3" { GoToTab 3; }
+    bind "4" { GoToTab 4; }
+    bind "5" { GoToTab 5; }
+    bind "6" { GoToTab 6; }
+    bind "7" { GoToTab 7; }
+    bind "8" { GoToTab 8; }
+    bind "9" { GoToTab 9; }
+    bind "0" { GoToTab 10; }
+
+    bind "s" {
+      LaunchOrFocusPlugin "zellij-choose-tree" {
+        floating true
+        move_to_focused_tab true
+        show_plugins false
+      }; SwitchToMode "Locked";
+    }
+  }
+
+  renametab {
+    bind "Esc" { UndoRenameTab; SwitchToMode "normal"; }
+    bind "Enter" { SwitchToMode "normal"; }
+  }
+}
+
+themes {
+  catppuccin-mocha {
+    bg "#585b70"
+    fg "#cdd6f4"
+    red "#f38ba8"
+    green "#a6e3a1"
+    blue "#89b4fa"
+    yellow "#f9e2af"
+    magenta "#f5c2e7"
+    orange "#fab387"
+    cyan "#89dceb"
+    black "#181825"
+    white "#cdd6f4"
+  }
+}
