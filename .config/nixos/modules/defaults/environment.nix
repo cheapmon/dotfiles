@@ -72,14 +72,12 @@
     nh
     openssl
     pavucontrol
-    pay-respects
     pinentry-tty
     postman
     repgrep
     ripgrep
     rsync
     rustup
-    sesh
     shikane
     signal-desktop
     simple-scan
@@ -91,7 +89,6 @@
     swappy
     starship
     telegram-desktop
-    television
     texliveFull
     thunderbird
     tmux
@@ -112,7 +109,6 @@
     yq
     zellij
     zoom-us
-    zoxide
     zsh
 
     # Ruby

@@ -74,15 +74,11 @@ rgl() {
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(pay-respects zsh)"
 eval "$(tmuxifier init -)"
 eval "$(direnv hook zsh)"
-eval "$(zoxide init zsh)"
-eval "$(tv init zsh)"
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 source <(just --completions bash)
-source <(sesh completion zsh)
 
 # Remove folder
 rm -rf "$HOME/Downloads"
