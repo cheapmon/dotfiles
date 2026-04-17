@@ -43,8 +43,31 @@ layout {
     }
   }
   tab name="zsh" focus=true {
-    pane name="logs" command="docker-compose" {
-      args "logs" "-f" "core" "--tail=100"
+    pane stacked=true {
+      pane name="core" command="docker-compose" {
+        args "logs" "-f" "core" "--tail=100"
+      }
+      pane name="css" command="docker-compose" {
+        args "logs" "-f" "core-css" "--tail=100"
+      }
+      pane name="db" command="docker-compose" {
+        args "logs" "-f" "core-db" "--tail=100"
+      }
+      pane name="js" command="docker-compose" {
+        args "logs" "-f" "core-js" "--tail=100"
+      }
+      pane name="redis" command="docker-compose" {
+        args "logs" "-f" "core-redis" "--tail=100"
+      }
+      pane name="sidekiq" command="docker-compose" {
+        args "logs" "-f" "core-sidekiq" "--tail=100"
+      }
+      pane name="selenium" command="docker-compose" {
+        args "logs" "-f" "selenium" "--tail=100"
+      }
+      pane name="thumbor" command="docker-compose" {
+        args "logs" "-f" "thumbor" "--tail=100"
+      }
     }
     pane name="zsh" focus=true
   }
