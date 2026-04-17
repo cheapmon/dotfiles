@@ -1,0 +1,47 @@
+layout {
+  swap_tiled_layout name="vertical" {
+    tab {
+      pane split_direction="vertical" {
+        children
+      }
+    }
+  }
+
+  swap_tiled_layout name="horizontal" {
+    tab {
+      pane split_direction="horizontal" {
+        children
+      }
+    }
+  }
+
+  swap_tiled_layout name="stacked" {
+    tab {
+      pane stacked=true {
+        children
+      }
+    }
+  }
+
+  default_tab_template {
+    children
+    pane size=1 borderless=true {
+      plugin location="zjstatus"
+    }
+  }
+
+  tab name="nvim" {
+    pane name="nvim" command="nvim" {
+      args "."
+    }
+  }
+  tab name="console" {
+    pane name="console"
+  }
+  tab name="zsh" focus=true {
+    pane name="zsh"
+  }
+  tab name="opencode" {
+    pane name="opencode" command="opencode"
+  }
+}
