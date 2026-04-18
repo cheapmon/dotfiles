@@ -54,6 +54,7 @@ export LESS="-R"
 export GLOBALIAS_FILTER_VALUES=(d ls ia iacli)
 export DIRENV_LOG_FORMAT=
 export GPG_TTY=$(tty)
+export MANPAGER='nvim +Man!'
 
 # Secrets
 SECRETS="/run/user/$(id -u)/secrets"
