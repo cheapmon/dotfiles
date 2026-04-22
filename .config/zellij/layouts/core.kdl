@@ -72,6 +72,8 @@ layout {
     pane name="zsh" focus=true
   }
   tab name="opencode" {
-    pane name="opencode" command="opencode"
+    pane name="opencode" command="zsh" {
+      args "-c" "opencode"
+    }
   }
 }

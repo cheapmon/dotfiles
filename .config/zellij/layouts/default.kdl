@@ -29,4 +29,8 @@ layout {
       plugin location="zjstatus"
     }
   }
+
+  tab name="zsh" {
+    pane name="zsh"
+  }
 }
