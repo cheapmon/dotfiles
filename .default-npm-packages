@@ -1,3 +1,4 @@
 @fission-ai/openspec
 agent-browser
 playwright
+@openchamber/web
