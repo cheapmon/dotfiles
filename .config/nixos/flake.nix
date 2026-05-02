@@ -7,7 +7,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/hyprland?ref=v0.54.3";
+    hyprland = {
+      url = "github:hyprwm/hyprland?ref=v0.54.3";
+    };
+    hy3 = {
+      url = "github:outfoxxed/hy3?ref=hl0.54.2.1";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
