@@ -82,7 +82,6 @@ plugins {
 }
 
 load_plugins {
-  "zellij:link"
   "vim-zellij-navigator"
   "zellij-switch"
 }
