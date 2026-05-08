@@ -16,6 +16,12 @@
     csvlens
     gitlab-runner
     glab
+    (llm.withPlugins {
+      llm-anthropic = true;
+      llm-gemini = true;
+      llm-openai-plugin = true;
+      llm-perplexity = true;
+    })
     ollama-cpu
     opencode
     postgresql
