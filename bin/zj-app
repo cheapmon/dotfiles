@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-declare -a paths layouts sessions
+source "$(dirname "$0")/lib/zj-switch"
+
+declare -a paths
 declare -A apps
 
 # Build apps list
@@ -17,40 +19,14 @@ for path in "${paths[@]}"; do
   apps[$b]=$path
 done
 
-# Get available layouts
-for f in ~/.config/zellij/layouts/*.kdl; do
-  [[ -f "$f" ]] && layouts+=("$(basename -s .kdl "$f")")
-done
-
-# Get active sessions
-mapfile -t sessions < <(zellij ls -s 2>/dev/null || true)
-
 # Select app
 app=$(printf '%s\n' "${!apps[@]}" | sort | fzf --prompt "app " --style full) || exit 0
 path="${apps[$app]}"
 
 # Find matching layout
 layout="app"
-for l in "${layouts[@]}"; do
+while IFS= read -r l; do
   [[ $l == "$app" ]] && layout=$l && break
-done
+done < <(zj_layouts)
 
-# Check if session exists
-session=""
-for s in "${sessions[@]}"; do
-  [[ $s == "$app" ]] && session=$s && break
-done
-
-if [[ -v ZELLIJ ]]; then
-  if [[ -n "$session" ]]; then
-    zellij pipe --plugin zellij-switch -- "--session ${app}"
-  else
-    zellij pipe --plugin zellij-switch -- "--session $app --cwd $path --layout $layout"
-  fi
-else
-  if [[ -n "$session" ]]; then
-    zellij attach "$app"
-  else
-    zellij --layout "$layout" attach -c "$app" options --default-cwd="$path"
-  fi
-fi
+zj_switch "$app" "$path" "$layout"

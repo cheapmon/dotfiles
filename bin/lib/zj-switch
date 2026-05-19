@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+zj_layouts() {
+  local -a layouts=()
+  for f in ~/.config/zellij/layouts/*.kdl; do
+    [[ -f "$f" ]] && layouts+=("$(basename -s .kdl "$f")")
+  done
+  if [[ ${#layouts[@]} -gt 0 ]]; then
+    printf '%s\n' "${layouts[@]}"
+  fi
+}
+
+zj_sessions() {
+  zellij ls -s 2>/dev/null || true
+}
+
+zj_session_exists() {
+  local session="$1"
+  local s
+  while IFS= read -r s; do
+    [[ "$s" == "$session" ]] && return 0
+  done < <(zj_sessions)
+  return 1
+}
+
+zj_attached() {
+  [[ -v ZELLIJ ]]
+}
+
+zj_switch() {
+  local app="$1" path="${2:-}" layout="${3:-}"
+
+  if zj_session_exists "$app"; then
+    if zj_attached; then
+      # inside zellij, existing session
+      zellij pipe --plugin zellij-switch -- "--session ${app}"
+    else
+      # outside zellij, existing session
+      zellij attach "$app"
+    fi
+  else
+    if zj_attached; then
+      # inside zellij, new session
+      zellij pipe --plugin zellij-switch -- "--session $app --cwd $path --layout $layout"
+    else
+      # outside zellij, new session
+      zellij --layout "$layout" attach -c "$app" options --default-cwd="$path"
+    fi
+  fi
+}

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-declare -a paths layouts sessions
+source "$(dirname "$0")/lib/zj-switch"
+
+declare -a paths
 
 # Get zoxide paths
 mapfile -t paths < <(zoxide query --list 2>/dev/null || true)
@@ -11,38 +13,18 @@ if [[ ${#paths[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# Get available layouts
-for f in ~/.config/zellij/layouts/*.kdl; do
-  [[ -f "$f" ]] && layouts+=("$(basename -s .kdl "$f")")
-done
-
-# Get active sessions
-mapfile -t sessions < <(zellij ls -s 2>/dev/null || true)
-
 # Select path
 path=$(printf '%s\n' "${paths[@]}" | sort | fzf --prompt "path " --preview "ls {}" --style full) || exit 0
 app=$(basename "$path")
 
-# Check if session exists
-session=""
-for s in "${sessions[@]}"; do
-  [[ $s == "$app" ]] && session=$s && break
-done
-
-if [[ -n "$session" ]]; then
-  # Attach to existing session
-  if [[ -v ZELLIJ ]]; then
-    zellij pipe --plugin zellij-switch -- "--session ${app}"
-  else
-    zellij attach "$app"
+# Prompt for layout only if no existing session
+layout=""
+if ! zj_session_exists "$app"; then
+  if ! zj_layouts | grep -q .; then
+    echo "No zellij layouts found in ~/.config/zellij/layouts" >&2
+    exit 1
   fi
-else
-  # Create new session - select layout
-  layout=$(printf '%s\n' "${layouts[@]}" | sort | fzf --prompt "layout " --style full) || exit 0
-
-  if [[ -v ZELLIJ ]]; then
-    zellij pipe --plugin zellij-switch -- "--session $app --cwd $path --layout $layout"
-  else
-    zellij --layout "$layout" attach -c "$app" options --default-cwd="$path"
-  fi
+  layout=$(zj_layouts | sort | fzf --prompt "layout " --style full) || exit 0
 fi
+
+zj_switch "$app" "$path" "$layout"

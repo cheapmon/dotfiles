@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$(dirname "$0")/lib/zj-switch"
+
+if ! zj_sessions | grep -q .; then
+  echo "No active zellij sessions found" >&2
+  exit 1
+fi
+
+session=$(zj_sessions | sort | fzf --prompt "session " --style full) || exit 0
+
+zj_switch "$session"
