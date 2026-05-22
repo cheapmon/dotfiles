@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Secrets
+SECRETS="/run/user/$(id -u)/secrets"
+if [ -d "$SECRETS" ]; then
+  GITLAB_API_TOKEN=$(cat "$SECRETS/api_token")
+  DIGITALOCEAN_TOKEN=$(cat "$SECRETS/digitalocean_token")
+  ANTHROPIC_API_KEY=$(cat "$SECRETS/anthropic_api_key")
+
+  export GITLAB_API_TOKEN DIGITALOCEAN_TOKEN ANTHROPIC_API_KEY
+fi
+
+# direnv & mise
+if [ -f ".envrc" ]; then
+  eval "$(direnv export bash)"
+  eval "$(mise activate bash)"
+fi
+
+exec "$@"

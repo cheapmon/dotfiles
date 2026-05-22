@@ -31,8 +31,8 @@ layout {
   }
 
   tab name="nvim" {
-    pane name="nvim" command="nvim" {
-      args "."
+    pane name="nvim" command="with-env" {
+      args "nvim" "."
     }
   }
   tab name="console" {
@@ -42,6 +42,8 @@ layout {
     pane name="zsh"
   }
   tab name="opencode" {
-    pane name="opencode" command="opencode"
+    pane name="opencode" command="with-env" {
+      args "opencode" "."
+    }
   }
 }
