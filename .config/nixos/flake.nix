@@ -8,10 +8,10 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland?ref=v0.54.3";
+      url = "github:hyprwm/hyprland?ref=v0.55.4";
     };
     hy3 = {
-      url = "github:outfoxxed/hy3?ref=hl0.54.2.1";
+      url = "github:outfoxxed/hy3?ref=hl0.55.0";
       inputs.hyprland.follows = "hyprland";
     };
 
