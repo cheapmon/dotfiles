@@ -16,6 +16,12 @@ x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
 x-scheme-handler/about=firefox-devedition.desktop
 x-scheme-handler/unknown=firefox-devedition.desktop
+x-scheme-handler/slack=slack.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-X0UKQ3.desktop
+message/rfc822=userapp-Thunderbird-X0UKQ3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-X0UKQ3.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-UM2LR3.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox-developer-edition.desktop;
@@ -29,3 +35,6 @@ application/xhtml+xml=firefox-developer-edition.desktop;
 application/x-extension-xhtml=firefox-developer-edition.desktop;
 application/x-extension-xht=firefox-developer-edition.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-X0UKQ3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-X0UKQ3.desktop;
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-UM2LR3.desktop;
