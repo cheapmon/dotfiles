@@ -2,3 +2,5 @@ Justfile
 
 # Age encryption keys
 .config/age/
+
+**/.claude/settings.local.json
