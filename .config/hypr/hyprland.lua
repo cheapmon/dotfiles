@@ -257,7 +257,7 @@ hl.window_rule({
 
 hl.window_rule({ match = { class = "firefox-devedition" }, workspace = "6" })
 hl.window_rule({ match = { class = "thunderbird" },       workspace = "7" })
-hl.window_rule({ match = { class = "Slack" },             workspace = "8" })
-hl.window_rule({ match = { class = "Element" },           workspace = "9" })
+hl.window_rule({ match = { class = "slack" },             workspace = "8" })
+hl.window_rule({ match = { class = "element" },           workspace = "9" })
 hl.window_rule({ match = { class = "signal" },            workspace = "9" })
 hl.window_rule({ match = { class = "spotify" },           workspace = "10" })
