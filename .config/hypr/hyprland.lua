@@ -129,13 +129,6 @@ hl.config({
     },
 })
 
--- Cursor
-hl.config({
-    cursor = {
-        no_hardware_cursors = true,
-    },
-})
-
 -- https://wiki.hypr.land/Configuring/Variables/#input
 hl.config({
     input = {
