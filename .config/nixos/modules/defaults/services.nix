@@ -8,6 +8,22 @@
   services.desktopManager.gnome.enable = true;
   services.displayManager.defaultSession = "hyprland";
 
+  # Route screencast/screenshot portals to the correct backend per session so
+  # OBS (PipeWire ScreenCast) gets frames. Without this, the Hyprland portal
+  # can hijack the ScreenCast D-Bus name in a GNOME session -> black capture.
+  xdg.portal.config = {
+    gnome = {
+      default = ["gnome" "gtk"];
+      "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+      "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
+    };
+    hyprland = {
+      default = ["hyprland" "gtk"];
+      "org.freedesktop.impl.portal.ScreenCast" = ["hyprland"];
+      "org.freedesktop.impl.portal.Screenshot" = ["hyprland"];
+    };
+  };
+
   services.openssh.enable = true;
   services.blueman.enable = true;
   services.printing.enable = true;

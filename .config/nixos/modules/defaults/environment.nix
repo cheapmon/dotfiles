@@ -105,7 +105,6 @@
     wlsunset
     wofi
     wofi-pass
-    xdg-desktop-portal-hyprland
     yq
     zellij
     zoom-us
