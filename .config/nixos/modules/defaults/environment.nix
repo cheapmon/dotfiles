@@ -70,6 +70,7 @@
     nautilus
     networkmanagerapplet
     nh
+    obs-studio
     openssl
     pavucontrol
     pinentry-tty

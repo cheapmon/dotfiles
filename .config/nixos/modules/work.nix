@@ -27,7 +27,7 @@
     postgresql
     slack
     sqlite
-    terraform
+    # terraform
     traefik
   ];
 
