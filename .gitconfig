@@ -6,9 +6,9 @@ name = Simon Kaleschke
 [alias]
 ap = add --patch
 co = checkout
-cf = !git checkout `git branch | sed s/$(git remote)// | cut -d'/' -f2 | fzf --popup 100%`
+cf = "!f() { git branch --format='%(refname:short)' | fzf --popup 100% --preview 'git log --oneline --color=always -30 {}' | xargs -r git checkout; }; f"
 cl = clean -fd
-cr = !git checkout `git branch -r | sed s/$(git remote)// | cut -d'/' -f2 | fzf --popup 100%`
+cr = "!f() { git branch -r --format='%(refname:short)' | grep -v ' -> ' | fzf --popup 100% --preview 'git log --oneline --color=always -30 {}' | sed 's|^[^/]*/||' | xargs -r git checkout; }; f"
 br = branch
 bd = !git branch -D `git branch | fzf -m --popup 100%`
 cm = commit
