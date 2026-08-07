@@ -16,6 +16,7 @@
     csvlens
     gitlab-runner
     glab
+    imagemagick
     (llm.withPlugins {
       llm-anthropic = true;
       llm-gemini = true;
@@ -30,6 +31,7 @@
     tea
     # terraform
     traefik
+    vips
   ];
 
   environment.sessionVariables = rec {

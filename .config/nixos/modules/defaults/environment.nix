@@ -54,8 +54,8 @@
     hyprlock
     hyprpaper
     inotify-tools
-    jetbrains.idea-oss
-    jetbrains.rust-rover
+    # jetbrains.idea
+    # jetbrains.rust-rover
     jq
     just
     kbd
