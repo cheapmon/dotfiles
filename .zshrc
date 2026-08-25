@@ -80,3 +80,6 @@ source <(just --completions bash)
 
 # Remove folder
 rm -rf "$HOME/Downloads"
+
+# Extra source files
+for FILE in $HOME/.zsh/*.sh; do source $FILE; done
