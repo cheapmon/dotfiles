@@ -17,6 +17,7 @@
     useOSProber = true;
     efiSupport = true;
     default = "saved";
+    configurationLimit = 2;
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
