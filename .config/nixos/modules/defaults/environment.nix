@@ -5,28 +5,24 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    # gource
-    # guvcview
     acpi
     age
     alacritty
     alejandra
     alsa-utils
+    appimage-run
     baobab
     bat
     brightnessctl
     cargo
     chromium
     cmatrix
-    codebuff
     cowsay
     cups
     curlie
-    dbeaver-bin
     delta
     difftastic
     dig
-    direnv
     docker
     docker-compose
     element-desktop
@@ -48,14 +44,14 @@
     gnupg
     google-chrome
     gopass
+    gource
     grim
+    guvcview
     htop
     hypridle
     hyprlock
     hyprpaper
     inotify-tools
-    # jetbrains.idea
-    # jetbrains.rust-rover
     jq
     just
     kbd
@@ -66,11 +62,11 @@
     lolcat
     magic-wormhole
     mako
-    mise
     nautilus
     networkmanagerapplet
     nh
     obs-studio
+    opencode
     openssl
     pavucontrol
     pinentry-tty
@@ -87,10 +83,9 @@
     solaar
     spotify
     spotify-cli-linux
-    swappy
     starship
+    swappy
     telegram-desktop
-    texliveFull
     thunderbird
     tokei
     unzip
@@ -107,7 +102,6 @@
     wofi-pass
     yq
     zellij
-    zoom-us
     zoxide
     zsh
 
@@ -138,7 +132,6 @@
 
     # Custom packages
     (callPackage ./derivations/toml-bombadil.nix {})
-    (callPackage ./derivations/acli.nix {})
   ];
 
   environment.gnome.excludePackages = with pkgs; [

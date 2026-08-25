@@ -5,8 +5,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/defaults.nix
-    ../../modules/work.nix
   ];
 
   system.stateVersion = "23.11";
@@ -35,7 +33,5 @@
     MONITOR = "";
     MONITOR_LEFT = "HDMI-A-1";
     MONITOR_RIGHT = "DP-1";
-
-    WORK = "yes";
   };
 }

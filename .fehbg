@@ -1,2 +1,0 @@
-#!/bin/sh
-/run/current-system/sw/bin/feh --no-fehbg --bg-fill '/home/seims/bg/img22.jpg' 

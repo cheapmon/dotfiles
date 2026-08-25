@@ -20,7 +20,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("blueman-applet")
 
     hl.exec_cmd("/bin/sh -c 'pull-dotfiles && link-dotfiles'")
-    hl.exec_cmd("work-session")
 end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/

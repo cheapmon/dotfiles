@@ -19,11 +19,5 @@
     MONITOR = "eDP-1";
     MONITOR_LEFT = "";
     MONITOR_RIGHT = "";
-
-    WORK = "";
   };
-
-  environment.systemPackages = with pkgs; [
-    codex
-  ];
 }

@@ -49,10 +49,9 @@ zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa $realpath'
 bindkey -e
 
 # Environment
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 export LESS="-R"
-export GLOBALIAS_FILTER_VALUES=(d ls ia iacli)
-export DIRENV_LOG_FORMAT=
+export GLOBALIAS_FILTER_VALUES=(d ls)
 export GPG_TTY=$(tty)
 export MANPAGER='nvim +Man!'
 
@@ -62,7 +61,7 @@ export ANSIBLE_VAULT_PASSWORD_FILE="$SECRETS/ansible_vault_password"
 
 # Aliases
 alias d='git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
-alias ls="exa --color"
+alias ls="exa --color=auto"
 alias g="git"
 alias dc="docker-compose"
 alias n="nvim"
@@ -74,15 +73,10 @@ rgl() {
 }
 
 # Shell integrations
-eval "$(direnv hook zsh)"
 eval "$(fzf --zsh)"
-eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 source <(just --completions bash)
 
 # Remove folder
 rm -rf "$HOME/Downloads"
-
-# Extra source files
-for FILE in $HOME/.zsh/*.sh; do source $FILE; done
