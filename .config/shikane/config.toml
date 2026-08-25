@@ -21,32 +21,6 @@ exec = ["organize-workspaces"]
         adaptive_sync = false
 
 [[profile]]
-name = "t14s"
-exec = ["organize-workspaces"]
-
-        [[profile.output]]
-        enable = false
-        search = ["m=0x403D", "s=", "v=Lenovo Group Limited"]
-
-        [[profile.output]]
-        enable = true
-        search = ["m=DELL S2715H", "s=PP92G52PA5ML", "v=Dell Inc."]
-        mode = "1920x1080@60Hz"
-        position = "3440,0"
-        scale = 1.0
-        transform = "normal"
-        adaptive_sync = false
-
-        [[profile.output]]
-        enable = true
-        search = ["m=DELL U3415W", "s=68MCF51304CL", "v=Dell Inc."]
-        mode = "3440x1440@59.973Hz"
-        position = "0,0"
-        scale = 1.0
-        transform = "normal"
-        adaptive_sync = false
-
-[[profile]]
 name = "t480s"
 
         [[profile.output]]

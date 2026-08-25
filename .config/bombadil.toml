@@ -8,9 +8,6 @@ vars = [ ".toml-bombadil/default.toml" ]
 [profiles.omen]
 vars = [ ".toml-bombadil/omen.toml" ]
 
-[profiles.t14s]
-vars = [ ".toml-bombadil/t14s.toml" ]
-
 [profiles.t480s]
 vars = [ ".toml-bombadil/t480s.toml" ]
 
