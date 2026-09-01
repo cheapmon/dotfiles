@@ -131,7 +131,7 @@
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Custom packages
-    (callPackage ./derivations/toml-bombadil.nix {})
+    (callPackage ./_derivations/toml-bombadil.nix {})
   ];
 
   environment.gnome.excludePackages = with pkgs; [

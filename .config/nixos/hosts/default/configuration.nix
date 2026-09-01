@@ -6,7 +6,8 @@
 }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ../../modules/defaults.nix
+    (inputs.import-tree ../../modules/defaults)
+    (inputs.import-tree ../../modules/extras)
   ];
 
   system.stateVersion = "23.11";
