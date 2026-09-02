@@ -70,6 +70,7 @@
     openssl
     pavucontrol
     pinentry-tty
+    pipewire
     postman
     repgrep
     ripgrep
@@ -95,11 +96,13 @@
     waybar
     wev
     wget
+    wireplumber
     wl-clipboard
     wlr-randr
     wlsunset
     wofi
     wofi-pass
+    xdg-desktop-portal-hyprland
     yq
     zellij
     zoxide
