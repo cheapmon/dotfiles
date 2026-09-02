@@ -105,12 +105,6 @@
     zoxide
     zsh
 
-    # Ruby
-    libyaml
-    libffi
-    libpq
-    openssl.dev
-
     # Neovim
     bash-language-server
     lua-language-server
