@@ -12,16 +12,6 @@
 
   system.stateVersion = "23.11";
 
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    useOSProber = true;
-    efiSupport = true;
-    default = "saved";
-    configurationLimit = 2;
-  };
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "omen";
 
   services.xserver.videoDrivers = ["nvidia"];

@@ -4,7 +4,11 @@
   inputs,
   ...
 }: {
-  services.displayManager.gdm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha-sapphire";
+  };
   services.desktopManager.gnome.enable = true;
   services.displayManager.defaultSession = "hyprland";
 

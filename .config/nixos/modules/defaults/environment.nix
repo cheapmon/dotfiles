@@ -127,8 +127,12 @@
     # Inputs
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-    # Custom packages
+    # Custom packages + overrides
     (callPackage ./_derivations/toml-bombadil.nix {})
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      accent = "sapphire";
+    })
   ];
 
   environment.gnome.excludePackages = with pkgs; [
