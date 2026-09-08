@@ -53,6 +53,13 @@
           ./hosts/omen/configuration.nix
         ];
       };
+      l16 = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          inputs.home-manager.nixosModules.default
+          ./hosts/l16/configuration.nix
+        ];
+      };
     };
   };
 }

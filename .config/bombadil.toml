@@ -11,6 +11,9 @@ vars = [ ".toml-bombadil/omen.toml" ]
 [profiles.t480s]
 vars = [ ".toml-bombadil/t480s.toml" ]
 
+[profiles.l16]
+vars = [ ".toml-bombadil/l16.toml" ]
+
 [settings.dots]
 waybar-config = { source = ".toml-bombadil/waybar/config.jsonc.tera", target = ".config/waybar/config.jsonc" }
 waybar-styles = { source = ".toml-bombadil/waybar/style.css.tera", target = ".config/waybar/style.css" }
