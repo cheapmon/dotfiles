@@ -31,12 +31,7 @@
     options = ["rw" "uid=1000"];
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 20 * 1024;
-    }
-  ];
+  swapDevices = [];
 
   networking.useDHCP = lib.mkDefault true;
 
