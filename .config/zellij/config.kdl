@@ -22,6 +22,9 @@ ui {
   }
 }
 
+pane_frame_style "full"
+stacked_pane_list false
+
 session_name "main"
 attach_to_session true
 session_serialization false
