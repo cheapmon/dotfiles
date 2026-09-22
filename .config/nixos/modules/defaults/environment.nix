@@ -21,6 +21,7 @@
     cups
     curlie
     delta
+    dex
     difftastic
     dig
     docker
