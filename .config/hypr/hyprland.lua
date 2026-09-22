@@ -1,3 +1,8 @@
+-- Plugins
+hl.plugin.load(os.getenv("HY3_PLUGIN"))
+
+local hy3 = hl.plugin.hy3
+
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 -- NOTE: Set MONITOR_LEFT, MONITOR_RIGHT and MONITOR as environment variables,
 -- or replace the os.getenv() calls below with your monitor names.
@@ -48,7 +53,7 @@ hl.config({
             inactive_border = "rgba(595959aa)",
         },
 
-        layout = "master",
+        layout = "hy3",
     },
 })
 
