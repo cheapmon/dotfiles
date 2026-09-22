@@ -262,3 +262,11 @@ hl.window_rule({ match = { class = "slack" },             workspace = "8" })
 hl.window_rule({ match = { class = "element" },           workspace = "9" })
 hl.window_rule({ match = { class = "signal" },            workspace = "9" })
 hl.window_rule({ match = { class = "spotify" },           workspace = "10" })
+
+-- Require extra configuration files
+local lfs = require("lfs")
+for file in lfs.dir(os.getenv("HOME") .. "/.config/hypr/extras") do
+  if file:match("%.lua$") then
+    require("extras." .. file:sub(1, -5))
+  end
+end

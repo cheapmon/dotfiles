@@ -109,6 +109,9 @@
     zoxide
     zsh
 
+    # Lua
+    lua55Packages.luafilesystem
+
     # Neovim
     bash-language-server
     lua-language-server
@@ -165,6 +168,7 @@
       --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
       --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
     '';
+    LUA_CPATH = "${pkgs.lua55Packages.luafilesystem}/lib/lua/5.5/?.so;;";
   };
 
   environment.etc = {
