@@ -36,6 +36,7 @@
 }
 
 #window,
+#submap,
 #battery,
 #backlight,
 #pulseaudio,
@@ -46,8 +47,24 @@
   margin: 5px 0;
 }
 
-#window {
+#window,
+#submap {
   border-radius: 1rem;
+}
+
+#window {
+  margin-right: 1rem;
+}
+
+#submap.hypr {
+  background-color: @red;
+  color: @surface0;
+}
+
+#submap.move,
+#submap.resize {
+  background-color: @peach;
+  color: @surface0;
 }
 
 #battery {
