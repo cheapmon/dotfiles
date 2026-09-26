@@ -1,8 +1,3 @@
--- Plugins
-hl.plugin.load(os.getenv("HY3_PLUGIN"))
-
-local hy3 = hl.plugin.hy3
-
 -- Catppuccin Mocha
 local rosewater = "rgba(f5e0dcff)"
 local flamingo  = "rgba(f2cdcdff)"
@@ -19,6 +14,33 @@ local sapphire  = "rgba(74c7ecff)"
 local blue      = "rgba(89b4faff)"
 local lavender  = "rgba(b4befeff)"
 local text      = "rgba(cdd6f4ff)"
+
+-- Plugins
+hl.plugin.load(os.getenv("HY3_PLUGIN"))
+
+local hy3 = hl.plugin.hy3
+
+hl.config({
+  plugin = {
+    hy3 = {
+      tabs = {
+        height = 32,
+        border_width = 3,
+
+        text_font = "IosevkaTerm Nerd Font",
+        text_height = 11,
+        text_padding = 11,
+
+        colors = {
+          active        = string.sub(blue, 1, -4) .. "40)",
+          active_border = sapphire,
+          active_text   = text,
+        },
+      }
+    }
+  }
+})
+
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 -- NOTE: Set MONITOR_LEFT, MONITOR_RIGHT and MONITOR as environment variables,
