@@ -3,6 +3,23 @@ hl.plugin.load(os.getenv("HY3_PLUGIN"))
 
 local hy3 = hl.plugin.hy3
 
+-- Catppuccin Mocha
+local rosewater = "rgba(f5e0dcff)"
+local flamingo  = "rgba(f2cdcdff)"
+local pink      = "rgba(f5c2e7ff)"
+local mauve     = "rgba(cba6f7ff)"
+local red       = "rgba(f38ba8ff)"
+local maroon    = "rgba(eba0acff)"
+local peach     = "rgba(fab387ff)"
+local yellow    = "rgba(f9e2afff)"
+local green     = "rgba(a6e3a1ff)"
+local teal      = "rgba(94e2d5ff)"
+local sky       = "rgba(89dcebff)"
+local sapphire  = "rgba(74c7ecff)"
+local blue      = "rgba(89b4faff)"
+local lavender  = "rgba(b4befeff)"
+local text      = "rgba(cdd6f4ff)"
+
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 -- NOTE: Set MONITOR_LEFT, MONITOR_RIGHT and MONITOR as environment variables,
 -- or replace the os.getenv() calls below with your monitor names.
@@ -49,8 +66,8 @@ hl.config({
 
         -- https://wiki.hypr.land/Configuring/Variables/#variable-types
         col = {
-            active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = { green, teal }, angle = 45 },
+            inactive_border = text,
         },
 
         layout = "hy3",
@@ -174,7 +191,6 @@ hl.config({
 
 -- Basic binds
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("ghostty -e zellij"))
-hl.bind(mainMod .. " + Space",  hl.dsp.exec_cmd("wofi --show run"))
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("hyprctl kill"))
@@ -189,10 +205,10 @@ hl.bind(mainMod .. " + W", hl.dsp.window.pin())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg swapwithmaster"))
 
 -- Move focus with mainMod + hjkl
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H", hy3.move_focus("left"))
+hl.bind(mainMod .. " + L", hy3.move_focus("right"))
+hl.bind(mainMod .. " + K", hy3.move_focus("up"))
+hl.bind(mainMod .. " + J", hy3.move_focus("down"))
 
 -- Switch workspaces with mainMod + [0-9]
 for i = 1, 10 do
@@ -203,7 +219,7 @@ end
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. key, hy3.move_to_workspace(i, { follow = true }))
 end
 
 -- Scroll through existing workspaces with mainMod + scroll
@@ -234,6 +250,67 @@ hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + CTRL + Z", hl.dsp.exec_cmd("wofi-pass -t"))
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 hl.bind(mainMod .. " + CTRL + Return", hl.dsp.exec_cmd("ghostty"))
+
+-- Submap colors
+local cols = {
+  default = { active_border = { colors = { green, teal   }, angle = 45 } },
+  hypr    = { active_border = { colors = { red, maroon   }, angle = 45 } },
+  move    = { active_border = { colors = { peach, yellow }, angle = 45 } },
+  resize  = { active_border = { colors = { peach, yellow }, angle = 45 } },
+}
+
+hl.on("keybinds.submap", function(name)
+  hl.config({ general = { col = cols[name] or cols["default"] } })
+end)
+
+-- Submaps
+local function dispatch_and_reset(f)
+  return function()
+    hl.dispatch(f)
+    hl.dispatch(hl.dsp.submap("reset"))
+  end
+end
+
+hl.bind(mainMod .. " + Space", hl.dsp.submap("hypr"))
+
+hl.define_submap("hypr", function()
+  hl.bind("Space", dispatch_and_reset(hl.dsp.exec_cmd("wofi --show run")))
+
+  hl.bind("M", hl.dsp.submap("move"))
+  hl.bind("R", hl.dsp.submap("resize"))
+
+  hl.bind("H", dispatch_and_reset(hy3.change_group("h")))
+  hl.bind("V", dispatch_and_reset(hy3.change_group("v")))
+  hl.bind("T", dispatch_and_reset(hy3.change_group("toggletab")))
+
+  hl.bind("SHIFT + H", dispatch_and_reset(hy3.make_group("h")))
+  hl.bind("SHIFT + V", dispatch_and_reset(hy3.make_group("v")))
+  hl.bind("SHIFT + T", dispatch_and_reset(hy3.make_group("tab")))
+
+  hl.bind("Escape", hl.dsp.submap("reset"))
+  hl.bind("catchall", function() end)
+end)
+
+hl.define_submap("move", function()
+  hl.bind("H", hy3.move_window("left"))
+  hl.bind("J", hy3.move_window("down"))
+  hl.bind("K", hy3.move_window("up"))
+  hl.bind("L", hy3.move_window("right"))
+
+  hl.bind("Escape", hl.dsp.submap("reset"))
+  hl.bind("catchall", function() end)
+end)
+
+hl.define_submap("resize", function()
+  local step = 20
+  hl.bind("H", hl.dsp.window.resize({ x = -step, y =     0, relative = true }), { repeating = true })
+  hl.bind("J", hl.dsp.window.resize({ x =     0, y =  step, relative = true }), { repeating = true })
+  hl.bind("K", hl.dsp.window.resize({ x =     0, y = -step, relative = true }), { repeating = true })
+  hl.bind("L", hl.dsp.window.resize({ x =  step, y =     0, relative = true }), { repeating = true })
+
+  hl.bind("Escape", hl.dsp.submap("reset"))
+  hl.bind("catchall", function() end)
+end)
 
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- See https://wiki.hypr.land/Configuring/Workspace-Rules/
