@@ -23,7 +23,13 @@
     };
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
   services.blueman.enable = true;
   services.printing.enable = true;
   services.gvfs.enable = true;
