@@ -140,7 +140,7 @@ fi
 # Clean old generations
 echo -e "${BLUE}→ Cleaning old generations...${NC}"
 if confirm "Clean old system generations?"; then
-    nh clean all
+    nh clean all --keep 5 --keep-since 7d
 else
     echo -e "${YELLOW}Skipping generation cleanup${NC}"
 fi
