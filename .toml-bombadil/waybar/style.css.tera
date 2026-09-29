@@ -67,6 +67,11 @@
   color: @surface0;
 }
 
+#submap.focus {
+  background-color: @sapphire;
+  color: @surface0;
+}
+
 #battery {
   color: @yellow;
   margin-left: 1rem;

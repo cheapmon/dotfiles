@@ -272,10 +272,11 @@ hl.bind(mainMod .. " + CTRL + Return", hl.dsp.exec_cmd("ghostty"))
 
 -- Submap colors
 local cols = {
-  default = { active_border = { colors = { green, teal   }, angle = 45 } },
-  hypr    = { active_border = { colors = { red, maroon   }, angle = 45 } },
-  move    = { active_border = { colors = { peach, yellow }, angle = 45 } },
-  resize  = { active_border = { colors = { peach, yellow }, angle = 45 } },
+  default = { active_border = { colors = { green, teal    }, angle = 45 } },
+  hypr    = { active_border = { colors = { red, maroon    }, angle = 45 } },
+  move    = { active_border = { colors = { peach, yellow  }, angle = 45 } },
+  resize  = { active_border = { colors = { peach, yellow  }, angle = 45 } },
+  focus   = { active_border = { colors = { sapphire, blue }, angle = 45 } },
 }
 
 hl.on("keybinds.submap", function(name)
@@ -297,6 +298,7 @@ hl.define_submap("hypr", function()
 
   hl.bind("M", hl.dsp.submap("move"))
   hl.bind("R", hl.dsp.submap("resize"))
+  hl.bind("F", hl.dsp.submap("focus"))
 
   hl.bind("H", dispatch_and_reset(hy3.change_group("h")))
   hl.bind("V", dispatch_and_reset(hy3.change_group("v")))
@@ -326,6 +328,16 @@ hl.define_submap("resize", function()
   hl.bind("J", hl.dsp.window.resize({ x =     0, y =  step, relative = true }), { repeating = true })
   hl.bind("K", hl.dsp.window.resize({ x =     0, y = -step, relative = true }), { repeating = true })
   hl.bind("L", hl.dsp.window.resize({ x =  step, y =     0, relative = true }), { repeating = true })
+
+  hl.bind("Escape", hl.dsp.submap("reset"))
+  hl.bind("catchall", function() end)
+end)
+
+hl.define_submap("focus", function()
+  hl.bind("H", hy3.change_focus("lower"))
+  hl.bind("J", hy3.change_focus("lower"))
+  hl.bind("K", hy3.change_focus("raise"))
+  hl.bind("L", hy3.change_focus("raise"))
 
   hl.bind("Escape", hl.dsp.submap("reset"))
   hl.bind("catchall", function() end)
