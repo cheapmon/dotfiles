@@ -8,16 +8,21 @@ return {
           num_pickers = 10,
           ignore_empty_prompt = true,
         },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case"
-          }
+      },
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case"
         }
       }
     },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+      telescope.load_extension("fzf")
+    end,
     keys = {
       { "<C-p>", function() require("telescope.builtin").find_files() end },
       { "<leader>tl", function() require("telescope.builtin").live_grep() end },
@@ -32,9 +37,7 @@ return {
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
     build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end
   },
 }
