@@ -60,8 +60,9 @@ log "Hostname: $HOSTNAME"
 
 # Run bombadil link
 log "Running: bombadil link -p $HOSTNAME"
-if ! OUTPUT=$(bombadil link -p "$HOSTNAME" 2>&1); then
-    EXIT_CODE=$?
+EXIT_CODE=0
+OUTPUT=$(bombadil link -p "$HOSTNAME" 2>&1) || EXIT_CODE=$?
+if [ "$EXIT_CODE" -ne 0 ]; then
     log "ERROR: bombadil link failed with exit code $EXIT_CODE"
     log "Output: $OUTPUT"
 

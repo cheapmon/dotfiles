@@ -63,8 +63,9 @@ fi
 
 # Perform git pull
 log "Running: git pull"
-if ! OUTPUT=$(git --git-dir="$DOTFILES_DIR" --work-tree="$WORK_TREE" pull 2>&1); then
-    EXIT_CODE=$?
+EXIT_CODE=0
+OUTPUT=$(git --git-dir="$DOTFILES_DIR" --work-tree="$WORK_TREE" pull 2>&1) || EXIT_CODE=$?
+if [ "$EXIT_CODE" -ne 0 ]; then
     log "ERROR: Git pull failed with exit code $EXIT_CODE"
     log "Output: $OUTPUT"
 
