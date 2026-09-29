@@ -4,7 +4,12 @@
   ...
 }: {
   programs.dconf.enable = true;
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    # ~/.zshrc runs compinit itself and uses starship for the prompt
+    enableGlobalCompInit = false;
+    promptInit = "";
+  };
 
   imports = [inputs.hyprland.nixosModules.default];
   programs.hyprland = {
