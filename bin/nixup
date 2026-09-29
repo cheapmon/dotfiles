@@ -161,7 +161,7 @@ fi
 COMMIT_MSG="[nix] Update system"
 if command -v nix >/dev/null 2>&1; then
     # Try to get some update details
-    UPDATED_INPUTS=$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" diff HEAD .config/nixos/flake.lock | grep -oP '(?<=repo": ")[^"]+' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
+    UPDATED_INPUTS=$(git --git-dir="$HOME/git/dotfiles" --work-tree="$HOME" diff HEAD "$HOME/.config/nixos/flake.lock" | grep -oP '(?<=repo": ")[^"]+' | sort -u | tr '\n' ',' | sed 's/,$//' || echo "")
     if [ -n "$UPDATED_INPUTS" ]; then
         COMMIT_MSG="[nix] Update flake inputs"
     fi
