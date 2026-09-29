@@ -22,5 +22,8 @@
     MONITOR = "";
     MONITOR_LEFT = "HDMI-A-1";
     MONITOR_RIGHT = "DP-1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 }
