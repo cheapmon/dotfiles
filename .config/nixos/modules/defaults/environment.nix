@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -18,13 +17,11 @@
     chromium
     cmatrix
     cowsay
-    cups
     curlie
     delta
     dex
     difftastic
     dig
-    docker
     docker-compose
     element-desktop
     eog
@@ -46,8 +43,8 @@
     google-chrome
     gopass
     gource
-    grim
     guvcview
+    grim
     htop
     hypridle
     hyprlock
@@ -65,18 +62,15 @@
     mako
     nautilus
     networkmanagerapplet
-    nh
     obs-studio
     opencode
     openssl
     pavucontrol
     pinentry-tty
-    pipewire
     postman
     repgrep
     ripgrep
     rsync
-    rustup
     shikane
     signal-desktop
     simple-scan
@@ -97,17 +91,14 @@
     waybar
     wev
     wget
-    wireplumber
     wl-clipboard
     wlr-randr
     wlsunset
     wofi
     wofi-pass
-    xdg-desktop-portal-hyprland
     yq
     zellij
     zoxide
-    zsh
 
     # Lua
     lua55Packages.luafilesystem
@@ -117,7 +108,6 @@
     lua-language-server
     neovim
     typescript-language-server
-    vscode-json-languageserver
     nodejs
     rust-analyzer
     taplo
@@ -157,10 +147,8 @@
     totem
   ];
 
-  environment.sessionVariables = rec {
+  environment.sessionVariables = {
     EDITOR = "nvim";
-    NH_FLAKE = "/home/seims/.config/nixos";
-    GTK_THEME = "Adwaita-dark";
     COMPOSE_HTTP_TIMEOUT = 86400;
     NIXOS_OZONE_WL = "1";
     FZF_DEFAULT_OPTS = ''
@@ -169,11 +157,6 @@
       --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
     '';
     LUA_CPATH = "${pkgs.lua55Packages.luafilesystem}/lib/lua/5.5/?.so;;";
-    HY3_PLUGIN = "${inputs.hy3.packages.x86_64-linux.hy3}/lib/libhy3.so";
-  };
-
-  environment.etc = {
-    "modprobe.d/hid_apple.conf".text = "options hid_apple fnmode=0";
-    "modprobe.d/no_beep.conf".text = "blacklist pcspkr";
+    HY3_PLUGIN = "${inputs.hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3}/lib/libhy3.so";
   };
 }

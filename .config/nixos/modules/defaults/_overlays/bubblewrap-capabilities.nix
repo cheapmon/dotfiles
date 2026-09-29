@@ -6,11 +6,11 @@
 final: prev: {
   buildFHSEnv = prev.buildFHSEnv.override (oldArgs: {
     bubblewrap = prev.writeShellScriptBin "bwrap" ''
-      exec ${prev.python3}/bin/python3 -c '
-import ctypes, os, sys
-ctypes.CDLL(None).prctl(47, 4, 0, 0, 0)
-os.execv("${prev.bubblewrap}/bin/bwrap", ["bwrap"] + sys.argv[1:])
-      ' "$@"
+            exec ${prev.python3}/bin/python3 -c '
+      import ctypes, os, sys
+      ctypes.CDLL(None).prctl(47, 4, 0, 0, 0)
+      os.execv("${prev.bubblewrap}/bin/bwrap", ["bwrap"] + sys.argv[1:])
+            ' "$@"
     '';
   });
 }

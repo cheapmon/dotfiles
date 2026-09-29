@@ -26,40 +26,18 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: {
-    nixosConfigurations = {
-      default = nixpkgs.lib.nixosSystem {
+  outputs = {nixpkgs, ...} @ inputs: {
+    nixosConfigurations = nixpkgs.lib.genAttrs ["default" "t480s" "omen" "l16"] (host:
+      nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
           inputs.home-manager.nixosModules.default
-          ./hosts/default/configuration.nix
+          (inputs.import-tree ./modules/defaults)
+          (inputs.import-tree ./modules/extras)
+          ./hosts/${host}/configuration.nix
         ];
-      };
-      t480s = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          inputs.home-manager.nixosModules.default
-          ./hosts/t480s/configuration.nix
-        ];
-      };
-      omen = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          inputs.home-manager.nixosModules.default
-          ./hosts/omen/configuration.nix
-        ];
-      };
-      l16 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          inputs.home-manager.nixosModules.default
-          ./hosts/l16/configuration.nix
-        ];
-      };
-    };
+      });
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }

@@ -1,18 +1,13 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ./hardware-configuration.nix
-    (inputs.import-tree ../../modules/defaults)
-    (inputs.import-tree ../../modules/extras)
   ];
 
   system.stateVersion = "23.11";
 
   networking.hostName = "omen";
+
+  boot.loader.grub.useOSProber = true;
 
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
@@ -23,7 +18,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  environment.sessionVariables = rec {
+  environment.sessionVariables = {
     MONITOR = "";
     MONITOR_LEFT = "HDMI-A-1";
     MONITOR_RIGHT = "DP-1";

@@ -1,16 +1,10 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   users.groups.plugdev = {};
-  users.extraGroups.vboxusers.members = ["seims"];
 
   users.users.seims = {
     isNormalUser = true;
     description = "Simon Kaleschke";
-    extraGroups = ["networkmanager" "wheel" "audio" "docker" "plugdev"];
+    extraGroups = ["networkmanager" "wheel" "audio" "docker" "plugdev" "vboxusers"];
     linger = true;
   };
 

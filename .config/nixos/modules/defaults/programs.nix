@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -12,10 +11,10 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
-    plugins = [inputs.hy3.packages.x86_64-linux.hy3];
+    plugins = [inputs.hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3];
   };
 
-  # Hyprland (launched directly from GDM, without uwsm) never activates
+  # Hyprland (launched directly from SDDM, without uwsm) never activates
   # graphical-session.target on its own, and that target refuses manual
   # `systemctl start` (RefuseManualStart=yes). Without it, xdg-desktop-portal
   # (Requisite=graphical-session.target) can never start, breaking screen
@@ -39,4 +38,13 @@
     ];
   };
   programs.steam.enable = true;
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/seims/.config/nixos";
+    clean = {
+      enable = true;
+      extraArgs = "--keep 5 --keep-since 7d";
+    };
+  };
 }

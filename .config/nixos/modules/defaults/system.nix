@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   # Create /bin and /usr/bin symlinks for compatibility with non-NixOS tooling
   system.activationScripts.bincompat = ''
     mkdir -p /bin

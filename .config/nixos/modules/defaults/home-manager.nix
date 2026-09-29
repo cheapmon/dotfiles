@@ -1,10 +1,7 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
     extraSpecialArgs = {inherit inputs;};
     users = {
       seims = {
@@ -17,13 +14,15 @@
 
         dconf = {
           enable = true;
-          settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+          settings."org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+            gtk-theme = "Adwaita-dark";
+          };
         };
 
         systemd.user.services.decrypt-secrets = {
           Unit = {
             Description = "Decrypt age-encrypted secrets to runtime directory";
-            After = ["default.target"];
           };
 
           Service = {

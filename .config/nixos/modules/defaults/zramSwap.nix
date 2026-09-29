@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{...}: {
   zramSwap = {
     enable = true;
     algorithm = "zstd";
