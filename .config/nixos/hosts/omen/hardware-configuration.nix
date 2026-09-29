@@ -28,7 +28,7 @@
   fileSystems."/mnt" = {
     device = "/dev/disk/by-uuid/01DD3409EE10C790";
     fsType = "ntfs-3g";
-    options = ["rw" "uid=1000"];
+    options = ["rw" "uid=1000" "nofail"];
   };
 
   swapDevices = [];
