@@ -213,9 +213,9 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("ghostty -e zellij"))
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("hyprctl kill"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("systemctl poweroff"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("systemctl reboot"))
-hl.bind(mainMod .. " + E", hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("systemctl poweroff"))
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("systemctl reboot"))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload"))
 
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
