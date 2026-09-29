@@ -8,7 +8,7 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Install prompt
+# Shallow-clone the next plugin
 zinit ice depth=1
 
 # Plugins
@@ -29,7 +29,6 @@ zinit cdreplay -q
 HISTSIZE=10000
 HISTFILE="$HOME/.zsh_history"
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 
 setopt appendhistory
 setopt sharehistory
@@ -43,13 +42,14 @@ setopt hist_find_no_dups
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*" menu no
-zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa $realpath'
+zstyle ":fzf-tab:complete:cd:*" fzf-preview 'eza $realpath'
 
 # Keybindings
 bindkey -e
 
 # Environment
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+typeset -U path PATH
+path+=("$HOME/bin" "$HOME/.local/bin")
 export LESS="-R"
 export GLOBALIAS_FILTER_VALUES=(d ls)
 export GPG_TTY=$(tty)
@@ -61,7 +61,7 @@ export ANSIBLE_VAULT_PASSWORD_FILE="$SECRETS/ansible_vault_password"
 
 # Aliases
 alias d='git --git-dir=$HOME/git/dotfiles --work-tree=$HOME'
-alias ls="exa --color=auto"
+alias ls="eza --color=auto"
 alias g="git"
 alias dc="docker-compose"
 alias n="nvim"
@@ -69,7 +69,7 @@ alias j="just"
 
 # Functions
 rgl() {
-  rg -p $@ | less
+  rg -p "$@" | less
 }
 
 # Shell integrations
