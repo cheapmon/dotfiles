@@ -76,7 +76,6 @@
     simple-scan
     sl
     slurp
-    solaar
     spotify
     spotify-cli-linux
     starship
