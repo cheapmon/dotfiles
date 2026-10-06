@@ -86,7 +86,7 @@ hl.config({
         -- https://wiki.hypr.land/Configuring/Variables/#variable-types
         col = {
             active_border   = { colors = { green, teal }, angle = 45 },
-            inactive_border = text,
+            -- inactive_border = text,
         },
 
         layout = "hy3",
@@ -304,9 +304,9 @@ hl.define_submap("hypr", function()
   hl.bind("V", dispatch_and_reset(hy3.change_group("v")))
   hl.bind("T", dispatch_and_reset(hy3.change_group("toggletab")))
 
-  hl.bind("SHIFT + H", dispatch_and_reset(hy3.make_group("h")))
-  hl.bind("SHIFT + V", dispatch_and_reset(hy3.make_group("v")))
-  hl.bind("SHIFT + T", dispatch_and_reset(hy3.make_group("tab")))
+  hl.bind("SHIFT + H", dispatch_and_reset(hy3.make_group("h", { toggle = true, ephemeral = "force" })))
+  hl.bind("SHIFT + V", dispatch_and_reset(hy3.make_group("v", { toggle = true, ephemeral = "force" })))
+  hl.bind("SHIFT + T", dispatch_and_reset(hy3.make_group("tab", { toggle = true, ephemeral = "force" })))
 
   hl.bind("Escape", hl.dsp.submap("reset"))
   hl.bind("catchall", function() end)
