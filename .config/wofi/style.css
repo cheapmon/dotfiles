@@ -1,56 +1,95 @@
+/* Catppuccin Mocha - Wofi */
 * {
-  font-family: "IosevkaTerm Nerd Font";
-  font-size: 13px;
-}
-
-window {
-  margin: 0px;
-  border: 1px solid #bd93f9;
-  background-color: #282a36;
-}
-
-#input {
-  margin: 5px;
-  border: none;
-  color: #f8f8f2;
-  background-color: #44475a;
-}
-
-#inner-box {
-  margin: 5px;
-  border: none;
-  background-color: #282a36;
-}
-
-#outer-box {
-  margin: 5px;
-  border: none;
-  background-color: #282a36;
+  font-size: 18px;
 }
 
 #scroll {
-  margin: 0px;
-  border: none;
+  background-color: #1e1e2e;
 }
 
-#text {
-  margin: 5px;
-  border: none;
-  color: #f8f8f2;
-} 
-
-#entry.activatable #text {
-  color: #282a36;
+#outer-box {
+  background-color: #1e1e2e;
+  padding: 10px;
+  border: 2px solid #74c7ec;
 }
 
-#entry > * {
-  color: #f8f8f2;
+#main {
+  background-color: #1e1e2e;
+}
+
+scrollbar,
+scrollbar trough,
+undershoot.top,
+undershoot.bottom {
+  min-width: 5px;
+  min-height: 5px;
+  background: none;
+}
+
+scrollbar slider{
+  background-color: #74c7ec;
+}
+
+#outer-box {
+  padding: 10px;
+}
+
+#input image {
+  color: #74c7ec;
+  -gtk-icon-effect: none;
+}
+
+#input {
+  background-color: #313244;
+  color: #cdd6f4;
+  caret-color: #74c7ec;
+  border: 1px solid #45475a;
+  padding: 8px 12px;
+  margin: 10px;
+  border-radius: 35px;
+  outline: 1px solid #585b70;
+}
+
+#input:focus {
+  border-color: #74c7ec;
+}
+
+#input placeholder {
+  color: #1e1e2e;
+}
+
+#entry {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+}
+
+#entry #entry:selected {
+  background-color: #313244;
+  color: #74c7ec;
 }
 
 #entry:selected {
-  background-color: #44475a;
+  background-color: #313244;
+  color: #74c7ec;
 }
 
-#entry:selected #text {
-  font-weight: bold;
+#entry:hover {
+  background-color: #45475a;
+}
+
+#text {
+  color: #cdd6f4 ;
+}
+
+#text:selected {
+  color: #74c7ec;
+}
+
+/* Customizations */
+* {
+  font-family: "IosevkaTerm Nerd Font";
+}
+
+#outer-box {
+  border-radius: 6px;
 }
