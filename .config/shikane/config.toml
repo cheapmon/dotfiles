@@ -51,3 +51,19 @@ exec = ["organize-workspaces"]
         [[profile.output]]
         enable = false
         search = ["m=DELL U3415W", "s=68MCF51304CL", "v=Dell Inc."]
+
+[[profile]]
+name = "inaudito"
+
+        [[profile.output]]
+        enable = true
+        search = ["m=DELL U3415W", "s=F1T1W72D10TL", "v=Dell Inc."]
+        mode = "3440x1440@59.973Hz"
+        position = "0,0"
+        scale = 1.0
+        transform = "normal"
+        adaptive_sync = false
+
+        [[profile.output]]
+        enable = false
+        search = ["m=NV160WUM-N4E", "s=", "v=Lenovo Group Limited"]
