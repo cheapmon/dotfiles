@@ -69,10 +69,10 @@ end)
 
 hl.define_submap("resize", function()
   local step = 20
-  hl.bind("H", hl.dsp.window.resize({ x = -step, y = 0, relative = true }), { repeating = true })
-  hl.bind("J", hl.dsp.window.resize({ x = 0, y = step, relative = true }), { repeating = true })
-  hl.bind("K", hl.dsp.window.resize({ x = 0, y = -step, relative = true }), { repeating = true })
-  hl.bind("L", hl.dsp.window.resize({ x = step, y = 0, relative = true }), { repeating = true })
+  hl.bind("H", dsp.resize("left", step), { repeating = true })
+  hl.bind("J", dsp.resize("down", step), { repeating = true })
+  hl.bind("K", dsp.resize("up", step), { repeating = true })
+  hl.bind("L", dsp.resize("right", step), { repeating = true })
 
   hl.bind("Escape", hl.dsp.submap("reset"))
   hl.bind("catchall", function() end)

@@ -11,3 +11,11 @@ hl.config({
     new_status = "slave",
   },
 })
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/
+hl.config({
+  scrolling = {
+    column_width = 0.75,
+    explicit_column_widths = "0.25, 0.333, 0.5, 0.667, 0.75, 1.0",
+  }
+})
