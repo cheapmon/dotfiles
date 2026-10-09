@@ -1,4 +1,4 @@
-local hy3 = hl.plugin.hy3
+local dsp = require("conf.dispatchers")
 
 -- See https://wiki.hypr.land/Configuring/Binds/
 local mainMod = "SUPER"
@@ -25,10 +25,10 @@ hl.bind(mainMod .. " + W", hl.dsp.window.pin())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg swapwithmaster"))
 
 -- Move focus with mainMod + hjkl
-hl.bind(mainMod .. " + H", hy3.move_focus("left"))
-hl.bind(mainMod .. " + L", hy3.move_focus("right"))
-hl.bind(mainMod .. " + K", hy3.move_focus("up"))
-hl.bind(mainMod .. " + J", hy3.move_focus("down"))
+hl.bind(mainMod .. " + H", dsp.move_focus("left"))
+hl.bind(mainMod .. " + L", dsp.move_focus("right"))
+hl.bind(mainMod .. " + K", dsp.move_focus("up"))
+hl.bind(mainMod .. " + J", dsp.move_focus("down"))
 
 -- Switch workspaces with mainMod + [0-9]
 for i = 1, 10 do
@@ -39,7 +39,7 @@ end
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
   local key = i % 10
-  hl.bind(mainMod .. " + SHIFT + " .. key, hy3.move_to_workspace(i, { follow = true }))
+  hl.bind(mainMod .. " + SHIFT + " .. key, dsp.move_to_workspace(i, { follow = true }))
 end
 
 -- Scroll through existing workspaces with mainMod + scroll

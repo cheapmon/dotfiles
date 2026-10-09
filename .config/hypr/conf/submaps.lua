@@ -2,7 +2,7 @@ local colors = require("conf.colors")
 local border, red, maroon = colors.border, colors.red, colors.maroon
 local peach, yellow, sapphire, blue = colors.peach, colors.yellow, colors.sapphire, colors.blue
 
-local hy3 = hl.plugin.hy3
+local dsp = require("conf.dispatchers")
 local mainMod = "SUPER" -- keep in sync with conf/binds.lua
 
 -- Submap colors
@@ -26,6 +26,13 @@ local function dispatch_and_reset(f)
   end
 end
 
+-- Changing general.layout re-tiles all existing workspaces
+local function set_layout(name)
+  return function()
+    hl.config({ general = { layout = name } })
+  end
+end
+
 hl.bind(mainMod .. " + Space", hl.dsp.submap("hypr"))
 
 hl.define_submap("hypr", function()
@@ -35,23 +42,26 @@ hl.define_submap("hypr", function()
   hl.bind("R", hl.dsp.submap("resize"))
   hl.bind("F", hl.dsp.submap("focus"))
 
-  hl.bind("H", dispatch_and_reset(hy3.change_group("h")))
-  hl.bind("V", dispatch_and_reset(hy3.change_group("v")))
-  hl.bind("T", dispatch_and_reset(hy3.change_group("toggletab")))
+  hl.bind("H", dispatch_and_reset(dsp.change_group("h")))
+  hl.bind("V", dispatch_and_reset(dsp.change_group("v")))
+  hl.bind("T", dispatch_and_reset(dsp.change_group("toggletab")))
 
-  hl.bind("SHIFT + H", dispatch_and_reset(hy3.make_group("h", { toggle = true, ephemeral = "force" })))
-  hl.bind("SHIFT + V", dispatch_and_reset(hy3.make_group("v", { toggle = true, ephemeral = "force" })))
-  hl.bind("SHIFT + T", dispatch_and_reset(hy3.make_group("tab", { toggle = true, ephemeral = "force" })))
+  hl.bind("SHIFT + H", dispatch_and_reset(dsp.make_group("h", { toggle = true, ephemeral = "force" })))
+  hl.bind("SHIFT + V", dispatch_and_reset(dsp.make_group("v", { toggle = true, ephemeral = "force" })))
+  hl.bind("SHIFT + T", dispatch_and_reset(dsp.make_group("tab", { toggle = true, ephemeral = "force" })))
+
+  hl.bind("I", dispatch_and_reset(set_layout("hy3")))
+  hl.bind("S", dispatch_and_reset(set_layout("scrolling")))
 
   hl.bind("Escape", hl.dsp.submap("reset"))
   hl.bind("catchall", function() end)
 end)
 
 hl.define_submap("move", function()
-  hl.bind("H", hy3.move_window("left"))
-  hl.bind("J", hy3.move_window("down"))
-  hl.bind("K", hy3.move_window("up"))
-  hl.bind("L", hy3.move_window("right"))
+  hl.bind("H", dsp.move_window("left"))
+  hl.bind("J", dsp.move_window("down"))
+  hl.bind("K", dsp.move_window("up"))
+  hl.bind("L", dsp.move_window("right"))
 
   hl.bind("Escape", hl.dsp.submap("reset"))
   hl.bind("catchall", function() end)
@@ -69,10 +79,10 @@ hl.define_submap("resize", function()
 end)
 
 hl.define_submap("focus", function()
-  hl.bind("H", hy3.change_focus("lower"))
-  hl.bind("J", hy3.change_focus("lower"))
-  hl.bind("K", hy3.change_focus("raise"))
-  hl.bind("L", hy3.change_focus("raise"))
+  hl.bind("H", dsp.change_focus("lower"))
+  hl.bind("J", dsp.change_focus("lower"))
+  hl.bind("K", dsp.change_focus("raise"))
+  hl.bind("L", dsp.change_focus("raise"))
 
   hl.bind("Escape", hl.dsp.submap("reset"))
   hl.bind("catchall", function() end)
