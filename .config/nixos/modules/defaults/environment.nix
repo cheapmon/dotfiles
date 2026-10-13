@@ -106,7 +106,7 @@
     bash-language-server
     lua-language-server
     neovim
-    typescript-language-server
+    # typescript-language-server
     nodejs
     rust-analyzer
     taplo
