@@ -26,10 +26,13 @@ local function dispatch_and_reset(f)
   end
 end
 
--- Changing general.layout re-tiles all existing workspaces
+-- A workspace rule re-tiles only the active workspace
 local function set_layout(name)
   return function()
-    hl.config({ general = { layout = name } })
+    local ws = hl.get_active_workspace()
+    if ws then
+      hl.workspace_rule({ workspace = ws.name, layout = name })
+    end
   end
 end
 
