@@ -3,7 +3,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm finalize")
   hl.exec_cmd("shikane")
   hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("hypridle")
   hl.exec_cmd("waybar")
   hl.exec_cmd("wlsunset")
 

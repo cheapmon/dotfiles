@@ -42,7 +42,6 @@
     guvcview
     grim
     htop
-    hypridle
     hyprpaper
     inotify-tools
     jq
