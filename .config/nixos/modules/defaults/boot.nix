@@ -12,7 +12,7 @@
       device = "nodev";
       efiSupport = true;
       default = "saved";
-      # /boot is only 256M and each kernel+initrd pair is ~50M, so keep this low.
+      # /boot is small on some hosts and each kernel+initrd pair is ~50M, so keep this low.
       # Older generations stay in the profile (see programs.nh.clean).
       configurationLimit = 2;
       theme = "${
