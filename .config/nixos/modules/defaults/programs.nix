@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.dconf.enable = true;
   programs.zsh = {
     enable = true;
@@ -11,12 +7,9 @@
     promptInit = "";
   };
 
-  imports = [inputs.hyprland.nixosModules.default];
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
-    plugins = [inputs.hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3];
   };
 
   # Hyprland (launched directly from SDDM, without uwsm) never activates
