@@ -54,7 +54,6 @@
     libreoffice
     lolcat
     magic-wormhole
-    mako
     nautilus
     networkmanagerapplet
     obs-studio
@@ -141,7 +140,6 @@
 
   environment.sessionVariables = {
     EDITOR = "nvim";
-    COMPOSE_HTTP_TIMEOUT = 86400;
     NIXOS_OZONE_WL = "1";
     # Single line: uwsm rejects multi-line values when importing the environment
     FZF_DEFAULT_OPTS = builtins.concatStringsSep " " [
