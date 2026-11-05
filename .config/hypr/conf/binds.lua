@@ -22,7 +22,7 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + W", hl.dsp.window.pin())
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg swapwithmaster"))
+hl.bind(mainMod .. " + M", hl.dsp.layout("swapwithmaster"))
 
 -- Move focus with mainMod + hjkl
 hl.bind(mainMod .. " + H", dsp.move_focus("left"))

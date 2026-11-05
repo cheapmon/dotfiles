@@ -59,7 +59,7 @@ move_workspace() {
   local monitor=$2
 
   if echo "$existing_workspaces" | grep -qx "$workspace"; then
-    if ! hyprctl dispatch moveworkspacetomonitor "$workspace" "$monitor" 2>/dev/null; then
+    if ! hyprctl dispatch "hl.dsp.workspace.move({workspace = \"$workspace\", monitor = \"$monitor\"})" 2>/dev/null; then
       notify-send -u critical -i "$ICON" "organize-workspaces" "Failed to move workspace $workspace to monitor $monitor"
       return 1
     fi
