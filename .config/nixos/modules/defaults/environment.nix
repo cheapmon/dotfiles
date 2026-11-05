@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     acpi
     age
@@ -70,6 +66,7 @@
     postman
     repgrep
     ripgrep
+    rose-pine-hyprcursor
     rsync
     shikane
     signal-desktop
@@ -116,9 +113,6 @@
     typst
     typstyle
     vscode-langservers-extracted
-
-    # Inputs
-    inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Custom packages + overrides
     (callPackage ./_derivations/toml-bombadil.nix {})

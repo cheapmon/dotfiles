@@ -10,11 +10,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    rose-pine-hyprcursor = {
-      url = "github:ndom91/rose-pine-hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: {
