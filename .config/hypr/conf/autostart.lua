@@ -1,7 +1,6 @@
 -- Autostart
 hl.on("hyprland.start", function()
-  hl.exec_cmd(
-    "/bin/sh -c 'systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE; dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE; systemctl --user start hyprland-session.target'")
+  hl.exec_cmd("uwsm finalize")
   hl.exec_cmd("shikane")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("hypridle")

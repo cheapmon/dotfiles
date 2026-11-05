@@ -5,7 +5,7 @@
     theme = "catppuccin-mocha-sapphire";
   };
   services.desktopManager.gnome.enable = true;
-  services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "hyprland-uwsm";
 
   # Route screencast/screenshot portals to the correct backend per session so
   # OBS (PipeWire ScreenCast) gets frames. Without this, the Hyprland portal

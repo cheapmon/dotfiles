@@ -10,20 +10,9 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-  };
-
-  # Hyprland (launched directly from SDDM, without uwsm) never activates
-  # graphical-session.target on its own, and that target refuses manual
-  # `systemctl start` (RefuseManualStart=yes). Without it, xdg-desktop-portal
-  # (Requisite=graphical-session.target) can never start, breaking screen
-  # sharing entirely. This proxy target BindsTo it so hyprland's exec-once
-  # (`systemctl --user start hyprland-session.target`) can pull it in as a
-  # dependency, which systemd allows.
-  systemd.user.targets.hyprland-session = {
-    description = "hyprland compositor session";
-    bindsTo = ["graphical-session.target"];
-    wants = ["graphical-session-pre.target"];
-    after = ["graphical-session-pre.target"];
+    # uwsm starts graphical-session.target (needed by xdg-desktop-portal).
+    # It also matches the cached nixpkgs build, which has uwsm enabled.
+    withUWSM = true;
   };
 
   programs.nix-ld = {
