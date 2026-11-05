@@ -2,5 +2,9 @@
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_THEME", "rose-pine-hyprcursor")
-hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("PATH", os.getenv("HOME") .. "/bin:" .. os.getenv("PATH"))
+-- Prepend ~/bin once, since the config can be evaluated more than once
+local home_bin = os.getenv("HOME") .. "/bin"
+local path = os.getenv("PATH") or ""
+if not (":" .. path .. ":"):find(":" .. home_bin .. ":", 1, true) then
+  hl.env("PATH", home_bin .. ":" .. path)
+end
