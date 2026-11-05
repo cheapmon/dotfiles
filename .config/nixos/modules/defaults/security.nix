@@ -6,5 +6,4 @@
       Defaults insults
     '';
   };
-  security.pam.services.hyprlock = {};
 }

@@ -43,7 +43,6 @@
     grim
     htop
     hypridle
-    hyprlock
     hyprpaper
     inotify-tools
     jq
