@@ -150,11 +150,12 @@
     EDITOR = "nvim";
     COMPOSE_HTTP_TIMEOUT = 86400;
     NIXOS_OZONE_WL = "1";
-    FZF_DEFAULT_OPTS = ''
-      --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
-      --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
-      --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
-    '';
+    # Single line: uwsm rejects multi-line values when importing the environment
+    FZF_DEFAULT_OPTS = builtins.concatStringsSep " " [
+      "--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8"
+      "--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc"
+      "--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+    ];
     LUA_CPATH = "${pkgs.lua55Packages.luafilesystem}/lib/lua/5.5/?.so;;";
     HY3_PLUGIN = "${pkgs.hyprlandPlugins.hy3}/lib/libhy3.so";
   };
