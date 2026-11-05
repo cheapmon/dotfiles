@@ -5,6 +5,7 @@ window-padding-y = 0
 title = ghostty
 
 background-opacity = 0.65
+background-blur = true
 
 font-family = "IosevkaTerm Nerd Font"
 font-size = 13
