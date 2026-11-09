@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# toggle-hypridle
+# Stop or start the hypridle user service and show a notification.
+
+if systemctl --user is-active --quiet hypridle; then
+  systemctl --user stop hypridle
+  notify-send -a hypridle -i caffeine-cup-full "Idle off" "Screen stays awake"
+else
+  systemctl --user start hypridle
+  notify-send -a hypridle -i caffeine-cup-empty "Idle on" "Lock and sleep enabled"
+fi

@@ -71,6 +71,7 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("spotifycli --prev"), { locked = true }
 -- Programs
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("refresh"))
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + CTRL + I", hl.dsp.exec_cmd("toggle-hypridle"))
 hl.bind(mainMod .. " + CTRL + Z", hl.dsp.exec_cmd("wofi-pass -t"))
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 hl.bind(mainMod .. " + CTRL + Return", hl.dsp.exec_cmd("ghostty"))
