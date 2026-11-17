@@ -19,9 +19,6 @@
   };
   services.journald.settings.Journal.SyncIntervalSec = "5s";
 
-  # GSP firmware halts (Xid 62) and freezes the desktop; run without it.
-  boot.kernelParams = ["nvidia.NVreg_EnableGpuFirmware=0"];
-
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     powerManagement.enable = true;
