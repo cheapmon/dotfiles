@@ -9,6 +9,19 @@
 
   boot.loader.grub.useOSProber = true;
 
+  # Debugging hard freezes: turn lockups into panics + reboot so a dump
+  # lands in pstore, and allow full SysRq to test if the kernel is alive.
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1;
+    "kernel.panic" = 10;
+    "kernel.hardlockup_panic" = 1;
+    "kernel.softlockup_panic" = 1;
+  };
+  services.journald.settings.Journal.SyncIntervalSec = "5s";
+
+  # GSP firmware halts (Xid 62) and freezes the desktop; run without it.
+  boot.kernelParams = ["nvidia.NVreg_EnableGpuFirmware=0"];
+
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     powerManagement.enable = true;
