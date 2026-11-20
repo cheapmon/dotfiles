@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# monitor-reset
+# Reset a monitor's link by switching it to 60Hz and letting shikane
+# restore its profile mode. Fixes a partly black screen.
+# Usage: monitor-reset [output]   (default: HDMI-A-1)
+
+output="${1:-HDMI-A-1}"
+
+# shikane reverts manual mode changes, so stop it first.
+pkill -x shikane || true
+modes=$(wlr-randr | sed -n "/^$output /,/^[^ ]/p")
+res=$(grep current <<<"$modes" | grep -oE '[0-9]+x[0-9]+')
+mode=$(grep -oE "$res px, 59\.[0-9]+" <<<"$modes" | head -1 | sed 's/ px, /@/')
+wlr-randr --output "$output" --mode "$mode"
+hyprctl dispatch 'hl.dsp.exec_cmd("shikane")' >/dev/null
