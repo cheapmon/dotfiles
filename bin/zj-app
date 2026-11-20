@@ -27,10 +27,15 @@ done
 app=$(printf '%s\n' "${!apps[@]}" | sort | fzf --prompt "app " --style full) || exit 0
 path="${apps[$app]}"
 
-# Find matching layout
+# App-specific layout and init live in a subfolder so zj-session does not list them
+app_dir=~/.config/zellij/layouts/apps
 layout="app"
-while IFS= read -r l; do
-  [[ $l == "$app" ]] && layout=$l && break
-done < <(zj_layouts)
+# Absolute path without .kdl: zellij-switch appends the extension itself
+[[ -f "$app_dir/$app.kdl" ]] && layout="$app_dir/$app"
+
+# Run init only for a new session
+if ! zj_session_exists "$app" && [[ -x "$app_dir/$app.init" ]]; then
+  (cd "$path" && "$app_dir/$app.init")
+fi
 
 zj_switch "$app" "$path" "$layout"
